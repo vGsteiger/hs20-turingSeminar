@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+
+% German
+%\usepackage[ngerman]{babel}
+% English
+\usepackage[english]{babel}
+
+\usepackage[round,authoryear]{natbib}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+
+\usepackage{lipsum}
+
+% German
+%\newtheorem{definition}{Definition}
+%\newtheorem{satz}{Satz}
+% English
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+% TODO
+\author{A. Student}
+\title{On Pancakes}
+\date{10.09.2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  \lipsum[1]
+\end{abstract}
+
+\section{Introduction}
+This sentence is justified with a reference \citep{hofstadter-1979}.
+
+This sentence is justified with multiple references \citep{hofstadter-1979,godel-mmp1931,prusinkiewicz-csiro1996}.
+
+\citet{prusinkiewicz-csiro1996} use in-line references.
+
+\lipsum[4]
+
+\section{Background}
+
+\lipsum[1]
+\begin{theorem}[Incompleteness theorem, \citeauthor{godel-mmp1931}, \citeyear{godel-mmp1931}]~\\
+    If $c$ be a given recursive, consistent class of formulae, then the
+    propositional formula which states that $c$ is consistent is not
+    $c$-provable; in particular, the consistency of $P$ is unprovable in $P$, it
+    being assumed that $P$ is consistent.
+\end{theorem}
+
+\subsection{Pancakes}
+
+\begin{figure}
+    \centering
+    \includegraphics[width= 0.6\textwidth]{figures/pancake}
+    \caption{Example pancakes}
+    \label{fig-pancake}
+\end{figure}
+
+\lipsum[3]
+(See algo in Figure~\ref{fig-pancake}.)
+
+
+\subsection{Difference to Waffles}
+\lipsum[2]
+
+
+\bibliographystyle{apalike}
+\bibliography{references}
+\end{document}
