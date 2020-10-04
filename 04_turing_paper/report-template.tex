@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+
+\usepackage[english]{babel}
+
+\usepackage[round,authoryear]{natbib}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+
+\usepackage{lipsum}
+
+% German
+%\newtheorem{definition}{Definition}
+%\newtheorem{satz}{Satz}
+% English
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+% TODO
+\author{Viktor Gsteiger \\ University of Basel \\ Matriculation Number: 18-054-700}
+\title{Backus-Naur form and its influence on programming languages}
+\date{October 10, 2020 \\\ Seminar: 58826-01 - Turing Award Winners and Their Contributions}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	The contribution of Peter Naur to the programming language Algol 60 and his preliminary work in the field of programming language description was a milestone of great importance to the field of computer science and the field of programming language design in particular. The simple but powerful Backus-Naur form has shown to be the new standard in language description from its use in the Algol 60 report on. The design and logic behind Algol 60 has proven to be the foundation on which a large subset of all programming languages still in use today have been built upon. Naur's thinking ahead and thinking in larger meta questions rather than small technicalities has proven to be fundamental for the strength of the Algol based languages. Since the importance of Naur's work, it is a worthwhile undertaking to restate the most important parts of Naur's contribution to Algol as well as his influence of the programming languages of the future. This paper is aimed at bachelor level students of Computer Science, however, we hope to appeal to a wider audience as well.
+\end{abstract}
+
+\newpage
+
+\section{Introduction}
+The content of this paper will present a fairly detailed history of the Backus-Naur form. From giving a background to the development of the form, we will cover much of the forms technicalities and a proof to properly settle it into the context free grammars. Furthermore, we will discuss the importance and impact of Naur's contribution to Algol 60 and its impact on the description of programming languages.
+%This sentence is justified with a reference \citep{hofstadter-1979}.
+%\citep{hofstadter-1979,godel-mmp1931,prusinkiewicz-csiro1996}.
+
+%\citet{prusinkiewicz-csiro1996} use in-line references.
+
+\section{Background}
+
+
+\begin{theorem}[Incompleteness theorem]~\\
+    If $c$ be a given recursive, consistent class of formulae, then the
+    propositional formula which states that $c$ is consistent is not
+    $c$-provable; in particular, the consistency of $P$ is unprovable in $P$, it
+    being assumed that $P$ is consistent.
+\end{theorem}
+
+\subsection{Pancakes}
+
+\begin{figure}
+    \centering
+    \caption{Example pancakes}
+    \label{fig-pancake}
+\end{figure}
+
+\lipsum[3]
+(See algo in Figure~\ref{fig-pancake}.)
+
+
+\subsection{Difference to Waffles}
+\lipsum[2]
+
+
+\bibliographystyle{apalike}
+\bibliography{references}
+\end{document}
