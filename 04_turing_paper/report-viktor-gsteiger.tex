@@ -19,7 +19,6 @@
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}{Theorem}
 
-% TODO
 \author{Viktor Gsteiger \\ University of Basel \\ Matriculation Number: 18-054-700}
 \title{Backus-Naur form and its influence on programming languages}
 \date{October 10, 2020 \\\ Seminar: 58826-01 - Turing Award Winners and Their Contributions}
@@ -29,29 +28,27 @@
 \maketitle
 
 \begin{abstract}
-	The contribution of Peter Naur to the programming language Algol 60 and his preliminary work in the field of programming language description was a milestone of great importance to the field of computer science and the field of programming language design in particular. The simple but powerful Backus-Naur form has shown to be the new standard in language description from its use in the Algol 60 report on. The design and logic behind Algol 60 has proven to be the foundation on which a large subset of all programming languages still in use today have been built upon. Naur's thinking ahead and thinking in larger meta questions rather than small technicalities has proven to be fundamental for the strength of the Algol based languages. Since the importance of Naur's work, it is a worthwhile undertaking to restate the most important parts of Naur's contribution to Algol as well as his influence of the programming languages of the future. This paper is aimed at bachelor level students of Computer Science, however, we hope to appeal to a wider audience as well.
+	The contribution of Peter Naur to the programming language Algol 60 and his preliminary work in the field of programming language description was a mile- stone of great importance to the field of computer science and the field of program- ming language design in particular. The simple but powerful Backus-Naur form, an extension of Naur to the already existing Backus form, has shown to be the new standard in language description from its use in the Algol 60 report on. The design and logic behind Algol 60 has proven to be the foundation on which a large sub- set of all programming languages still in use today have been built upon. Naur’s thinking ahead and thinking in larger meta questions rather than small technical- ities has proven to be fundamental for the strength of the Algol based languages. Since the importance of Naur’s work, it is a worthwhile undertaking to restate the most important parts of Naur’s contribution to Algol as well as his influence of the programming languages of the future. This report is aimed at bachelor level students of Computer Science, however, we hope to appeal to a wider audience as well.
 \end{abstract}
 
 \newpage
 
 \section{Introduction}
-The content of this paper will present a fairly detailed history of the Backus-Naur form. From giving a background to the development of the form, we will cover much of the forms technicalities and a proof to properly settle it into the context free grammars. Furthermore, we will discuss the importance and impact of Naur's contribution to Algol 60 and its impact on the description of programming languages.
+The content of this paper will present a fairly detailed review of the development of formal notations of languages. The main focus of the first half of the report will lie in the development leading up to the notation used in the Algol 60 report and the notation used in the report itself. The subsequent parts will follow Naur’s personal development and his further contributions to the topic of formalisation. We will wrap up this report with the impact of Naur and the impact of Algol in particular.
 
 \section{History of Formal Descriptions for Languages}
-The goal of defining a language by a formal system of variables and rules to derive the language as been of interest to grammarians and mathematicians since the verge of civilisation. Pānini, a Sanskrit philologist and grammarian which has worked between the 6th and 4th century BCE had, according to the biography by \cite{bhate2002panini}, already described a notation structure for the language of Sanskrit which resembled the structure of the Backus Notation. However, the interest in a formal grammar in the west was not of general interest until the 20th century. With the advance of an interest in new, artificial languages like Esperanto or Ido and especially the introduction of the computer there was a new interest in language description.
+The goal of defining a language by a formal system of variables and rules to derive the language as been of interest to grammarians and mathematicians since the verge of civilisation. Panini, a Sanskrit philologist and grammarian which has worked be- tween the 6th and 4th century BCE had, according to the biography Panini ?, already described a notation structure for the language of Sanskrit. This is insofar interesting as it shows that the problem of a formal description of a language has existed even long before the topic of computer languages ever was one. The interest in a formal notation of a language in the west was not of general interest until the 20th century. With the advance of an interest in new, artificial languages like Esperanto or Ido and especially the rapid advances in calculating machines and first version of computers. The advance of new technologies posed new challenges in human-machine as well as human-human interactions which first had to be resolved before the underlying technological advances could be made usable for a larger audience than research scientists.
 
 \subsection{Noam Chomsky}
-Noam Chomsky, an American linguist teaching at MIT combined the new interest from mathematicians and linguists and defined the grammar structure of English as finite state Markov processes. \cite{1056813} introduced a notation for the rewriting of strings according to a grammar as well as he established the distinction between several classes of grammars. 
+Noam Chomsky, an American linguist teaching at MIT combined the new interest from mathematicians and linguists in his teaching groups. Chomsky gave lecture to infor- mation technology students and combined past research in the topic of string rewriting rules and formalisms to develop his own theory of formal logical systems. His main idea was to define the grammar structure of English as a finite state Markov process. To achieve this idea, \cite{1056813} introduced in his paper \textit{Three Models for Description of Language} a notation for the rewriting of strings according to a grammar. A grammar can be viewed as a machine operating on strings and giving certain output to an input. Chomsky also defined several different distinct grammars which are used in theoretical computer science until today.
 
-The idea of Chomsky was to define a language $L$ as a (finite or infinte) set of sentences of finite length. Furthermore a string is defined as a concatenation of symbols of an Alphabet $A$ which consists of a finite set of terminal symbols. A grammar is now defined as a device that produces all of the strings that are sentences of $L$. 
+The importance of Chomsky’s work can not be understated, even though he was not the original inventor of the idea. He built upon work from other mathematicians as well as computer scientists. Most notably Axel Thue as well as Alan Turing. In perspective of this paper, it is of great importance to understand the concept of phrase-structure grammars, also called context-free grammars.
 
-The interesting idea of Chomsky was now to define that any grammar is based on a finite number of sentences and that it projects this set to an infinite set of grammatical sentences by establishing general transformation laws. A properly formulated grammar should furthermore define unambiguously the set of grammatical sentences of the language it represents. This means that a sentence which is clearly part of the language should be handled by the grammar in a fixed and predetermined manner. 
+Chomsky defined a language $L$ as a (finite or infinte) set of sentences of finite length. Furthermore, a string is defined as a concatenation of symbols of an Alphabet $A$. The Alphabet consists of a finite set of terminal symbols. A grammar is then defined as a device that produces all of the strings that are sentences of $L$. A properly formulated grammar should define unambiguously the set of grammatical sentences of the language it represents. This means that a sentence which is clearly part of the language should be handled by the grammar in a fixed and predetermined manner.
 
-\cite{1056813} further developed three different types of languages which were based on two grammars he defined. The more important grammar for this report is the phrase-structure grammar, also called context free grammar, which we will now describe in detail.
+A phrase-structure grammar consists of a finite vocabulary $V_p$, a finite set of initial strings$E$ in $V_p$ and a finite set of rules $F$ of the form $X \to Y$ , where $X$ and $Y$ are strings in $V_p$. The rules are interpreted as an instruction to the grammar device where $X$ has to be rewritten by $Y$ . So any $Y_i$ is formed from a $X_i$ by replacement of a single symbol of $X_i$ by some string. A derivable string from this language is a string which can be derived by the rules $F$. A terminal string from this language is a string which is the last line of a derivation where there is no further string to be derived.
 
-A phrase-structure grammar consists of a finite vocabulary $V_p$, a finite set of initial strings $\sum$ in $V_p$ and a finite set of rules $F$ of the form $X \to Y$, where $X$ and $Y$ are strings in $V_p$. The rules are interpreted as an instruction to the grammar device where $X$ has to be rewritten by $Y$. So any $Y_i$ is formed from $X_i$ by replacement of a single symbol of $X_i$ by some string. 
-
-An example from \cite{1056813} for a phrase-structure grammar would be the following. $^{\cap}$ is introduced for concatenation and can be replaced by an empty space and \# define the boundaries of the grammar:
+An example from Chomsky for a phrase-structure grammar would be the following. $^{\cap}$ is introduced for concatenation and can be replaced by an empty space and \# denominate a metalinguistic symbol to determine the boundaries of the given string:
 
 \begin{align*}
 	\sum : \# Sentence \# \\
@@ -63,17 +60,15 @@ An example from \cite{1056813} for a phrase-structure grammar would be the follo
 
 A derivable and terminal string from this grammar would be "the man took the book".
 
-Chomsky elaborated that a language consisting of basic sentences that are derived from terminal strings of a phrase-structure grammar and a set of optional transformation rules applied on these terminal strings may create a language similar to the modern English. 
+Interesting in the scope of this report is the elaboration of Chomsky that that a language consisting of basic sentences that are derived from terminal strings of a phrase- structure grammar and a set of optional transformation rules applied on these terminal strings may create a language similar to the modern English. The distinction of generative rules of a grammar and transformational rules, which are applied after generating the language may remind some of the way functions and similar constructs in programming languages work today. The insight of Chomsky provided further researchers as well as people interested in the structure of formal notations an entry point.
 
-This is the most important idea of Chomsky which had a large impact on the formal notation of programming languages later on. The distinction of generative rules of a grammar and transformational rules, which are applied after generating the language may remind some of the way functions and similar constructs in programming languages work today.
 
 \subsection{Backus}
-John Backus, an American Computer Scientist who received the ACM Turing award in 1977 for his contribution to the design of practical high-level programming systems and for publication of formal procedures for the specification of programming languages. The latter part is interesting in the scope of this report as Backus continued the preliminary work of Chomsky and was also one of the more influential computer scientists working on the then newly established programming language international algebraic language (IAL). IAL was a predecessor to the programming language known as ALGOL 60 which will play a role later on in this report and especially in the contribution of Peter Naur. 
+John Backus, an American Computer Scientist who received the ACM Turing award in 1977 for his contribution to the design of practical high-level programming systems and for publication of formal procedures for the specification of programming languages. The latter part is interesting in the scope of this report as Backus built upon the idea of Chomsky and Backus was also one of the more influential computer scientists working on the then newly established programming language international algebraic language (IAL). \cite{Backus1959TheSA} authored the report \textit{The syntax and semantics of the proposed international algebraic language of the Zurich ACM-GAMM Conference} which was the defining paper of the programming language now known as Algol 58 and a direct precursor to Algol 60 to which Peter Naur contributed substantially.
 
-Backus introduced a metalinguistic formulae to formally describe the rules of the IAL programming language. The metalinguistic formulae introduced by Backus was a reference language to describe the functions of the language on a meta level to allow for later hardware implementation to only differ with regards to word length, overflow conditions and the like. A reference language always if only referring to the syntax. This goal of a reference language to describe the rules called for an exact and precise description of those rules. 
+Backus, with the knowledge of the power of phrase-structure grammars, introduced a metalinguistic formulae to formally describe the rules of the IAL programming lan- guage. The formulae could describe the phrase-structure grammars and was a more approachable notation to the idea behind these grammars. The metalinguistic formulae introduced by Backus was a reference language to describe the functions of the lan- guage on a meta level to allow for later hardware implementation to only differ with regards to word length, overflow conditions and the like. The idea was to allow the different stake holders in the development of a programming language to communicate with a common, formal notation. The main goal of the reference language introduced by Backus was to be as precise as possible without seeming out of touch. It may also be noted that Backus only starts using his new notation on page five out of seven. He first describes the language in mostly informal ways before he proceeds to describe it in the new notation. This detail will remain relevant later in the paper as Naur has extensively written on the topic of informal and formal notation.
 
-\cite{Backus1959TheSA} introduced the syntax of the metalinguistic formulae in the influential preliminary report on the syntax and semantics of the IAL. The syntax of the reference language proposed by Backus was the following:
-\\
+The syntax of the reference language introduced by Backus was the following:
 \begin{itemize}
 	\item Sequences of character symbols enclosed in "<>" are metalinguistic variables whose values are strings of symbols,
 	\item The marks ":$\equiv$" and "$or$" are metalinguistic connectives,
@@ -81,20 +76,16 @@ Backus introduced a metalinguistic formulae to formally describe the rules of th
 	\item The combination of marks and/or variables signifies the combination of the strings denoted
 \end{itemize} 
 
-This is best illustrated by an example:
+This is best illustrated by an example. The \_ is introduced for the combination of two marks and\/ or variables and will in the derivation ultimately be replaced by an empty space:
 \\
 \begin{align*}
-	<ab> : \equiv ( or [ or <ab>( or <ab><d>
+	<sentence>:<NP>_<VP> \\
+	<VP>:<Verb>_<NP > \\
+	<NP>:$the man$ or $the book$ \\
+	<Verb>:$took$ \\
 \end{align*}
 
-Where <d> denotes the decimal digits. As one may observe, the variable <ab> is used recursively. Some values for <ab> are:
-
-\begin{align*}
-	((( \\
-	[86
-\end{align*}
-
-This simple metalinguistic formulae, which should remind oneself to the phrase-structure grammar established by Chomsky, allowed Backus to describe the IAL in a formal way which would allow hardware and software engineers to create compilers and programs for the new language without needing further explanation. However the formulae devised by Backus did not yet catch on with the general field of language design. For this, first a Danish Computer Scientist named Peter Naur would have to introduce some changes and simplifications. 
+As one may observe, it is the same example used in the previous section and should show the power of the notation. Furthermore, as previously, one possible derivation would be "the man took the book". One notable difference to the notation used by Chomsky is that Backus introduced the mark $or$, however, every string in the Backus notation consisting an $or$ could easily be rewritten into one or more strings without using the connective. It is therefore relevant to note that the notation introduced by Backus is exactly as strong as the phrase-structure grammars. The notation used by Backus was too clumsy and did not catch on to the wider field of computer science and would have almost been forgotten, even though the need for an easily understandable and strong notation was greater than ever.
 
 \section{Main part}
 
@@ -117,6 +108,16 @@ Naurs contribution to ALGOL lay in selecting the right forms of description to d
 Naur also contributed to the establishment of computer science as an academic field in Denmark and he has continued to advocate for an applied form of computer science not only for his students but also for the field in general hereby oposing Dijkstra and Wirth structured programming agenda.
 
 \subsection{Backus-Naur form}
+
+\subsection{Algol 60}
+
+\subsection{Type checking in the Gier Algol Compiler}
+
+\subsection{Notes on Formalization}
+
+\section{Conclusions}
+
+\section{Further Work of Peter Naur}
 
 \bibliographystyle{apalike}
 \bibliography{references}
