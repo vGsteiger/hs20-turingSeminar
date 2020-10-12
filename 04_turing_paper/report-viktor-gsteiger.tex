@@ -47,7 +47,7 @@ The content of this paper will present a fairly detailed review of the developme
 \section{History of Formal Descriptions for Languages}
 The goal of defining a language by a formal system of variables and rules to derive the language as been of interest to grammarians and mathematicians since the verge of civilization. Panini, a Sanskrit philologist and grammarian which has worked be- tween the 6th and 4th century BCE had, according to the biography \textit{Panini} by \citet{bhate2002panini}, already described a notation structure for the language of Sanskrit. This is insofar interesting as it shows that the problem of a formal description of a language has existed even long before the topic of computer languages ever was one. The interest in a formal notation of a language in the west was not of general interest until the 20th century. With the advance of an interest in new, artificial languages like Esperanto or Ido and especially the rapid advances in calculating machines and first version of computers. The advance of new technologies posed new challenges in human-machine as well as human-human interactions which first had to be resolved before the underlying technological advances could be made usable for a larger audience than research scientists.
 
-\subsection{Noam Chomsky}
+\subsection{Noam Chomsky's introduction of phrase-structure grammar}
 \textit{Noam Chomsky}, an American linguist teaching at MIT combined the new interest from mathematicians and linguists in his teaching groups. Chomsky gave lecture to information technology students and combined past research in the topic of string rewriting rules and formalism to develop his own theory of formal logical systems. His main idea was to define the grammar structure of English as a finite state Markov process. To achieve this idea, \citet{1056813} introduced in his paper \textit{Three Models for Description of Language} a notation for the rewriting of strings according to a grammar. A grammar can be viewed as a machine operating on strings and giving certain output to an input. Chomsky also defined several different distinct grammars which are used in theoretical computer science until today.
 
 The importance of Chomsky’s work can not be understated, even though he was not the original inventor of the idea. He built upon work from other mathematicians as well as computer scientists. Most notably \textit{Axel Thue} as well as \textit{Alan Turing}. In perspective of this paper, it is of great importance to understand the concept of phrase-structure grammars, also called context-free grammars.
@@ -73,7 +73,7 @@ A derivable and terminal string from this grammar would be "the man took the boo
 Interesting in the scope of this report is the elaboration of Chomsky that that a language consisting of basic sentences that are derived from terminal strings of a phrase- structure grammar and a set of optional transformation rules applied on these terminal strings may create a language similar to the modern English. The distinction of generative rules of a grammar and transformation rules, which are applied after generating the language may remind some of the way functions and similar constructs in programming languages work today. The insight of Chomsky provided further researchers as well as people interested in the structure of formal notations an entry point.
 
 
-\subsection{Backus}
+\subsection{Backus's introduction of a formal programming language description}
 \textit{John Backus}, an American Computer Scientist who received the ACM Turing award in 1977 for his contribution to the design of practical high-level programming systems and for publication of formal procedures for the specification of programming languages. The latter part is interesting in the scope of this report as Backus built upon the idea of Chomsky and Backus was also one of the more influential computer scientists working on the then newly established programming language international algebraic language (IAL). \citet{Backus1959TheSA} authored the report \textit{The syntax and semantics of the proposed international algebraic language of the Zurich ACM-GAMM Conference} which was the defining paper of the programming language now known as Algol 58 and a direct precursor to Algol 60 to which Peter Naur contributed substantially.
 
 Backus, with the knowledge of the power of phrase-structure grammars, introduced a meta-linguistic formulae to formally describe the rules of the IAL programming language. The formulae could describe the phrase-structure grammars and was a more approachable notation to the idea behind these grammars. The meta-linguistic formulae introduced by Backus was a reference language to describe the functions of the language on a meta level to allow for later hardware implementation to only differ with regards to word length, overflow conditions and the like. The idea was to allow the different stake holders in the development of a programming language to communicate with a common, formal notation. The main goal of the reference language introduced by Backus was to be as precise as possible without seeming out of touch. It may also be noted that Backus only starts using his new notation on page five out of seven. He first describes the language in mostly informal ways before he proceeds to describe it in the new notation. This detail will remain relevant later in the paper as Naur has extensively written on the topic of informal and formal notation.
@@ -99,7 +99,7 @@ This is best illustrated by an example. The \_ is introduced for the combination
 
 As one may observe, it is the same example used in the previous section and should show the power of the notation. Furthermore, as previously, one possible derivation would be "the man took the book". One notable difference to the notation used by Chomsky is that Backus introduced the mark $or$, however, every string in the Backus notation consisting an $or$ could easily be rewritten into one or more strings without using the connective. It is therefore relevant to note that the notation introduced by Backus is exactly as strong as the phrase-structure grammars. The notation used by Backus was too clumsy and did not catch on to the wider field of computer science and would have almost been forgotten, even though the need for an easily understandable and strong notation was greater than ever.
 
-\section{Main part}
+\section{Programming language description, formalization and Algol 60}
 
 \begin{quote}{Ludwig Wittgenstein}
 	\begin{flushright}
@@ -107,7 +107,7 @@ As one may observe, it is the same example used in the previous section and shou
 	\end{flushright}
 \end{quote}
 
-\subsection{The biography of Peter Naur}
+\subsection{The Biography of Peter Naur}
 Peter Naur, born in 1928 to a family of artists and business minded parents, had the early interest involving astronomy. He was allowed to work at the local observatory even as a very young boy. Naur published his first scientific paper with 15 and he had attained many technical skills of mathematics early on from professional astronomers which took him on as a young prodigy. After finishing his astronomy degree in Copenhagen he was recommended to conduct research at King's college, Cambridge where he focused of astronomy and the emerging field of computer science. Due to weather constraints Naur had to divert his time from astronomy and had more time to spend programming the Electronic Delay Storage Automatic Calculator (EDSAC). Peter Naur, used to do complicated computational calculations by hand focused his energy mostly on the limitations of the EDSAC such as the limited number range. After leaving Cambridge, Naur conducted research at Harvard University and Princeton, where he learned the state of the art in computing. The now more established field of computer science would be the focus of Naur, who returned to Denmark in 1953.
 
 He joined the computer center of Copenhagen and was asked to participate in the development of an algorithmic programming language, later called ALGOL. Naur's contribution to ALGOL lay in selecting the right forms of description to define the language. This was in line with his later research as he was more interested in the meta aspects of the language rather than specific implementation. This was also in line with his previous scientific work as he knew how to do the calculations himself he was rather interested in the larger questions regarding computing and also concerning the applicability of the  developed programming languages. Naur's main concern was the often overly formal reports led to a split between the industry and academia as the two interacted ever less due to different ideas on formalities and the proofs of algorithms. It was an important question to him to make the field of computer science comprehensible to a wider audience.
@@ -131,7 +131,7 @@ The syntax of the Backus Naur form is described as follows and it is always also
 
 An example of the notation being used in the Algol report is how an integer is built up in Algol:
 
-\begin{equation} \label{eq2}
+\begin{equation} \label{eq3}
 	\begin{split}
 	<\text{digit}> ::=&0|1|2|3|4|5|6|7|8|9 \\
 	<\text{unsigned integer}> ::=&<\text{digit}>|<\text{unsigned integer}><\text{digit}> \\
@@ -141,9 +141,9 @@ An example of the notation being used in the Algol report is how an integer is b
 
 Particularly the last part was introduced by Naur to clarify the notation and make it more accessible. Generally, the Backus Naur notation was introduced to give the report a formal reference language. It has since been adapted and changed for multiple uses and an extended version of the Backus Naur form remains used by most programming languages nowadays. The notation proved to be essential for further language and compiler design. The clear vision and simplicity has remained and has allowed further generations of computer scientists to work on the field of language design.
 \\
-An interesting quality of the Backus Naur form is also that with just some slight modification it is possible for the form to describe itself. \citet{rohl1968note} has shown that in his \textit{A note on Backus Naur form}. The goal of this was to allow compilers to accept the Backus Naur form as input for their design. The approach taken by Rohl was for the brackets to surround not the meta-linguistic variables but the basic symbols. This allows the Backus Naur form to describe the meta-linguistic formulae themselves. The brackets are then a device for over-riding any meta-linguistic significance of the symbol they enclose. Rohl also introduced the $.$ to signify concatenation to allow for better readability.
+An interesting quality of the Backus Naur form is also that with just some slight modification it is possible for the form to describe itself. \citet{rohl1968note} has shown that in his text \textit{A note on Backus Naur form}. The goal of this was to allow compilers to accept the Backus Naur form as input for their design. The approach taken by Rohl was for the brackets to surround not the meta-linguistic variables but the basic symbols. This allows the Backus Naur form to describe the meta-linguistic formulae themselves. The brackets are then a device for over-riding any meta-linguistic significance of the symbol they enclose. Rohl also introduced the $.$ to signify concatenation to allow for better readability.
 The definition of the meta-linguistic formulae goes as follows:
-\begin{equation} \label{eq2}
+\begin{equation} \label{eq4}
 \begin{split}
 	\text{meta formula} ::=& \text{meta variable}.<::=>.\text{definiens} \\
 	\text{definiens} ::=& \text{construction}.<|>.\text{definiens} | \text{construction} \\
@@ -162,19 +162,29 @@ The effort of Algol 60 started after several scientists, including Peter Naur, s
 
 According to \citet{naur1968successes} in his talk \textit{Successes and failures of the ALGOL effort} which took place in 1968, ten years after the first version of Algol 58 was published, a strong understanding of languages as well as compiler problems led to a need for a sound, common programming language. Together with developments in the United States on Fortran as well as the developments of the Amsterdam school which supplied powerful and general ideas about the central features of programming languages there was solid groundwork for an improved programming language. Furthermore, the development of Backus on the reference language provided a suitable notation for a formal description of the resulting language.
 
-The resulting \textit{Report on the algorithmic language ALGOL 60} by \citet{backus1960report} defined the language Algol 60 in a mix of formal, Backus Naur form, and informal syntax. The influence of the report was wide and we will try to discuss some important developments of the language and its syntax description. The most important aspect of a programming language is the programming of computers, in which Algol was a partial success. As a core language with its formal description and the newly introduced nested function definition as well as a strong focus on the lexical scopes of methods, the language could provide the developers of the time with new and strong concepts for their work. However, the mission input and output facilities proved to be detrimental to a wider field of programming applications.
+The resulting \textit{Report on the algorithmic language ALGOL 60} by \citet{backus1960report} defined the language Algol 60 in a mix of formal, Backus Naur form, and informal syntax. The influence of the report was wide and we will try to discuss some important developments of the language and its syntax description. The most important aspect of a programming language is the programming of computers, in which Algol was a partial success. As a core language with its formal description and the newly introduced nested function definition as well as a strong focus on the lexical scopes of methods, the language could provide the developers of the time with new and strong concepts for their work. However, the missing input and output facilities proved to be detrimental for a wider field of programming applications.
 
 One aspect of the language which directly coincided with its rather formal notation was the publication of algorithms. The very non ambivalent description of the language made it a favorite for the development of algorithms and allowed it to be used theoretically in many applications. A further aspect of importance was on the development of formal languages and has acted as a strong stimulus for compiler designers. However, according to Naur, this development could be seen from two sides and the over formalization would definitely not help to draw in further interest from the public.
 
 The form of the description was of great interest to Naur and would prove to be the topic of his interest in his later work. He was interested mostly in that a language could not only be understood by a computer but also by a human reader. This was also why he as the sole editor tried to use about the same amount of formal as well as informal notation to describe the language. The mixture of both was important to Naur and he later even proposed that the report should have included more informal introduction. Naur himself criticized his own work on Algol 60 strongly. Even though he was content with the formal description of the language, he was not content on how the report was received in the larger public. The Algol 60 report, as said by Naur, was very hard on the uninitiated reader.
 
+An example of the formal notation one may have a look on the definition of the basic symbols of Algol 60 as introduced by the \textit{Revised report on the algorithmic language ALGOL 60} by \cite{Backus1963RevisedRO}. The revised report does not differ in notation and consists of different error corrections at different parts of the report:
+\\ \\
+\textit{The reference language is built up from the following basic symbols:}
+\begin{equation} \label{eq5}
+\begin{split}
+<\text{basic symbol}> ::=&<\text{letter}>|<\text{digit}>|<\text{logical value}>|<\text{delimiter}> \\
+\end{split}
+\end{equation}
+
 Some problems in the documentation by \citet{naur1963documentation} later pointed out in his article \textit{Documentation Problems: Algol 60} were mostly in the reliance of language description on formal notations. However, even though the Backus Naur form helped in documentation, it provided no safety against errors. Writing a report on a programming language, according to Naur, differed not substantially from any other form of communication and the integral part was that the description must be complete and unambiguous. It is therefore also important to stress that event though there has been substantial progress in constructing mechanical and formal metalanguages, the natural languages will always remain the ultimate metalanguage.
 
 The effort in the Algol 60 report was thus not futile, however, the over formalization proved to be a thorn in the eyes of Naur and would be of particular interest to him in his further work. Generally, it can be said that the report and the corresponding language of Algol 60 proved to be strongly influential, however, far from perfect.
 
-\subsection{Type checking in the Gier Algol Compiler}
-
 \subsection{Notes on Formalization}
+
+
+\subsection{Checking operand types in the Gier Algol Compiler}
 
 \section{Conclusions}
 
