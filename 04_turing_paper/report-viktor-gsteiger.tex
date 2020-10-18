@@ -31,7 +31,7 @@
 
 \author{Viktor Gsteiger \\ University of Basel \\ Matriculation Number: 18-054-700}
 \title{Backus Naur form and its influence on programming languages}
-\date{October 10, 2020 \\\ Seminar: 58826-01 - Turing Award Winners and Their Contributions}
+\date{October 18, 2020 \\\ Seminar: 58826-01 - Turing Award Winners and Their Contributions}
 
 \begin{document}
 
@@ -56,7 +56,7 @@ The importance of Chomsky’s work can not be understated, even though he was no
 
 Chomsky defined a language $L$ is a (finite or infinite) set of sentences of finite length. Furthermore, a string is defined as a concatenation of symbols of an Alphabet $A$. The Alphabet consists of a finite set of terminal symbols. A grammar is then defined as a device that produces all of the strings that are sentences of $L$. A properly formulated grammar should define unambiguously the set of grammatical sentences of the language it represents. This means that a sentence which is clearly part of the language should be handled by the grammar in a fixed and predetermined manner.
 
-A phrase-structure grammar consists of a finite vocabulary $V_p$, a finite set of initial strings$E$ in $V_p$, and a finite set of rules $F$ of the form $X \to Y$, where $X$ and $Y$ are strings in $V_p$. The rules are interpreted as an instruction to the grammar device where $X$ has to be rewritten by $Y$. So any $Y_i$ is formed from a $X_i$ by replacement of a single symbol of $X_i$ by some string. A derivable string from this language is a string that can be derived by the rules $F$. A terminal string from this language is a string which is the last line of a derivation where there is no further string to be derived.
+A phrase-structure grammar consists of a finite vocabulary $V_p$, a finite set of initial strings $E$ in $V_p$, and a finite set of rules $F$ of the form $X \to Y$, where $X$ and $Y$ are strings in $V_p$. The rules are interpreted as an instruction to the grammar device where $X$ has to be rewritten by $Y$. So any $Y_i$ is formed from a $X_i$ by replacement of a single symbol of $X_i$ by some string. A derivable string from this language is a string that can be derived by the rules $F$. A terminal string from this language is a string which is the last line of a derivation where there is no further string to be derived.
 
 An example from Chomsky for a phrase-structure grammar would be the following. The symbol $\_$ is introduced for concatenation and will be replaced in the terminal string by a space. The \# denominates a meta-linguistic symbol to determine the boundaries of the given string:
 
@@ -78,7 +78,7 @@ Interesting in the scope of this report is the elaboration of Chomsky that a lan
 \subsection{Backus's introduction of a formal programming language description}
 \textit{John Backus}, an American Computer Scientist who received the ACM Turing award in 1977 for his contribution to the design of practical high-level programming systems and for publication of formal procedures for the specification of programming languages. The latter part is interesting in the scope of this report as Backus built upon the idea of Chomsky. Backus was also one of the most influential computer scientists working on the then newly established programming language \textit{International Algebraic Language} (IAL). \citet{Backus1959TheSA} authored the report \textit{The syntax and semantics of the proposed international algebraic language of the Zurich ACM-GAMM Conference} which was the defining paper of the programming language now known as Algol 58 which was a direct precursor to Algol 60 to which Peter Naur contributed substantially.
 
-Backus, with the knowledge of the power of phrase-structure grammars, introduced a meta-linguistic formula to formally describe the rules of the IAL programming language. The formulae could describe the phrase-structure grammars and was a more approachable notation to the idea behind these grammars. The meta-linguistic formula introduced by Backus was a reference language to describe the functions of the language on a meta-level to allow for later hardware implementation to only differ with regards to word length, overflow conditions, and the like. The idea was to allow the different stakeholders in the development of a programming language to communicate with a common, formal notation. The main goal of the reference language introduced by Backus was to be as precise as possible without seeming out of touch. Backus first describes the reference language in an informal notation before he proceeds to show an example of it in the new notation.
+Backus, with the knowledge of the power of phrase-structure grammars, introduced a meta-linguistic formula to formally describe the rules of the IAL programming language. The formula could describe the phrase-structure grammars and was a more approachable notation to the idea behind these grammars. The meta-linguistic formula introduced by Backus was a reference language to describe the functions of the language on a meta-level to allow for later hardware implementation to only differ with regards to word length, overflow conditions, and the like. The idea was to allow the different stakeholders in the development of a programming language to communicate with a common, formal notation. The main goal of the reference language introduced by Backus was to be as precise as possible without seeming out of touch. Backus first describes the reference language in an informal notation before he proceeds to show an example of it in the new notation.
 \\
 The syntax of the reference language introduced by Backus was the following:
 \begin{itemize}
@@ -143,9 +143,9 @@ An example of the notation being used in the Algol report is how an integer is d
 
 The Backus Naur notation was introduced to give the report a formal reference language. It has since been adapted and changed for multiple uses and an extended version of the Backus Naur form remains used by most programming languages nowadays. The notation proved to be essential for further language and compiler design. The clear vision and simplicity has remained and has allowed further generations of computer scientists to work in the field of language design.
 \\
-An interesting quality of the Backus Naur form is also that with just some slight modification the form can describe itself. \citet{rohl1968note} has shown that in his text \textit{A note on Backus Naur form}. The goal of this was to allow compilers to accept the Backus Naur form as input for their design. The approach taken by Rohl was for the brackets to surround not the meta-linguistic variables but the basic symbols. This allows the Backus Naur form to describe the meta-linguistic formulae themselves. The brackets are then a device for over-riding any meta-linguistic significance of the symbol they enclose. Rohl also introduced the $.$ to signify concatenation to allow for better readability.
+An interesting quality of the Backus Naur form is also that with just some slight modification the form can describe itself. \citet{rohl1968note} has shown that in his text \textit{A note on Backus Naur form}. The goal of this was to allow compilers to accept the Backus Naur form as input for their design. The approach taken by Rohl was for the brackets to surround not the meta-linguistic variables but the basic symbols. This allows the Backus Naur form to describe the meta-linguistic formula themselves. The brackets are then a device for over-riding any meta-linguistic significance of the symbol they enclose. Rohl also introduced the "$.$" to signify concatenation to allow for better readability.
 \\
-The definition of the meta-linguistic formulae goes as follows:
+The definition of the meta-linguistic formula goes as follows:
 \begin{equation} \label{eq4}
 \begin{split}
 	\text{meta formula} ::=& \text{meta variable}.<::=>.\text{definiens} \\
@@ -155,7 +155,7 @@ The definition of the meta-linguistic formulae goes as follows:
 \end{split}
 \end{equation}
 
-This definition now allows for a more automatic compiler generation as proposed by \citet{brooker1963compiler} in the paper \textit{The compiler compiler} where they proposed a compiler that was itself able to generate compilers for a certain hardware architecture, then the Atlas computers, with the language specification of the compilers being a phrase-structure grammar. By defining the meta-linguistic formulae themselves it would be possible to compile a compiler for Algol with the compiler compiler.
+This definition now allows for a more automatic compiler generation as proposed by \citet{brooker1963compiler} in the paper \textit{The compiler compiler} where they proposed a compiler, named \textit{compiler compiler}, that was able to generate compilers for a certain hardware architecture, then the Atlas computers, with the language specification for the compilers being a phrase-structure grammar. By defining the meta-linguistic formula themselves it would be possible to compile a compiler for Algol with the \textit{compiler compiler}.
 
 \subsection{The Algol 60 Report}
 
@@ -169,7 +169,7 @@ The resulting \textit{Report on the algorithmic language ALGOL 60} by \citet{bac
 
 One aspect of the language which directly coincided with its rather formal notation was the publication of algorithms. The very non-ambivalent description of the language made it a favorite for the development of algorithms and allowed it to be used theoretically in many applications. A further aspect of importance was on the development of formal languages and has acted as a strong stimulus for compiler designers. However, according to Naur, this development could be seen from two sides and the over formalization would not help to draw in further interest from the public.
 
-The form of the description was of great interest to Naur and would prove to be the topic of his interest in his later work. He was interested mostly in that a language could not only be understood by a computer but also by a human reader. This was also why he as the sole editor tried to use about the same amount of formal as well as in informal notation to describe the language. The mixture of both was important to Naur and he later even proposed that the report should have included a more informal introduction. Naur himself criticized his work on Algol 60 strongly. Even though he was content with the formal description of the language, he was not content with how the report was received by the larger public. The Algol 60 report, as said by Naur, was very hard on the uninitiated reader.
+The form of the description was of great interest to Naur and would prove to be the topic of his interest in his later work. Naur was mostly concerned about the comprehensibility of a language by human readers rather than computers. This was also why he as the sole editor tried to use about the same amount of formal as well as in informal notation to describe the language. The mixture of both was important to Naur and he later even proposed that the report should have included a more informal introduction. Naur himself criticized his work on Algol 60 strongly. Even though he was content with the formal description of the language, he was not content with how the report was received by the larger public. The Algol 60 report, as said by Naur, was very hard on the uninitiated reader.
 
 An example of the formal notation one may have a look at the definition of the basic symbols of Algol 60 as introduced by the \textit{Revised report on the algorithmic language ALGOL 60} by \cite{Backus1963RevisedRO}. The revised report does not differ in notation and consists of different error corrections at different parts of the report:
 \\ \\
@@ -203,7 +203,7 @@ The philosophy of error treatment in the Gier Algol compiler, as stated by \cite
 It is important to note that the first level of error detection can work with the description given by the Backus Naur form as it can check if the source code is a terminal and reachable string of the described grammar. The second error checking needs some additional logic. 
 
 The problem of the second error checking is the following: Given source code and given a complete description of the types and kinds of identifiers (provided by the language description), check that the usage of the identifiers and source code usages conform to their descriptions.
-
+\newpage
 The solution proposed by Naur was to use the Reverse Polish form, which is a form of evaluating arithmetic expressions by using a stack to hold the values of those operands that have not been operated upon yet. The stack can be described as follows:
 \\
 \begin{equation} \label{eq6}
@@ -250,12 +250,12 @@ Each time an operand gets evaluated, its value gets put into the \textit{OPERAND
 The logic applied in the Reversed Polish form in the Gier Algol compiler also extends to all other Algo 60 delimiters like for example \textbf{then}. Every time an error gets detected, the internal operand class, \textit{UNDECLARED}, replaces the current operand and an error message is given.
 
 The operand checking in the Gier Algol compiler is a good example of how a good operand definition of a language coupled with robust algorithms can be coupled to implement a strong error detection which then helps the human programmers to develop software faster. It is also a good example of how a formal language definition is beneficial to the compiler designers as it makes their job clear cut and the edge cases in this example can clearly be handled within the constraints of the language.
-
-\section{Peter Naur's Further Work}
+\newpage
+\section{Conclusion and Peter Naur's Further Work}
 Peter Naur has been both an advocate of formalization as well as a strong opponent of over-formalization. His influence can be seen in the Algol 60 report as well as in the subsequent development of programming languages. Most programming languages up to today use some extended form of the Backus Naur form in their language specification. Even though Naur himself did not want to be so closely associated with the notation, he did have a strong influence on the design and content of the Algol report. His philosophy of conveying theories rather than brute force information can also be seen in the article \textit{Programming as theory building} from \cite{naur1985programming} where he pointed out that the designers' job is not to pass along the design of a program but rather the theories driving the design. The primary job of a programmer is thus to build up knowledge. This philosophy can already be seen in Naur's early work where the documentation seemed to always place more importance on the wider concept than technical details. The description of Algol 60 for example made it such a strong programming language exactly because it was rather a theory conveying than focusing on the technical details of its implementation.
 
 Naur furthermore influenced the field of language description and therefore the future of compiler design by providing not only a good notation to be used by the designers but also by his human-first approach to the field of computer science. The idea of descriptive documents to him was always to allow humans to understand it better and he observed early on that for a language and its system to flourish it must be accessible to many more people than just a small part of academia. \cite{naur2007computing} further displayed this interest in the human understanding in his acceptance speech of the ACM's 2005 A.M. Turing Award \textit{Computing Versus Human Thinking} where he displayed a deep interest in the human understanding and the complex processes of thinking. Not only could Naur be considered a computer scientist but also a philosopher, psychologist, and linguist. His fundamental contribution to the field of computer science is vast and the influence of his work can be seen until today for example in form of a larger audience being able to participate and the humanist approach used in most educational courses and literature nowadays and beyond.
-
+\newpage
 \bibliographystyle{apalike}
 \bibliography{references}
 \end{document}
