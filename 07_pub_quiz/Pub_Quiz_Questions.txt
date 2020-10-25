@@ -1,0 +1,146 @@
+- Week 8 (November 5th):
+   - presentations:
+     - 1969, Minsky
+	From which personality could a memento be found in Marvin Minksys living room?
+		- Stan Lee
+		- The Who
+		- Gene Roddenberry (true)
+		- Albert Einstein
+	Source (page 7/8): https://www.aaai.org/ojs/index.php/aimagazine/article/download/2064/2058
+     - 1971, McCarthy
+	What energy source was John McCarthy a strong advocate for?
+		- Oil
+		- Wind Energy
+		- Water Energy
+		- Nuclear Energy (true)
+	Source: https://web.archive.org/web/20131004172832/http://www-formal.stanford.edu/jmc/progress/
+     - 1975, Newell and Simon
+	How many images are publicly aviable in the two image collections produced by Allen Newell and Herbert A. Simon?
+		- Around 50'000
+		- Around 100'000
+		- Around 200'000
+		- Around 300'000 (true)
+	Source: http://www.cbi.umn.edu/iterations/schlombs.html
+     - 1980, Hoare
+	What was one of the largest regrets of C. Anthony R. Hoare?
+		- Null References (true)
+		- His work on Algol 68
+		- Quicksort
+		- His work at Microsoft
+	Source: http://everything.explained.today/Tony_Hoare/#Ref-22
+
+- Week 9 (November 12th, same day as the final report due):
+   - presentations:
+     - 1981, Codd
+	What is not one of Edgar F. Codds 12 rules for Relational Database Management?
+		- OLAP tools must provide concurrent retrieval and update access, integrity and security.
+		- Reporting facilities should present information in any way the user wants to view it.
+		- Performance of the OLAP tool should not suffer significantly as the number of dimensions is decreased. (true)
+		- Every data dimension should be equivalent in its structure and operational capabilities.
+	Source: https://olap.com/learn-bi-olap/codds-paper/
+     - 1983, Thompson and Ritchie
+	What were the hacker handles used by Dennis Ritchie and Ken Thompson?
+		- dmr and ken (true)
+		- dnr and ken
+		- rit and tho
+		- drt and son
+	Source: http://plaza.ufl.edu/ysmgator/famous/dk.html
+     - 1986, Hopcroft and Tarjan
+	With whom had Robert E. Tarjan a public online talk during the Heidelberg Laureate Forum this year?
+		- John E. Hopcroft
+		- Alan Kay
+		- Donald Knuth (true)
+		- Bill Gates
+	Source: https://cccblog.org/2020/09/25/applying-mathematics-and-computer-science-to-everyday-life-anecdotes-from-donald-knuth-and-robert-tarjan/
+     - 1987, Cocke
+	Why is the 801 designed by John Cocke named 801?
+		- It refers to the number of instructions available
+		- It refers to the year 1981 in which the project got started
+		- It refers to the birth year of Thomas J. Watson
+		- It refers to the building in which Cockes group worked
+	Source: http://www.iment.com/maida/tv/computer/johncocke.htm#fran
+
+- Week 10 (November 19th):
+   - presentations:
+     - 1988, Sutherland
+	Where can one access Ivan E. Sutherlands collection on asynchronous computing?
+		- Sun Microsystems
+		- Computer History Museum (true)
+		- Library of Congress
+		- Smithsonian Institution
+	Source: https://oac.cdlib.org/findaid/ark:/13030/c8js9x57/
+     - 1995, Blum
+	What is the name of one of Manuel Blums papers?
+		- Coin Flipping by Telephone (true)
+		- RECAPTCHA: Using Hard AI Problems for Security
+		- Comparison of One Pseudo-Random Number Generator
+		- Auctions by Telephone
+	Source: https://www.iacr.org/cryptodb/data/author.php?authorkey=437
+     - 1998, Gray
+	How many emails were written, coauthored by James N. Gray or reference him during his time at Bell making Gray partially digitally immortal?
+		- 10'000
+		- 13'000 (true)
+		- 15'000
+		- 25'000
+	Source: https://www.researchgate.net/publication/282190277_James_N_Gray_Biographical_Memoir_by_Gordon_Bell_Leslie_Lamport_and_Butler_W_Lampson_National_Academy_of_Sciences_publications_httpwwwnasonlineorgpublicationsbiographical-memoirsmemoir-pdfsgray-jamespd
+     - 2002, Rivest, Shamir, and Adleman
+	How many students did Adi Shamir, Ronald Rivest, and Leonard Adleman supervise that themselves received a Ph.D. and are mentioned in the Mathematics Genealogy Project?
+		- 41 (true)
+		- 52
+		- 36
+		- 47
+	Source: https://www.genealogy.math.ndsu.nodak.edu/search.php
+
+- Week 11 (November 26th):
+   - presentations:
+     - 2003, Kay
+	What did Alan Kay do while his time at Disney?
+		- Developed software for the amusement park rides
+		- Worked on graphics programms for pixar studios
+		- Developed Squeak and the e-toys (true)
+		- Developed a new affordable toy laptop
+	Source: https://wiki.c2.com/?AlanKay
+     - 2005, Naur
+	What was the definition of a programm according to Naur?
+		- Text to give orders to a machine
+		- The theory of the developer applied to a problem (true)
+		- A form of prose
+		- Zeroes and ones
+	Source: http://pages.cs.wisc.edu/~remzi/Naur.pdf
+     - 2008, Liskov
+	What was Barbara Liskovs opinion on Exceptions?
+		- Shouldn't happen (true)
+		- Should terminate the programm
+		- Should be used a lot and in many parts of a programm
+		- Handling is more important than propagating
+	Source (40/54): http://www.pmg.csail.mit.edu/~liskov/turing-09-5.pdf
+     - 2009, Thacker
+	What was Charles Thacker able to do according to his friend Butler Lampson?
+		- Circuit design all the way through to hardware archidecture, programming, and user-interface design (true)
+		- Get any printer working
+		- Fly any plane
+		- Develop the ethernet system in less than a month
+	Source: https://strangequark.me/2017/06/23/alto-creator-charles-p-thacker-dies/
+
+- Week 12 (December 3rd):
+   - presentations:
+     - 2011, Pearl
+	How many citations did Judea Pearl receive for his work on causality according to google scholar (average is around 6300 per author)?
+		- 5632
+		- 15881
+		- 17436 (true)
+		- 25189
+	Source: https://scholar.google.com/citations?user=bAipNH8AAAAJ
+     - 2015, Diffie and Hellman
+	On which recent topic did Whitfield Diffie voide his opinion?
+		- US election
+		- COVID-19 (true)
+		- Freedom of Speech
+		- Net Neutrality
+	Source: https://www.mercurynews.com/2020/04/13/diffie-covid-19-crisis-is-a-harbinger-of-biological-warfare/
+     - 2016, Berners-Lee
+	Which is not a principle from the contract for the web launched by Tim Berners-Lee?
+		- Keep all of the internet available, all of the time
+		- Be creators and collaorators on the web
+		- Fight for the web
+		- Develop technologies to advance the web accessibility
