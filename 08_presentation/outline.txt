@@ -1,0 +1,50 @@
+Outline of the Turing presentation on Peter Naur:
+
+Total time: 30 min
+
+Overarching topic: Formalization
+
+Title page: (1 min)
+Title, name, date/event
+
+Introduction: (3 min)
+
+	Introduction to Peter Naur and Peter Naur's contribution for which he earned the Turing award:
+
+		For fundamental contributions to programming language design and the definition of Algol 60, to compiler design, and to the art and practice of computer programming.
+
+	Formal notations:
+		Need, why where from?
+
+Outline: (1 min)
+	Formal notation in Algol 60, compiler design and art and practice of computer programming
+
+Activate Previous Knowledge: (4 min)
+	Phrase structure grammars
+	Backus Naur form (Tony Hoare)
+	Programming languages, natural languages and mathematical languages
+
+New Information: (10 min)
+	Definition of Algol 60: (3 min)
+		Historical context
+		Backus Naur form in Algol 60 report
+		Impact of formalized notation in Algol 60
+
+	Compiler Design: (3 min)
+		Gier Algol Compiler and formalized notation
+
+	Art and practice of computer programming: (4 min)
+		Notes on formalization
+		Programming as theory building
+
+Discussion: (3 min)
+	Computing Versus Human Thinking (previous discussions)
+
+Conclusion: (1 min)
+	Importance of formal notations but with respect to the readability -> formal notation is another way to transfer theories but not the only and far from the best way
+	What happened since then?
+
+End: (0.5 min)
+	Thank you!
+
+-> Quesions ( 6.5 min)
