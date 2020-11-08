@@ -37,10 +37,10 @@
 %\usetheme{Frankfurt}
 %\usetheme{Goettingen}
 %\usetheme{Hannover}
-%\usetheme{Ilmenau}
+\usetheme{Ilmenau} % best so far
 %\usetheme{JuanLesPins}
 %\usetheme{Luebeck}
-\usetheme{Madrid}
+%\usetheme{Madrid}
 %\usetheme{Malmoe}
 %\usetheme{Marburg}
 %\usetheme{Montpellier}
@@ -62,7 +62,7 @@
 %\usecolortheme{dolphin}
 %\usecolortheme{dove}
 %\usecolortheme{fly}
-%\usecolortheme{lily}
+\usecolortheme{lily}
 %\usecolortheme{orchid}
 %\usecolortheme{rose}
 %\usecolortheme{seagull}
@@ -71,33 +71,61 @@
 %\usecolortheme{wolverine}
 
 %\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
-%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
 
 %\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
 }
 
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{csquotes}
+\usepackage{caption}
+\graphicspath{{figures/}}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Short title]{Full Title of the Talk} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[Formalization]{Peter Naur's contribution to formal notations and beyond} % The short title appears at the bottom of every slide, the full title is only on the title page
 
-\author{John Smith} % Your name
-\institute[UCLA] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+\author{Viktor Gsteiger} % Your name
+\institute[unibas] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {
-University of California \\ % Your institution for the title page
+University of Basel \\ % Your institution for the title page
 \medskip
-\textit{john@smith.com} % Your email address
+\textit{Seminar Turing Award Winners and Their Contributions} \\
+\textit{v.gsteiger@unibas.ch} % Your email address
 }
-\date{\today} % Date, can be changed to a custom date
+\date{November 26, 2020} % Date, can be changed to a custom date
 
 \begin{document}
 
 \begin{frame}
 \titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+	\frametitle{Peter Naur's contribution}
+	
+	\blockquote{For fundamental contributions to programming language design and the definition of Algol 60, to compiler design, and to the art and practice of computer programming.}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Formal notations in history}
+	
+	\begin{figure}
+		\includegraphics[width=8cm]{1920px-Birch_bark_MS_from_Kashmir_of_the_Rupavatra_Wellcome_L0032691}
+		\caption{File:Birch bark MS from Kashmir of the Rupavatra Wellcome L0032691.jpg. (2020, September 26). Wikimedia Commons, the free media repository. Retrieved 09:38, November 8, 2020 from https://commons.wikimedia.org/w/index.php?title=File:Birch\_bark\_MS\_from\_Kashmir\_of\_the\_Rupavatra\_Wellcome\_L0032691.jpg\&oldid=472535897.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{New need for formal notations}
+	
+	\begin{figure}
+		\includegraphics[width=8cm]{EDSAC_(19)}
+		\caption{File:EDSAC (19).jpg. (2020, October 28). Wikimedia Commons, the free media repository. Retrieved 09:49, November 8, 2020 from https://commons.wikimedia.org/w/index.php?title=File:EDSAC\_(19).jpg\&oldid=504634746.}
+	\end{figure}
 \end{frame}
 
 \begin{frame}
@@ -110,10 +138,10 @@ University of California \\ % Your institution for the title page
 %----------------------------------------------------------------------------------------
 
 %------------------------------------------------
-\section{First Section} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+\section{Formal notations} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
 %------------------------------------------------
 
-\subsection{Subsection Example} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+\subsection{Phrase structure grammars} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
 
 \begin{frame}
 \frametitle{Paragraphs of Text}
@@ -123,6 +151,8 @@ Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. A
 \end{frame}
 
 %------------------------------------------------
+
+\subsection{Backus Naur form}
 
 \begin{frame}
 \frametitle{Bullet Points}
@@ -136,6 +166,8 @@ Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. A
 \end{frame}
 
 %------------------------------------------------
+
+\subsection{Programming languages, natural languages and mathematical languages}
 
 \begin{frame}
 \frametitle{Blocks of Highlighted Text}
@@ -173,8 +205,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ul
 \end{frame}
 
 %------------------------------------------------
-\section{Second Section}
+\section{Peter Naur's contribution}
 %------------------------------------------------
+
+\subsection{Definition of Algol 60}
 
 \begin{frame}
 \frametitle{Table}
@@ -194,6 +228,8 @@ Treatment 3 & 0.0009271 & 0.296 \\
 
 %------------------------------------------------
 
+\subsection{Compiler Design}
+
 \begin{frame}
 \frametitle{Theorem}
 \begin{theorem}[Mass--energy equivalence]
@@ -202,6 +238,8 @@ $E = mc^2$
 \end{frame}
 
 %------------------------------------------------
+
+\subsection{Art and practice of computer programming}
 
 \begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
 \frametitle{Verbatim}
@@ -235,25 +273,48 @@ An example of the \verb|\cite| command to cite within the presentation:\\~
 This statement requires citation \cite{p1}.
 \end{frame}
 
+\section{Computing vs. Human Thinking}
+
 %------------------------------------------------
 
-\begin{frame}
-\frametitle{References}
-\footnotesize{
-\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem[Smith, 2012]{p1} John Smith (2012)
-\newblock Title of the publication
-\newblock \emph{Journal Name} 12(3), 45 -- 678.
-\end{thebibliography}
-}
+\subsection{Difference to previous presentations}
+
+\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
+	\frametitle{Citation}
+	An example of the \verb|\cite| command to cite within the presentation:\\~
+	
+	This statement requires citation \cite{p1}.
+\end{frame}
+
+%------------------------------------------------
+
+\section{Conclusion}
+
+\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
+	\frametitle{Citation}
+	An example of the \verb|\cite| command to cite within the presentation:\\~
+	
+	This statement requires citation \cite{p1}.
 \end{frame}
 
 %------------------------------------------------
 
 \begin{frame}
-\Huge{\centerline{The End}}
+	\frametitle{References}
+	\footnotesize{
+		\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
+			\bibitem[Smith, 2012]{p1} John Smith (2012)
+			\newblock Title of the publication
+			\newblock \emph{Journal Name} 12(3), 45 -- 678.
+		\end{thebibliography}
+	}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+	\Huge{\centerline{The End}}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
-
 \end{document} 
