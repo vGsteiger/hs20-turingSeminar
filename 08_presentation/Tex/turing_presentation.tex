@@ -79,8 +79,28 @@
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{csquotes}
-\usepackage{caption}
+\usepackage[font=tiny,labelfont=bf]{caption}
+\usepackage{url}
+\usepackage{qtree}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
+
 \graphicspath{{figures/}}
+\bibliographystyle{abbrv}
+
+\let\oldquote\quote
+\let\endoldquote\endquote
+\renewenvironment{quote}[2][]
+{\if\relax\detokenize{#1}\relax
+	\def\quoteauthor{#2}%
+	\else
+	\def\quoteauthor{#2~---~#1}%
+	\fi
+	\oldquote}
+{\par\nobreak\smallskip\hfill(\quoteauthor)%
+	\endoldquote\addvspace{\bigskipamount}}
+
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -105,6 +125,17 @@ University of Basel \\ % Your institution for the title page
 \end{frame}
 
 \begin{frame}
+	\frametitle{Peter Naur}
+	\begin{figure}
+		\includegraphics[height=\dimexpr
+		\textheight-3\baselineskip-\parskip-.2em-
+		\abovecaptionskip-\belowcaptionskip\relax]{Peternaur}
+		\caption{\cite{naur}}
+		\label{fig:naur}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Peter Naur's contribution}
 	
 	\blockquote{For fundamental contributions to programming language design and the definition of Algol 60, to compiler design, and to the art and practice of computer programming.}
@@ -115,7 +146,8 @@ University of Basel \\ % Your institution for the title page
 	
 	\begin{figure}
 		\includegraphics[width=8cm]{1920px-Birch_bark_MS_from_Kashmir_of_the_Rupavatra_Wellcome_L0032691}
-		\caption{File:Birch bark MS from Kashmir of the Rupavatra Wellcome L0032691.jpg. (2020, September 26). Wikimedia Commons, the free media repository. Retrieved 09:38, November 8, 2020 from https://commons.wikimedia.org/w/index.php?title=File:Birch\_bark\_MS\_from\_Kashmir\_of\_the\_Rupavatra\_Wellcome\_L0032691.jpg\&oldid=472535897.}
+		\caption{\cite{birch}}
+		\label{fig:bark}
 	\end{figure}
 \end{frame}
 
@@ -124,7 +156,7 @@ University of Basel \\ % Your institution for the title page
 	
 	\begin{figure}
 		\includegraphics[width=8cm]{EDSAC_(19)}
-		\caption{File:EDSAC (19).jpg. (2020, October 28). Wikimedia Commons, the free media repository. Retrieved 09:49, November 8, 2020 from https://commons.wikimedia.org/w/index.php?title=File:EDSAC\_(19).jpg\&oldid=504634746.}
+		\caption{\cite{EDSAC}}
 	\end{figure}
 \end{frame}
 
@@ -144,10 +176,25 @@ University of Basel \\ % Your institution for the title page
 \subsection{Phrase structure grammars} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
 
 \begin{frame}
-\frametitle{Paragraphs of Text}
-Sed iaculis dapibus gravida. Morbi sed tortor erat, nec interdum arcu. Sed id lorem lectus. Quisque viverra augue id sem ornare non aliquam nibh tristique. Aenean in ligula nisl. Nulla sed tellus ipsum. Donec vestibulum ligula non lorem vulputate fermentum accumsan neque mollis.\\~\\
+	\frametitle{Phrase structure definition}
+	\begin{equation} \label{eq1}
+	\begin{split}
+	\sum &: \# Sentence \# \\
+	F&: \\ Sentence &\to NP\_VP \\
+	VP &\to Verb\_NP \\
+	NP &\to \text{the man}, \text{the book} \\
+	Verb &\to \text{took}
+	\end{split}
+	\end{equation}
+\end{frame}
 
-Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. Aliquam vel dui orci, a porta odio. Nullam id suscipit ipsum. Aenean lobortis commodo sem, ut commodo leo gravida vitae. Pellentesque vehicula ante iaculis arcu pretium rutrum eget sit amet purus. Integer ornare nulla quis neque ultrices lobortis. Vestibulum ultrices tincidunt libero, quis commodo erat ullamcorper id.
+\begin{frame}
+\frametitle{Phrase structure in tree form}
+\begin{equation} \label{eq2}
+	\Tree[.Sentence [.NP [ \textit{the man} ]]
+			  [.VP [.Verb \textit{took} ]
+					[.NP [.\textit{the book} ]]]]
+\end{equation}
 \end{frame}
 
 %------------------------------------------------
@@ -155,14 +202,15 @@ Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. A
 \subsection{Backus Naur form}
 
 \begin{frame}
-\frametitle{Bullet Points}
-\begin{itemize}
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-\item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
-\item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
-\item Nam cursus est eget velit posuere pellentesque
-\item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
-\end{itemize}
+\frametitle{Backus Naur form}
+\begin{equation} \label{eq2}
+	\begin{split}
+	<sentence> &::=<NP>\text{ }<VP> \\
+	<VP> &::=<Verb>\text{ }<NP> \\
+	<NP> &::=\text{the man}\text{ }|\text{ }\text{the book} \\
+	<Verb> &::=\text{took} \\
+\end{split}
+\end{equation}
 \end{frame}
 
 %------------------------------------------------
@@ -170,38 +218,12 @@ Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. A
 \subsection{Programming languages, natural languages and mathematical languages}
 
 \begin{frame}
-\frametitle{Blocks of Highlighted Text}
-\begin{block}{Block 1}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
-\end{block}
-
-\begin{block}{Block 2}
-Pellentesque sed tellus purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum quis magna at risus dictum tempor eu vitae velit.
-\end{block}
-
-\begin{block}{Block 3}
-Suspendisse tincidunt sagittis gravida. Curabitur condimentum, enim sed venenatis rutrum, ipsum neque consectetur orci, sed blandit justo nisi ac lacus.
-\end{block}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-\frametitle{Multiple Columns}
-\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
-
-\column{.45\textwidth} % Left column and width
-\textbf{Heading}
-\begin{enumerate}
-\item Statement
-\item Explanation
-\item Example
-\end{enumerate}
-
-\column{.5\textwidth} % Right column and width
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
-
-\end{columns}
+\frametitle{Comparison of levels of formalization}
+\begin{itemize}
+	\item Natural languages
+	\item Mathematical languages
+	\item Programming languages
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
@@ -270,20 +292,26 @@ Uncomment the code on this slide to include your own image from the same directo
 \frametitle{Citation}
 An example of the \verb|\cite| command to cite within the presentation:\\~
 
-This statement requires citation \cite{p1}.
+This statement requires citation \cite{birch}.
 \end{frame}
 
 \section{Computing vs. Human Thinking}
 
 %------------------------------------------------
 
-\subsection{Difference to previous presentations}
+\begin{frame} % Need to use the fragile option when verbatim is used in the slide
+	\frametitle{Computing Versus Human Thinking}
+	\begin{itemize}
+		\item Description of computers
+		\item Description of human thinking
+	\end{itemize}
+\end{frame}
 
-\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-	\frametitle{Citation}
-	An example of the \verb|\cite| command to cite within the presentation:\\~
-	
-	This statement requires citation \cite{p1}.
+%------------------------------------------------
+
+\begin{frame}
+	\frametitle{Discussion}
+	\textbf{Do you think that human thinking will be formally describable?}
 \end{frame}
 
 %------------------------------------------------
@@ -291,24 +319,13 @@ This statement requires citation \cite{p1}.
 \section{Conclusion}
 
 \begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-	\frametitle{Citation}
-	An example of the \verb|\cite| command to cite within the presentation:\\~
-	
-	This statement requires citation \cite{p1}.
+	\frametitle{Importance of formal notation}
+	\begin{quote}{Peter Naur}
+			For achieving clarity any formal mode of expression should be used, not as a goal in itself, but wherever it appears to be helpful to authors and readers alike.
+	\end{quote}
 \end{frame}
 
 %------------------------------------------------
-
-\begin{frame}
-	\frametitle{References}
-	\footnotesize{
-		\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-			\bibitem[Smith, 2012]{p1} John Smith (2012)
-			\newblock Title of the publication
-			\newblock \emph{Journal Name} 12(3), 45 -- 678.
-		\end{thebibliography}
-	}
-\end{frame}
 
 %------------------------------------------------
 
@@ -317,4 +334,11 @@ This statement requires citation \cite{p1}.
 \end{frame}
 
 %----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{References}
+	\footnotesize{
+		\bibliography{references}
+	}
+\end{frame}
+
 \end{document} 

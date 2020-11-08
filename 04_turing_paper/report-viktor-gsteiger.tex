@@ -31,7 +31,7 @@
 
 \author{Viktor Gsteiger \\ University of Basel \\ Matriculation Number: 18-054-700}
 \title{Backus Naur form and its influence on programming languages}
-\date{October 18, 2020 \\\ Seminar: 58826-01 - Turing Award Winners and Their Contributions}
+\date{November 8, 2020 \\\ Seminar: 58826-01 - Turing Award Winners and Their Contributions}
 
 \begin{document}
 
@@ -52,13 +52,13 @@ The goal of defining a language by a formal system of variables and rules to der
 \subsection{Noam Chomsky's introduction of phrase-structure grammar}
 \textit{Noam Chomsky}, an American linguist teaching at MIT combined the new interest from mathematicians and linguists in his teaching groups. Chomsky gave lectures to information technology students and combined past research on the topic of string rewriting rules and formalism to develop his theory of formal logical systems. His main idea was to define the grammar structure of English as a finite-state Markov process. A finite-state Markov process is a random process on a linear representation where it is clearly specified what the possible available transitions are from each node to the next ones. To achieve this idea, \citet{1056813} introduced in his paper \textit{Three Models for Description of Language} a notation for the rewriting of strings according to grammar. A grammar can be viewed as a machine operating on strings and giving certain output to an input. Chomsky also defined several different levels of grammars that are used in theoretical computer science until today.
 
-The importance of Chomsky’s work can not be understated, even though he was not the original inventor of the idea. He built upon work from other mathematicians as well as computer scientists. Most notably \textit{Axel Thue} as well as \textit{Alan Turing}. From the perspective of this paper, it is of great importance to understand the concept of phrase-structure grammars, also called context-free grammars. Those grammars are as defined by Chomsky finite-state Markov processes that produce languages.
+The importance of Chomsky’s work can not be understated, even though he was not the original inventor of the idea. He built upon work from other mathematicians as well as computer scientists. Most notably \textit{Axel Thue} as well as \textit{Alan Turing}. From the perspective of this paper, it is of great importance to understand the concept of phrase-structure grammars. Those grammars are as defined by Chomsky finite-state Markov processes that produce languages.
 
 Henceforth, Chomsky defined a language $L$ as a (finite or infinite) set of sentences of finite length. Furthermore, a string is defined as a concatenation of symbols of an Alphabet $A$. The Alphabet consists of a finite set of terminal symbols. A grammar, as formulated beforehand, is then defined as a device that produces all of the strings that are sentences of $L$. A properly formulated grammar should define unambiguously the set of grammatical sentences of the language it represents. This means that a sentence which is clearly part of the language should be handled by the grammar in a fixed and predetermined manner.
 
 A phrase-structure grammar consists of a finite vocabulary $V_p$, a finite set of initial strings $E$ in $V_p$, and a finite set of rules $F$ of the shape $X \to Y$, where $X$ and $Y$ are strings in $V_p$. The rules are interpreted as an instruction to the grammar device where $X$ has to be rewritten by $Y$. So any $Y_i$ is formed from a $X_i$ by replacement of a single symbol of $X_i$ by some string. A derivable string from this language is a string that can be constructed by the rules $F$. A terminal string from this language is a string which is the last line of a derivation where there is no further string to be derived.
 
-Following, we will introduce an example for a phrase structure grammar. The symbol in the example $\_$ is introduced for concatenation and will be replaced in the terminal string by a space. The \# denominates a meta-linguistic symbol to determine the boundaries of the given string:
+Following, we will introduce an example for a phrase structure grammar. The symbol "$\_$" in the example is introduced for concatenation and will be replaced in the terminal string by a space. The \# denominates a meta-linguistic symbol to determine the boundaries of the given string:
 
 \begin{equation} \label{eq1}
 	\begin{split}
@@ -141,7 +141,7 @@ An example of the notation being used in the Algol report is how an integer is d
 	\end{split}
 \end{equation}
 
-Although the Backus Naur form is recognized as one of Peter Naur's most influential contributions, Naur himself did not like the name Backus Naur form and continued to name it Backus normal form. Naur's contribution to the notation is also in line with his later research as he mostly focused on the undesirability of the notation and in selecting the right forms of description. 
+Although the Backus Naur form is recognized as one of Peter Naur's most influential contributions, Naur himself did not like the name Backus Naur form and continued to name it Backus normal form. The reason for this decision is not entirely known but we speculate that Naur thought his contribution to the form to be of minor importance compared with the contribution of Backus. Naur's contribution to the notation is also in line with his later research as he mostly focused on the undesirability of the notation and in selecting the right forms of description. 
 
 Henceforth, the Backus Naur form has been adapted and altered for multiple uses and an extended version of the Backus Naur form remains employed by most programming languages nowadays. The notation proved to be essential for further language and compiler design. The clear vision and simplicity has remained and has allowed further generations of computer scientists to work within the field of language design.
 \\

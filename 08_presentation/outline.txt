@@ -24,6 +24,8 @@ Activate Previous Knowledge: (4 min)
 	Backus Naur form (Tony Hoare)
 	Programming languages, natural languages and mathematical languages
 
+--- DONE BEFORE
+
 New Information: (10 min)
 	Definition of Algol 60: (3 min)
 		Historical context
@@ -36,6 +38,9 @@ New Information: (10 min)
 	Art and practice of computer programming: (4 min)
 		Notes on formalization
 		Programming as theory building
+
+--- DONE AFTER
+
 
 Discussion: (3 min)
 	Computing Versus Human Thinking (previous discussions)
