@@ -31,6 +31,7 @@ New Information: (10 min)
 		Historical context
 		Backus Naur form in Algol 60 report
 		Impact of formalized notation in Algol 60
+		Slide on project!!
 
 	Compiler Design: (3 min)
 		Gier Algol Compiler and formalized notation
