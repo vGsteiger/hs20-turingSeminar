@@ -1,5 +1,7 @@
 Outline of the Turing presentation on Peter Naur:
 
+Zeilenumbruch vor and DONE
+
 Total time: 30 min
 
 Overarching topic: Formalization
@@ -7,44 +9,51 @@ Overarching topic: Formalization
 Title page: (1 min)
 Title, name, date/event
 
+-----------------------------------------------------------------------------------------------------------------
+
 Introduction: (3 min)
+
+	Formal notations:
+		Need, why where from?
 
 	Introduction to Peter Naur and Peter Naur's contribution for which he earned the Turing award:
 
 		For fundamental contributions to programming language design and the definition of Algol 60, to compiler design, and to the art and practice of computer programming.
 
-	Formal notations:
-		Need, why where from?
-
-Outline: (1 min)
-	Formal notation in Algol 60, compiler design and art and practice of computer programming
+-----------------------------------------------------------------------------------------------------------------
 
 Activate Previous Knowledge: (4 min)
-	Phrase structure grammars
+	Phrase structure grammars -> chomsky hierarchy DONE
 	Backus Naur form (Tony Hoare)
 	Programming languages, natural languages and mathematical languages
 
---- DONE BEFORE
+-----------------------------------------------------------------------------------------------------------------
 
 New Information: (10 min)
 	Definition of Algol 60: (3 min)
-		Historical context
+		Historical context -> example of reports! How was it prior? DONE
 		Backus Naur form in Algol 60 report
-		Impact of formalized notation in Algol 60
+		Show examples of algol specifications 
+
+		A call by name is functionally much like a call by reference, but is slightly different in spirit. Instead of passing the address of a variable as an argument, a language that implements call-by-name (i.e., Algol-60) passes a thunk--a pair of functions that provide read and write access to the variable. In the case of simple variables (i.e., not arrays), call-by-name yields the same results as call-by-reference. When an argument to a function or procedure is an array element, however, its index expression is re-evaluated in the caller's scope every time the parameter is used within the function or procedure. Indeed, the swap example below is perhaps the canonical example of the perils of call-by-name. In fact, with call-by-name it is impossible to implement a "foolproof" version of such a swap function.
+
+		The basic difficulty with call-by-name results from the side effects that assignment via thunk can cause. For example, if an array element is passed as an argument, the precise element of the array being referred to can depend on the state; hence, if the state changes, so does the element being referred to. In the example, both i and a[i] are passed as arguments to the same function; then, when i changes, a[i] refers to a different element of the array from that which was (probably) intended.
+
+		Impact of formalized notation in Algol 60 -> was kann man spezifizieren, was nicht, wie mächtig ist die Spezifizierungssprache
 		Slide on project!!
 
-	Compiler Design: (3 min)
+	Compiler Design: (3 min) Maybe leave out to have more time for other 
 		Gier Algol Compiler and formalized notation
 
 	Art and practice of computer programming: (4 min)
 		Notes on formalization
 		Programming as theory building
-
---- DONE AFTER
+		problem of over formalization -> error in proof!
 
 
 Discussion: (3 min)
 	Computing Versus Human Thinking (previous discussions)
+	To the end!
 
 Conclusion: (1 min)
 	Importance of formal notations but with respect to the readability -> formal notation is another way to transfer theories but not the only and far from the best way
