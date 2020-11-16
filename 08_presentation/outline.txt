@@ -25,12 +25,29 @@ Introduction: (3 min)
 Activate Previous Knowledge: (4 min)
 	Phrase structure grammars -> chomsky hierarchy DONE
 	Backus Naur form (Tony Hoare)
+
+NOTE — If a syntactic-exception is permitted to be an arbitrary
+syntactic-factor, Extended BNF could define a wider class of
+languages than the context-free grammars, including attempts
+which lead to Russell-like paradoxes, e.g.
+xx = "A" - xx;
+Is "A" an example of xx? Such licence is undesirable
+and the form of a syntactic-exception is therefore restricted
+to cases that can be proved to be safe. Thus whereas a
+syntactic-factor is in general equivalent to some context-free
+grammar, a syntactic-exception is always equivalent to some
+regular grammar. It may be shown that the difference between a
+context-free grammar and a regular grammar is always another
+context-free grammar; hence a syntactic-term (and hence any
+grammar defined according to this standard) is equivalent to
+some context-free grammar
+
 	Programming languages, natural languages and mathematical languages
 
 -----------------------------------------------------------------------------------------------------------------
 
 New Information: (10 min)
-	Definition of Algol 60: (3 min)
+	Definition of Algol 60: (5 min)
 		Historical context -> example of reports! How was it prior? DONE
 		Backus Naur form in Algol 60 report
 		Show examples of algol specifications 
@@ -40,10 +57,7 @@ New Information: (10 min)
 		The basic difficulty with call-by-name results from the side effects that assignment via thunk can cause. For example, if an array element is passed as an argument, the precise element of the array being referred to can depend on the state; hence, if the state changes, so does the element being referred to. In the example, both i and a[i] are passed as arguments to the same function; then, when i changes, a[i] refers to a different element of the array from that which was (probably) intended.
 
 		Impact of formalized notation in Algol 60 -> was kann man spezifizieren, was nicht, wie mächtig ist die Spezifizierungssprache
-		Slide on project!!
-
-	Compiler Design: (3 min) Maybe leave out to have more time for other 
-		Gier Algol Compiler and formalized notation
+		Slide on project!! DONE
 
 	Art and practice of computer programming: (4 min)
 		Notes on formalization
