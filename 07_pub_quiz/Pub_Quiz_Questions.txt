@@ -114,6 +114,10 @@
 		- Should be used a lot and in many parts of a programm
 		- Handling is more important than propagating
 	Source (40/54): http://www.pmg.csail.mit.edu/~liskov/turing-09-5.pdf
+
+
+- Week 12 (December 3rd):
+   - presentations:
      - 2009, Thacker
 	What was Charles Thacker able to do according to his friend Butler Lampson?
 		- Circuit design all the way through to hardware archidecture, programming, and user-interface design (true)
@@ -121,9 +125,6 @@
 		- Fly any plane
 		- Develop the ethernet system in less than a month
 	Source: https://strangequark.me/2017/06/23/alto-creator-charles-p-thacker-dies/
-
-- Week 12 (December 3rd):
-   - presentations:
      - 2011, Pearl
 	How many citations did Judea Pearl receive for his work on causality according to google scholar (average is around 6300 per author)?
 		- 5632
@@ -138,6 +139,8 @@
 		- Freedom of Speech
 		- Net Neutrality
 	Source: https://www.mercurynews.com/2020/04/13/diffie-covid-19-crisis-is-a-harbinger-of-biological-warfare/
+
+
      - 2016, Berners-Lee
 	Which is not a principle from the contract for the web launched by Tim Berners-Lee?
 		- Keep all of the internet available, all of the time
