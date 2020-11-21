@@ -1,7 +1,5 @@
 Outline of the Turing presentation on Peter Naur:
 
-Zeilenumbruch vor and DONE
-
 Total time: 30 min
 
 Overarching topic: Formalization
@@ -9,6 +7,8 @@ Overarching topic: Formalization
 Title page: (1 min)
 Title, name, date/event
 
+Exact time:30s
+Time left: 29min 30s
 -----------------------------------------------------------------------------------------------------------------
 
 Introduction: (3 min)
@@ -16,14 +16,34 @@ Introduction: (3 min)
 	Formal notations:
 		Need, why where from?
 
+	Information: Bhate Panini, 6th and 4th BCE, Always needed, interest strong due to inherent importance of language, knowledge transfer, Electronic Delay Storage Automatic Calculator, Ido and Esperanto
+
+	Exact time: 1min 30s
+	Time left: 28min
+
 	Introduction to Peter Naur and Peter Naur's contribution for which he earned the Turing award:
 
+	Information: born 1928. Interested in astronomy, wunderkind, first paper published with 15, Cambridge, weather, Electronic Delay Storage Automatic Calculator, limitations of EDSAC, return to Denmark after time in the US, Regnencentralen, ALGOL 60, editor Algol bulletin, established computer science in denmark, Datalogy, continued to work around formalisation, knowledge transfer, Died on January 3rd 2016
+
+	Exact time: 1min 30s
+	Time left: 26min 30s
+
 		For fundamental contributions to programming language design and the definition of Algol 60, to compiler design, and to the art and practice of computer programming.
+
+	Give overview!
+
+	Exact time: 30s
+	Time left: 26min
 
 -----------------------------------------------------------------------------------------------------------------
 
 Activate Previous Knowledge: (4 min)
-	Phrase structure grammars -> chomsky hierarchy DONE
+	Phrase structure grammars
+	
+	Exact time: 1min 30s
+	Time left: 24min 30s
+
+
 	Backus Naur form (Tony Hoare)
 
 NOTE — If a syntactic-exception is permitted to be an arbitrary
@@ -42,38 +62,54 @@ context-free grammar; hence a syntactic-term (and hence any
 grammar defined according to this standard) is equivalent to
 some context-free grammar
 
-	Programming languages, natural languages and mathematical languages
+	Exact time: 4min
+	Time left: 20min 30s
 
 -----------------------------------------------------------------------------------------------------------------
 
 New Information: (10 min)
 	Definition of Algol 60: (5 min)
-		Historical context -> example of reports! How was it prior? DONE
+		Historical context
 		Backus Naur form in Algol 60 report
 		Show examples of algol specifications 
+
+	Exact time: 3min 30s
+	Time left: 17min
 
 		A call by name is functionally much like a call by reference, but is slightly different in spirit. Instead of passing the address of a variable as an argument, a language that implements call-by-name (i.e., Algol-60) passes a thunk--a pair of functions that provide read and write access to the variable. In the case of simple variables (i.e., not arrays), call-by-name yields the same results as call-by-reference. When an argument to a function or procedure is an array element, however, its index expression is re-evaluated in the caller's scope every time the parameter is used within the function or procedure. Indeed, the swap example below is perhaps the canonical example of the perils of call-by-name. In fact, with call-by-name it is impossible to implement a "foolproof" version of such a swap function.
 
 		The basic difficulty with call-by-name results from the side effects that assignment via thunk can cause. For example, if an array element is passed as an argument, the precise element of the array being referred to can depend on the state; hence, if the state changes, so does the element being referred to. In the example, both i and a[i] are passed as arguments to the same function; then, when i changes, a[i] refers to a different element of the array from that which was (probably) intended.
 
-		Impact of formalized notation in Algol 60 -> was kann man spezifizieren, was nicht, wie mächtig ist die Spezifizierungssprache
-		Slide on project!! DONE
+	Exact time: 4min
+	Time left: 13min
+
 
 	Art and practice of computer programming: (4 min)
 		Notes on formalization
 		Programming as theory building
 		problem of over formalization -> error in proof!
 
+	Exact time: 3min
+	Time left: 10min
 
-Discussion: (3 min)
+
+Discussion: (1 min)
 	Computing Versus Human Thinking (previous discussions)
-	To the end!
+
+	Exact time: 1min 30s
+	Time left: 8min 30s
 
 Conclusion: (1 min)
 	Importance of formal notations but with respect to the readability -> formal notation is another way to transfer theories but not the only and far from the best way
 	What happened since then?
 
-End: (0.5 min)
-	Thank you!
+	Exact time: 2min
+	Time left: 6min 30s
 
--> Quesions ( 6.5 min)
+Applause:
+	Exact time: 30s
+	Time left: 6min
+
+Disussion:
+	Exact time 6min
+	Time left: 0s

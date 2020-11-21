@@ -206,8 +206,8 @@ University of Basel \\ % Your institution for the title page
 		\begin{itemize}
 			\item $\Sigma$ \textit{terminal symbols}
 			\item V \textit{variables} with V $\cap$ $\Sigma$ = $\emptyset$
-			\item S $\in$ V \textit{start symbol}
 			\item P $\subseteq$ $(V \cup \Sigma)^+$ $\times$ $(V \cup \Sigma)^*$ \textit{production rules}
+			\item S $\in$ V \textit{start symbol}
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -217,8 +217,8 @@ University of Basel \\ % Your institution for the title page
 	\begin{exampleblock}{Example}
 		\begin{equation*}
 			\begin{aligned}
-				G ={} ( & \{S, NP, VP, V, \text{the man}, \text{the book}, \text{took}\}, \\ 
-				& \{\text{the man}, \text{the book}, \text{took}\}, P, S)
+				G ={} ( & \{\text{the man}, \text{the book}, \text{took}\}, \\ 
+				& \{S, NP, VP, V\}, P, S)
 			\end{aligned}
 		\end{equation*}
 		\begin{equation*}
@@ -237,8 +237,8 @@ University of Basel \\ % Your institution for the title page
 \frametitle{Phrase structure in tree form}
 	\begin{exampleblock}{Example}
 		\begin{equation*}
-			\Tree[.Sentence [.NP [ \textit{the man} ]]
-					  [.VP [.Verb \textit{took} ]
+			\Tree[.S [.NP [ \textit{the man} ]]
+					  [.VP [.V \textit{took} ]
 							[.NP [.\textit{the book} ]]]]
 		\end{equation*}
 	\end{exampleblock}
@@ -269,14 +269,14 @@ University of Basel \\ % Your institution for the title page
 \subsection{Backus Naur form}
 
 \begin{frame}
-	\frametitle{Backus Normal form}
+	\frametitle{Backus Naur form}
 	\begin{exampleblock}{Example}
 		\begin{equation*}
 		\begin{split}
-		<S> &:\equiv<NP>\text{ }<VP> \\
-		<VP> &:\equiv<V>\text{ }<NP> \\
-		<NP> &:\equiv\text{the man}\text{ }\textit{or}\text{ }\text{the book} \\
-		<V> &:\equiv\text{took} \\
+		<S> &::=<NP>\text{ }<VP> \\
+		<VP> &::=<V>\text{ }<NP> \\
+		<NP> &::=\text{the man}\text{ }|\text{ }\text{the book} \\
+		<V> &::=\text{took} \\
 		\end{split}
 		\end{equation*}
 	\end{exampleblock}
@@ -386,7 +386,7 @@ University of Basel \\ % Your institution for the title page
 	
 	\begin{itemize}
 		\item Block scope
-		\item Call-by-value, call-by-name and call-by-reference parameter passing
+		\item Call-by-value and call-by-name parameter passing
 		\item Formal specification
 		\item No I/O facilities
 	\end{itemize}
@@ -554,8 +554,8 @@ $\to$ For an example see Proof Versus Formalization by Peter Naur
 
 \begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
 	\frametitle{Importance of formal notation}
-	\begin{quote}{Peter Naur}
-			For achieving clarity any formal mode of expression should be used, not as a goal in itself, but wherever it appears to be helpful to authors and readers alike.
+	\begin{quote}{Peter Naur, Formalization in Program Development}
+			"For achieving clarity any formal mode of expression should be used, not as a goal in itself, but wherever it appears to be helpful to authors and readers alike."
 	\end{quote}
 \end{frame}
 
@@ -568,12 +568,5 @@ $\to$ For an example see Proof Versus Formalization by Peter Naur
 	\end{center}
 \end{frame}
 
-%----------------------------------------------------------------------------------------
-\begin{frame}
-	\frametitle{References}
-	\footnotesize{
-		\bibliography{references}
-	}
-\end{frame}
 
 \end{document} 
