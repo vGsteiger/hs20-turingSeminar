@@ -160,33 +160,130 @@ We will now save the ALGOL 60 program, translate it, compile it, and run it. The
 
 \section{ALGOL 60 Basic Syntax}
 
+\subsection{Formal Notation}
+The notation used in this part of the tutorial is the Backus Naur form also used in the original AGLOL 60 report. The notation is best explained with an example:\\
+
+\begin{equation} \label{eq1}
+\begin{split}
+<\text{ab}> ::=&( |<\text{ab}>(|\text{example}|)  \\
+\end{split}
+\end{equation}
+
+Where the sequence of character enclosed in brackets represent meta-linguistic variables which are represented by a sequence of symbols. The ::= and | signify meta-linguistic connectives. | has the meaning or. Any symbol in a formula that is neither a variable nor a connective denotes itself. Variables can be replaced with their own definition. So the example signifies a recursive rule for the formation of values of the variable <ab>. Some values for <ab> are:\\
+example( or )((
+
 \subsection{Symbols}
+The basic symbols of the ALGOL 60 programming language consists of letters, digits, logical values, and delimiters. With the basic symbols of ALGOL 60 every ALGOL 60 program can be created. The basic symbols themselves have no semantic values and are combined together to create every program. The basic symbols are made up as follows: \\
+
+\subsubsection{Letters}
+\begin{equation} \label{eq1}
+\begin{split}
+<\text{digit}> ::=&a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|\\&A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z \\
+\end{split}
+\end{equation}
+Which are used for forming identifiers and strings.
+
+\subsubsection{Digits}
+\begin{equation} \label{eq2}
+\begin{split}
+<\text{digit}> ::=&0|1|2|3|4|5|6|7|8|9 \\
+\end{split}
+\end{equation}
+Which are used for forming numbers, identifiers and strings.
+
+\subsubsection{Logical values}
+\begin{equation} \label{eq3}
+\begin{split}
+<\text{logical values}> ::=&\textbf{true}|\textbf{false} \\
+\end{split}
+\end{equation}
+Which have a set meaning as boolean logical values.
+
+\subsubsection{Delimiters}
+\begin{equation} \label{eq4}
+\begin{split}
+<\text{delimiter}> ::=&<\text{operator}>|<\text{separator}>|<\text{bracket}>|<\text{declarator}>|\\&<\text{specificator}> \\
+<\text{operator}> ::=&<\text{arithmetic operator}>|<\text{relational operator}>|\\&<\text{logical operator}>|<\text{sequential operator}> \\
+<\text{arithmetic operator}> ::=&+|-|*|/|\%|^** \\
+<\text{relational operator}> ::=&<|<=|=|>=|>|!= \\
+<\text{logical operator}> ::=&==|->(\text{meaning }\supset)||(\text{meaning or})|\&|!\\
+<\text{sequential operator}> ::=&\textbf{go to}|\textbf{if}|\textbf{then}|\textbf{else}|\textbf{for}|\textbf{do}\\
+<\text{separator}> ::=&,|.|\#|:|;|:=|\textbf{step}|\textbf{until}|\textbf{while}|\textbf{comment}\\
+<\text{bracket}> ::=&\text{(}|\text{)}|\text{[}|\text{]}|\text{"}|\textbf{begin}|\textbf{end}\\
+<\text{declarator}> ::=&\textbf{own}|\textbf{Boolean}|\textbf{integer}|\textbf{real}|\textbf{array}|\textbf{switch}|\textbf{procedure}\\
+<\text{specificator}> ::=&\textbf{string}|\textbf{label}|\textbf{value}\\
+\end{split}
+\end{equation}
+All delimiters have a fixed meaning for which is mostly obvious, or else the meaning will be explained at the appropriate section.\\
+Typographical features such as blank spaces can be inserted between symbols, however, multi-character symbols should contain no blank space.\\
+The separator \textbf{comment} has special importance and has the purpose of writing symbols into the code that will not be translated into machine executable code. The commenting symbols are all symbols between the separator \textbf{comment} and the separator ;.
+
 
 \subsection{Identifiers}
+In ALGOL 60 an identifier has no inherent meaning, but serve the identification of variables, arrays, labels, switches and procedures. An identifier starts with a letter and is followed by zero or more letters or digits. Every combination is allowed except the previously defined delimiters. Some examples for identifiers are as follows:\\
 
-\subsection{Numbers}
+\begin{lstlisting}[]
+Soup
+V17a
+MARILYN
+\end{lstlisting}
+
+\subsection{Numbers} \label{numbers}
+Numbers are used for arithmetic operations. There are two types of numbers in the ALGOL 60 programming language. Both have the same functionalities, however different ranges of size. The types of numbers are \textbf{integer} and \textbf{real}. Integers are any positive or negative combination of digits. Reals are any integer including a decimal fraction and/or an exponent part (denoted by the symbol \#). More on this in the section \nameref{datatypes}. Some examples for numbers are as follows:\\
+
+\begin{lstlisting}[]
+0
+.5384
+-.083#-02
+\end{lstlisting}
 
 \subsection{Strings}
+A string is any sequence of basic symbols not containing ". Strings are used as actual parameters of procedure, for example also the procedure \texttt{outstring} which has been included into the translation program for output functionalities. Due to the translation to a C program the strings may be coded as usual in C fashion. Escape sequences like \textbackslash n are allowed. To use double quote in a string use a backslash \textbackslash". Some examples for strings are as follows:\\
 
-\section{ALGOL 60 Data Types}
+\begin{lstlisting}[]
+"This is a string"
+"This is another \"string\""
+\end{lstlisting}
+
+
+\section{ALGOL 60 Data Types} \label{datatypes}
+As the original ALGOL 60 document was written without a specific hardware implementation in mind the ALGOL 60 data types used in this tutorial will reflect the C language data types in sizes. Data types define how much space will be occupied in storage.
 
 \subsection{Integer Types}
+As mentioned in subsection \nameref{numbers} integers refer to any positive or negative concatenation of numbers without any exponent or decimal fractions. The values possible are between \texttt{-32'768} to \texttt{32'768} if int is stored in 2 bytes or between \texttt{-2,147,483,648} to \texttt{2,147,483,647} if int is stored in 4 bytes. To get the exact possible size of the integer write a short program as follows:
 
-\subsection{Floating-Point Types}
+\begin{lstlisting}[]
+inline("printf(sizeof(int));")
+\end{lstlisting}
 
-\subsection{Array Types}
+The inline procedure is a pseudo procedure implemented by the MARST developers to signify what code will be one to one translated into C code.
 
-\section{ALGOL 60 Variables}
+\subsection{Real Types}
+Again, as mentioned in subsection \nameref{numbers} reals refer to any positive concatenation of digits which may include exponents and/or decimal fractions. The values possible are between \texttt{1.2E-38} to \texttt{3.4E+38} with a precision to 6 decimal places if float is stored in 4 bytes
 
-\subsection{Variable Declaration}
+\section{ALGOL 60 Expressions}
+The main constituents of any ALGOL 60 programs describing algorithmic processes are arithmetic, Boolean, and designational, expressions. These expressions contain logical values, numbers, variables, function designators, and operators.
 
-\section{ALGOL 60 Operators}
+\subsection{Variables}
+A variable represents a single values. This value can be used in expressions and can be used to form other values and may be changed by means of assignment statements. Array expressions with their identifiers are also considered variables. The identifiers of arrays are enclosed in subscript brackets []. The type of a variable is defined in the declaration of the variable itself (see \nameref{typeDecl} for more information on types) or for the array identifier (see \nameref{arrayDecl} for more information on arrays). Examples for variables are as follows:
 
-\subsection{Arithmetic Operators}
+\begin{lstlisting}[]
+beta
+Q[7, 2]
+a17
+\end{lstlisting}
 
-\subsection{Relational Operators}
+\subsection{Function designators}
+A function designator represents a single value that can be attained by the application of a given set of rules defined by a procedure declaration (see \nameref{procDecl} for more information on procedures) to a defined set of parameters which can either be single values or variables. Examples for function desigantors are as follows:
 
-\subsection{Logical Operators}
+\begin{lstlisting}[]
+Compile("Test")Stack:(P)
+J(1+s, n)
+Rhesus
+\end{lstlisting}
+
+\subsection{Arithmetic expressions}
+
 
 \section{ALGOL 60 Statements}
 
@@ -199,6 +296,18 @@ We will now save the ALGOL 60 program, translate it, compile it, and run it. The
 \subsection{For Statement}
 
 \subsection{Procedure Statement}
+
+\section{ALGOL 60 Declarations}
+
+\subsection{Type Declaration} \label{typeDecl}
+
+\subsection{Array Declaration} \label{arrayDecl}
+
+\subsection{Switch Declaration}
+
+\subsection{Procedure Declaration} \label{procDecl}
+
+\subsection{Variable Declaration}
 
 \section{Procedures}
 
