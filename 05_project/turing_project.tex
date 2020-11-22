@@ -204,7 +204,7 @@ Which have a set meaning as boolean logical values.
 \begin{split}
 <\text{delimiter}> ::=&<\text{operator}>|<\text{separator}>|<\text{bracket}>|<\text{declarator}>|\\&<\text{specificator}> \\
 <\text{operator}> ::=&<\text{arithmetic operator}>|<\text{relational operator}>|\\&<\text{logical operator}>|<\text{sequential operator}> \\
-<\text{arithmetic operator}> ::=&+|-|*|/|\%|^** \\
+<\text{arithmetic operator}> ::=&+|-|*|/|\%|\text{ }\hat{} \ast \ast \\
 <\text{relational operator}> ::=&<|<=|=|>=|>|!= \\
 <\text{logical operator}> ::=&==|->(\text{meaning }\supset)||(\text{meaning or})|\&|!\\
 <\text{sequential operator}> ::=&\textbf{go to}|\textbf{if}|\textbf{then}|\textbf{else}|\textbf{for}|\textbf{do}\\
@@ -274,20 +274,56 @@ a17
 \end{lstlisting}
 
 \subsection{Function designators}
-A function designator represents a single value that can be attained by the application of a given set of rules defined by a procedure declaration (see \nameref{procDecl} for more information on procedures) to a defined set of parameters which can either be single values or variables. Examples for function desigantors are as follows:
+A function designator represents a single value that can be attained by the application of a given set of rules defined by a procedure declaration (see \nameref{procDecl} for more information on procedures) to a defined set of parameters which can either be single values or variables. Examples for function desigantors are as follows:\\
 
 \begin{lstlisting}[]
 Compile("Test")Stack:(P)
-J(1+s, n)
+J(1 + s, n)
 Rhesus
 \end{lstlisting}
 
 \subsection{Arithmetic expressions}
+Arithmetic expressions, as the name says, are rules for computing numerical values. Simple arithmetic expressions are the application of the arithmetic operations of the rule upon the actual numerical values of the primaries involved in the expression. The numerical values of primaries are either simply the values given in the case of numbers or in the case of variables the currently assigned values of the variables (see \nameref{assigStat} for more information on assignments). For functional designators it is the value received by executing the corresponding procedure. The normal arithmetic rules apply. Thus also the precedence from left to right with the exponent operator having the highest precedence, the multiplication or division operators the second highest and the addition or subtraction operator the third highest precedence. Expressions within parentheses are evaluated on their own and further calculated in the subsequent calculations. Examples for simple arithmetic expressions are as follows:\\
 
+\begin{lstlisting}[]
+w * u - Q(S + C) ^** 2
+a * sin(omega * t)
+\end{lstlisting}
+
+There is also the possibility of more complex arithmetic expressions which involve Boolean expressions. In this case the value of the arithmetic expression is calculated from the Boolean expressions that are true. Examples for complex arithmetic expressions are as follows:\\
+
+\begin{lstlisting}[]
+if q > 0 then U + V else if a * b > 17 then U / V else 0
+if s then n - 1 else n
+\end{lstlisting}
+
+\subsubsection{Arithmetic expression types}
+The types of arithmetic expressions must be integer or real (see \nameref{datatypes} for more information on types).\\
+The operators +, - and * have the conventional meaning and will return integer if all operands are integer, else real.\\
+The operation <term> / <factor> and <term> \% <factor> both denote division while / is defined for all four combinations of integer and real and will give a result of type real while \% is only defined for two operands of type integer and will return an integer. / is defined as the multiplication of the term with the reciprocal of the factor. \% is defined as the multiplication of the sign of the / division of the two operands with the largest absolute integer that is smaller than the / division of the two operands.\\
+The operation <factor> $\hat{}$ ** <primary> means exponential, where the factor is the base and the primary the exponent.
+
+\subsection{Boolean expressions}
+Boolean expressions are rules for calculating logical values where the principles of evaluations are analogous to the principles of arithmetic evaluations. The operators of Boolean expressions are defined as follows:
+
+\begin{table}[]
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		b1                  & false & false & true  & true  \\ \hline
+		b2                  & false & true  & false & true  \\ \hline
+		!b1                 & true  & true  & false & false \\ \hline
+		b1\&b2              & false & false & false & true  \\ \hline
+		b1|b2               & false & true  & true  & true  \\ \hline
+		b1-\textgreater{}b2 & true  & true  & false & true  \\ \hline
+		b1==b2              & true  & false & false & true  \\ \hline
+	\end{tabular}
+\end{table}
+
+The Boolean expressions <, <=, =, >, >=, and != are applied on two arithmetic expressions.
 
 \section{ALGOL 60 Statements}
 
-\subsection{Assignment Statement}
+\subsection{Assignment Statement} \label{assigStat}
 
 \subsection{Go To Statement}
 
@@ -310,8 +346,6 @@ Rhesus
 \subsection{Variable Declaration}
 
 \section{Procedures}
-
-\subsection{Declarations}
 
 \section{ALGOL 60 Scope Rules}
 
