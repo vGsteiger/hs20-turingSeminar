@@ -16,6 +16,16 @@
 \restylefloat{table}
 
 \usepackage{lipsum}
+\usepackage{float}
+\restylefloat{table}
+
+\lstset{
+	numbers=left, 
+	numberstyle=\small, 
+	numbersep=8pt, 
+	frame = single, 
+	language=Pascal, 
+	framexleftmargin=15pt}
 
 \let\oldquote\quote
 \let\endoldquote\endquote
@@ -76,13 +86,13 @@ The C Compiler usually used is the GNU C/C++ compiler. In the following subsecti
 \subsubsection{Installation on UNIX}
 The GNU C/C++ compiler is mostly already installed on UNIX systems. To check whether the compiler is already install type the following into the command line:
 
-\begin{lstlisting}[]
+\begin{lstlisting}[language=bash]
 $ gcc -v
 \end{lstlisting}
 
 If the GNU compiler is already installed then something like the following will be printed out to the command line:
 
-\begin{lstlisting}[]
+\begin{lstlisting}[language=bash]
 Using built-in specs. 
 Target: i386-redhat-linux 
 Configured with: ../configure --prefix=/usr ....... 
@@ -102,7 +112,7 @@ The marst ALGOL 60 translator can be downloaded from any \href{https://www.gnu.o
 
 To install marst on your OS type the following into the command line at the location of the \texttt{marst-2.7} directory:
 
-\begin{lstlisting}[]
+\begin{lstlisting}[language=bash]
 $ ./configure; make; make install
 \end{lstlisting}
 
@@ -123,29 +133,30 @@ An ALGOL 60 program can be constructed with the following parts:
 
 A simple example to display various parts of an ALGOL 60 program would be the following:
 
-\begin{lstlisting}[]
-procedure main();
-	comment a first ALGOL 60 program
+\begin{lstlisting}[language={[60]algol}, caption={hello.alg program}, captionpos=b, label={hello.alg}]
+begin
+	comment A first ALGOL 60 program;
+	procedure main;
 	begin
 		outstring(1, "Hello, world!\n")
-	end
-end main;
-
-main();
+	end;
+	main
+end
 \end{lstlisting}
 
 The parts of the above program are the following:
 
 \begin{enumerate}
-	\item The first line declares the procedure which we called the main procedure. The name of the procedure can be changed.
+	\item The first line declares the block scope of our program.
+	\item The second line declares the procedure which we called the main procedure. The identifier of the procedure may be changed.
 	\item The next line is a comment which will be ignored by the translator and is used to comment on the code at hand to make it easier for fellow programmers to understand the intention of the program.
 	\item The \texttt{begin} keyword signifies that a block of the procedure starts here.
 	\item Following comes an output keyword \texttt{outstring} which displays the string given to the first  output channel.
-	\item The last line calls the main procedure and executes it with it.
+	\item The seventh line calls the main procedure.
 \end{enumerate}
 
 \subsection{Compile and Execute an ALGOL 60 Program}
-We will now save the ALGOL 60 program, translate it, compile it, and run it. The steps to do this are the following:
+We will now save the \nameref{hello.alg}, translate it, compile it, and run it. The steps to do this are the following:
 
 \begin{enumerate}
 	\item Open your text editor and type in the above program.
@@ -157,6 +168,8 @@ We will now save the ALGOL 60 program, translate it, compile it, and run it. The
 	\item Run your executable \texttt{./hello}.
 	\item If everything worked fine you should see \texttt{"Hello, world!"} printed on the command line.
 \end{enumerate}
+
+\newpage
 
 \section{ALGOL 60 Basic Syntax}
 
@@ -170,13 +183,14 @@ The notation used in this part of the tutorial is the Backus Naur form also used
 \end{equation}
 
 Where the sequence of character enclosed in brackets represent meta-linguistic variables which are represented by a sequence of symbols. The ::= and | signify meta-linguistic connectives. | has the meaning or. Any symbol in a formula that is neither a variable nor a connective denotes itself. Variables can be replaced with their own definition. So the example signifies a recursive rule for the formation of values of the variable <ab>. Some values for <ab> are:\\
+
 example( or )((
 
 \subsection{Symbols}
 The basic symbols of the ALGOL 60 programming language consists of letters, digits, logical values, and delimiters. With the basic symbols of ALGOL 60 every ALGOL 60 program can be created. The basic symbols themselves have no semantic values and are combined together to create every program. The basic symbols are made up as follows: \\
 
 \subsubsection{Letters}
-\begin{equation} \label{eq1}
+\begin{equation} \label{eq2}
 \begin{split}
 <\text{digit}> ::=&a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|\\&A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z \\
 \end{split}
@@ -184,7 +198,7 @@ The basic symbols of the ALGOL 60 programming language consists of letters, digi
 Which are used for forming identifiers and strings.
 
 \subsubsection{Digits}
-\begin{equation} \label{eq2}
+\begin{equation} \label{eq3}
 \begin{split}
 <\text{digit}> ::=&0|1|2|3|4|5|6|7|8|9 \\
 \end{split}
@@ -192,7 +206,7 @@ Which are used for forming identifiers and strings.
 Which are used for forming numbers, identifiers and strings.
 
 \subsubsection{Logical values}
-\begin{equation} \label{eq3}
+\begin{equation} \label{eq4}
 \begin{split}
 <\text{logical values}> ::=&\textbf{true}|\textbf{false} \\
 \end{split}
@@ -200,7 +214,7 @@ Which are used for forming numbers, identifiers and strings.
 Which have a set meaning as boolean logical values.
 
 \subsubsection{Delimiters}
-\begin{equation} \label{eq4}
+\begin{equation} \label{eq5}
 \begin{split}
 <\text{delimiter}> ::=&<\text{operator}>|<\text{separator}>|<\text{bracket}>|<\text{declarator}>|\\&<\text{specificator}> \\
 <\text{operator}> ::=&<\text{arithmetic operator}>|<\text{relational operator}>|\\&<\text{logical operator}>|<\text{sequential operator}> \\
@@ -222,16 +236,16 @@ The separator \textbf{comment} has special importance and has the purpose of wri
 \subsection{Identifiers}
 In ALGOL 60 an identifier has no inherent meaning, but serve the identification of variables, arrays, labels, switches and procedures. An identifier starts with a letter and is followed by zero or more letters or digits. Every combination is allowed except the previously defined delimiters. Some examples for identifiers are as follows:\\
 
-\begin{lstlisting}[]
+\begin{lstlisting}[language={[60]algol}]
 Soup
 V17a
 MARILYN
 \end{lstlisting}
 
 \subsection{Numbers} \label{numbers}
-Numbers are used for arithmetic operations. There are two types of numbers in the ALGOL 60 programming language. Both have the same functionalities, however different ranges of size. The types of numbers are \textbf{integer} and \textbf{real}. Integers are any positive or negative combination of digits. Reals are any integer including a decimal fraction and/or an exponent part (denoted by the symbol \#). More on this in the section \nameref{datatypes}. Some examples for numbers are as follows:\\
+Numbers are used for arithmetic operations. There are two types of numbers in the ALGOL 60 programming language. Both have the same functionalities, however different ranges of size. The types of numbers are \textbf{integer} and \textbf{real}. Integers are any positive or negative combination of digits. Reals are any integer including a decimal fraction (denoted by the separator .) and/or an exponent part (denoted by the separator \#). More on this in the section \nameref{datatypes}. Some examples for numbers are as follows:\\
 
-\begin{lstlisting}[]
+\begin{lstlisting}[language={[60]algol}]
 0
 .5384
 -.083#-02
@@ -240,11 +254,12 @@ Numbers are used for arithmetic operations. There are two types of numbers in th
 \subsection{Strings}
 A string is any sequence of basic symbols not containing ". Strings are used as actual parameters of procedure, for example also the procedure \texttt{outstring} which has been included into the translation program for output functionalities. Due to the translation to a C program the strings may be coded as usual in C fashion. Escape sequences like \textbackslash n are allowed. To use double quote in a string use a backslash \textbackslash". Some examples for strings are as follows:\\
 
-\begin{lstlisting}[]
+\begin{lstlisting}[language={[60]algol}]
 "This is a string"
 "This is another \"string\""
 \end{lstlisting}
 
+\newpage
 
 \section{ALGOL 60 Data Types} \label{datatypes}
 As the original ALGOL 60 document was written without a specific hardware implementation in mind the ALGOL 60 data types used in this tutorial will reflect the C language data types in sizes. Data types define how much space will be occupied in storage.
@@ -252,14 +267,32 @@ As the original ALGOL 60 document was written without a specific hardware implem
 \subsection{Integer Types}
 As mentioned in subsection \nameref{numbers} integers refer to any positive or negative concatenation of numbers without any exponent or decimal fractions. The values possible are between \texttt{-32'768} to \texttt{32'768} if int is stored in 2 bytes or between \texttt{-2,147,483,648} to \texttt{2,147,483,647} if int is stored in 4 bytes. To get the exact possible size of the integer write a short program as follows:
 
-\begin{lstlisting}[]
+\begin{lstlisting}[language={[60]algol}]
 inline("printf(sizeof(int));")
 \end{lstlisting}
 
-The inline procedure is a pseudo procedure implemented by the MARST developers to signify what code will be one to one translated into C code.
+The inline procedure is a pseudo procedure implemented by the MARST developers to signify what code will be one to one translated into C code. \\
+
+Examples for integers in ALGOL 60 are as follows:
+
+\begin{lstlisting}[language={[60]algol}]
+123
+0
+-6577
+\end{lstlisting}
 
 \subsection{Real Types}
 Again, as mentioned in subsection \nameref{numbers} reals refer to any positive concatenation of digits which may include exponents and/or decimal fractions. The values possible are between \texttt{1.2E-38} to \texttt{3.4E+38} with a precision to 6 decimal places if float is stored in 4 bytes
+
+Examples for reals in ALGOL 60 are as follows:
+
+\begin{lstlisting}[language={[60]algol}]
+.87
+-.03#-04
+-56.46
+\end{lstlisting}
+
+\newpage
 
 \section{ALGOL 60 Expressions}
 The main constituents of any ALGOL 60 programs describing algorithmic processes are arithmetic, Boolean, and designational, expressions. These expressions contain logical values, numbers, variables, function designators, and operators.
@@ -267,46 +300,48 @@ The main constituents of any ALGOL 60 programs describing algorithmic processes 
 \subsection{Variables}
 A variable represents a single values. This value can be used in expressions and can be used to form other values and may be changed by means of assignment statements. Array expressions with their identifiers are also considered variables. The identifiers of arrays are enclosed in subscript brackets []. The type of a variable is defined in the declaration of the variable itself (see \nameref{typeDecl} for more information on types) or for the array identifier (see \nameref{arrayDecl} for more information on arrays). Examples for variables are as follows:
 
-\begin{lstlisting}[]
+\begin{lstlisting}[language={[60]algol}]
 beta
 Q[7, 2]
 a17
 \end{lstlisting}
 
 \subsection{Function designators}
-A function designator represents a single value that can be attained by the application of a given set of rules defined by a procedure declaration (see \nameref{procDecl} for more information on procedures) to a defined set of parameters which can either be single values or variables. Examples for function desigantors are as follows:\\
+A function designator represents a single value that can be attained by the application of a given set of rules defined by a procedure declaration (see \nameref{procDecl} for more information on procedures) to a defined set of parameters which can either be single values or variables. It is important to note that if the function is called without any parameter that the brackets should not be added. Examples for function desigantors are as follows:\\
 
-\begin{lstlisting}[]
+\begin{lstlisting}[language={[60]algol}]
 Compile("Test")Stack:(P)
 J(1 + s, n)
 Rhesus
 \end{lstlisting}
 
-\subsection{Arithmetic expressions}
-Arithmetic expressions, as the name says, are rules for computing numerical values. Simple arithmetic expressions are the application of the arithmetic operations of the rule upon the actual numerical values of the primaries involved in the expression. The numerical values of primaries are either simply the values given in the case of numbers or in the case of variables the currently assigned values of the variables (see \nameref{assigStat} for more information on assignments). For functional designators it is the value received by executing the corresponding procedure. The normal arithmetic rules apply. Thus also the precedence from left to right with the exponent operator having the highest precedence, the multiplication or division operators the second highest and the addition or subtraction operator the third highest precedence. Expressions within parentheses are evaluated on their own and further calculated in the subsequent calculations. Examples for simple arithmetic expressions are as follows:\\
+\subsection{Arithmetic expressions} \label{arithexp}
+Arithmetic expressions, as the name says, are rules for computing numerical values. Simple arithmetic expressions are the application of the arithmetic operations of the rule upon the actual numerical values of the primaries involved in the expression. The numerical values of primaries are either simply the values given in the case of numbers or in the case of variables the currently assigned values of the variables (see \nameref{assigStat} for more information on assignments). For functional designators it is the value received by executing the corresponding procedure.\\
+The possible arithmetic operators are +, -, *, /, \% and $\hat{}$ **. For more information on the semantics of those operators see \nameref{arithexptypes}.\\
+ The normal arithmetic rules apply. Thus also the precedence from left to right with the exponent operator having the highest precedence, the multiplication or division operators the second highest and the addition or subtraction operator the third highest precedence. Expressions within parentheses are evaluated on their own and further calculated in the subsequent calculations. Examples for simple arithmetic expressions are as follows:\\
 
-\begin{lstlisting}[]
+\begin{lstlisting}[language={[60]algol}]
 w * u - Q(S + C) ^** 2
 a * sin(omega * t)
 \end{lstlisting}
 
 There is also the possibility of more complex arithmetic expressions which involve Boolean expressions. In this case the value of the arithmetic expression is calculated from the Boolean expressions that are true. Examples for complex arithmetic expressions are as follows:\\
 
-\begin{lstlisting}[]
+\begin{lstlisting}[language={[60]algol}]
 if q > 0 then U + V else if a * b > 17 then U / V else 0
 if s then n - 1 else n
 \end{lstlisting}
 
-\subsubsection{Arithmetic expression types}
+\subsubsection{Arithmetic expression types} \label{arithexptypes}
 The types of arithmetic expressions must be integer or real (see \nameref{datatypes} for more information on types).\\
 The operators +, - and * have the conventional meaning and will return integer if all operands are integer, else real.\\
 The operation <term> / <factor> and <term> \% <factor> both denote division while / is defined for all four combinations of integer and real and will give a result of type real while \% is only defined for two operands of type integer and will return an integer. / is defined as the multiplication of the term with the reciprocal of the factor. \% is defined as the multiplication of the sign of the / division of the two operands with the largest absolute integer that is smaller than the / division of the two operands.\\
 The operation <factor> $\hat{}$ ** <primary> means exponential, where the factor is the base and the primary the exponent.
 
 \subsection{Boolean expressions}
-Boolean expressions are rules for calculating logical values where the principles of evaluations are analogous to the principles of arithmetic evaluations. The operators of Boolean expressions are defined as follows:
+Boolean expressions are rules for calculating logical values where the principles of evaluations are analogous to the principles of arithmetic evaluations. The possible boolean operators are !, \&, |, -\textgreater{} or ==. 
 
-\begin{table}[]
+\begin{table}[h]
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline
 		b1                  & false & false & true  & true  \\ \hline
@@ -319,11 +354,81 @@ Boolean expressions are rules for calculating logical values where the principle
 	\end{tabular}
 \end{table}
 
-The Boolean expressions <, <=, =, >, >=, and != are applied on two arithmetic expressions.
+The relational operators <, <=, =, >, >=, and != are applied on two arithmetic expressions. \\
 
-\section{ALGOL 60 Statements}
+The precedence of the operators are first the \label{arithexptypes} precedence, then the relational operators, next the !, following the \&, and then the |, with -\textgreater{} following and == coming last.\\
+The semantics of the operators are defined as follows:\\
+Examples for boolean expressions are as follows:\\
+
+\begin{lstlisting}[language={[60]algol}]
+x = -2
+a + c > -5 & z - 6 < o
+if k < 5 then s > w else h == c
+\end{lstlisting}
+
+\subsection{Designational expression}
+Designational expressions are rules to determine the labels of an \nameref{statement}. Here the evaluation happens analogous to the \nameref{arithexp}. Boolean expressions can be used to introduce some conditional logic into the designation of the labels. A switch designator refers to the corresponding switch declaration and by the value given to the switch declaration the switch selects the designational expression listed in the switch declaration. More on \nameref{switchDecl} later.\\
+Examples for designational expressions are as follows:\\
+
+\begin{lstlisting}[language={[60]algol}]
+Select[k-2]
+if b < c then p9 else s[if w <= 0 then 5 else n]
+\end{lstlisting}
+
+\newpage
+
+\section{ALGOL 60 Statements} \label{statement}
+Statements in ALGOL are the units of operation of every program. Statements will be executed in order as written, however, there are additional control mechanisms as go to statements which allow to let the control flow be directed in a more granular fashion. Labels on statements allow for this dynamic control flow.\\
+Conditional statements may also allow to select certain statements to be executed and others to be skipped.\\
+
+\subsection{Compound statements and blocks}
+Basic statements do not require the keywords begin or end and are the basic building blocks for the following compound statements and blocks. Basic statements may either be assignment statements, go to statements, conditional statements or for statements. Basic statements may also include labels.\\
+
+Compound statements and block statements are of the form as follows with S denoting statements which may be again complete compound statements or blocks, L denoting labels and D denoting declarations:\\
+
+Compound statements:
+\begin{lstlisting}[language={[60]algol}]
+L: L: ... begin S; S; ... S; S end
+\end{lstlisting}
+
+Blocks:
+\begin{lstlisting}[language={[60]algol}]
+L: L: ... begin D; D; ... D; S; S; ... S; S end
+\end{lstlisting}
+
+Examples for basic statements are as follows:\\ 
+\begin{lstlisting}[language={[60]algol}]
+tmp := 3
+Rome: S := "All roads lead to rome"
+for i := 1 step 1 until len do x := x + 3
+go to Rome
+\end{lstlisting}
+
+Examples for compound statements are as follows:\\
+\begin{lstlisting}[language={[60]algol}]
+begin
+	x := 0;
+	for t := 0 step 5 until 100 do x := x + t;
+	if t == x then go to CONTINUE else x := 0;
+end
+\end{lstlisting}
+
+Examples for blocks are as follows:\\ 
+\begin{lstlisting}[language={[60]algol}]
+Z: begin 
+	integer i; real t;
+	for i := 0 step 1 until m do
+		for j := 0 step 1 until m do
+			begin
+				z := 0;
+			end
+end block Z
+\end{lstlisting}
+
+On more information on the scope rules of ALGOL 60 and the blocks see \nameref{scopeRule}.
 
 \subsection{Assignment Statement} \label{assigStat}
+Assignment statements allow the programmer to assign values to one or more variables
 
 \subsection{Go To Statement}
 
@@ -333,23 +438,33 @@ The Boolean expressions <, <=, =, >, >=, and != are applied on two arithmetic ex
 
 \subsection{Procedure Statement}
 
+\newpage
+
 \section{ALGOL 60 Declarations}
 
 \subsection{Type Declaration} \label{typeDecl}
 
 \subsection{Array Declaration} \label{arrayDecl}
 
-\subsection{Switch Declaration}
+\subsection{Switch Declaration} \label{switchDecl}
 
 \subsection{Procedure Declaration} \label{procDecl}
 
 \subsection{Variable Declaration}
 
+\newpage
+
 \section{Procedures}
 
-\section{ALGOL 60 Scope Rules}
+\newpage
+
+\section{ALGOL 60 Scope Rules} \label{scopeRule}
+
+\newpage
 
 \section{Simple Programs}
+
+\newpage
 
 \section{Recursion}
 
