@@ -135,12 +135,12 @@ A simple example to display various parts of an ALGOL 60 program would be the fo
 
 \begin{lstlisting}[language={[60]algol}, caption={hello.alg program}, captionpos=b, label={hello.alg}]
 begin
-	comment A first ALGOL 60 program;
-	procedure main;
-	begin
-		outstring(1, "Hello, world!\n")
-	end;
-	main
+    comment A first ALGOL 60 program;
+    procedure main;
+    begin
+        outstring(1, "Hello, world!\n")
+    end;
+    main
 end
 \end{lstlisting}
 
@@ -232,7 +232,6 @@ All delimiters have a fixed meaning for which is mostly obvious, or else the mea
 Typographical features such as blank spaces can be inserted between symbols, however, multi-character symbols should contain no blank space.\\
 The separator \textbf{comment} has special importance and has the purpose of writing symbols into the code that will not be translated into machine executable code. The commenting symbols are all symbols between the separator \textbf{comment} and the separator ;.
 
-
 \subsection{Identifiers}
 In ALGOL 60 an identifier has no inherent meaning, but serve the identification of variables, arrays, labels, switches and procedures. An identifier starts with a letter and is followed by zero or more letters or digits. Every combination is allowed except the previously defined delimiters. Some examples for identifiers are as follows:\\
 
@@ -258,6 +257,9 @@ A string is any sequence of basic symbols not containing ". Strings are used as 
 "This is a string"
 "This is another \"string\""
 \end{lstlisting}
+
+\subsection{Indentation}
+ALGOL 60 does not require any indentation, however, to make the code more easily readable we will be using an easy sort of indentation where the code within a \texttt{begin} and \texttt{end} will be indented by four spaces. Furthermore, if there is a label, the indentation will be also four spaces in the to the label belonging code.
 
 \newpage
 
@@ -366,11 +368,12 @@ a + c > -5 & z - 6 < o
 if k < 5 then s > w else h == c
 \end{lstlisting}
 
-\subsection{Designational expression}
+\subsection{Designational expression} \label{desigExp}
 Designational expressions are rules to determine the labels of an \nameref{statement}. Here the evaluation happens analogous to the \nameref{arithexp}. Boolean expressions can be used to introduce some conditional logic into the designation of the labels. A switch designator refers to the corresponding switch declaration and by the value given to the switch declaration the switch selects the designational expression listed in the switch declaration. More on \nameref{switchDecl} later.\\
 Examples for designational expressions are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
+p9
 Select[k-2]
 if b < c then p9 else s[if w <= 0 then 5 else n]
 \end{lstlisting}
@@ -407,36 +410,87 @@ go to Rome
 Examples for compound statements are as follows:\\
 \begin{lstlisting}[language={[60]algol}]
 begin
-	x := 0;
-	for t := 0 step 5 until 100 do x := x + t;
-	if t == x then go to CONTINUE else x := 0;
+    x := 0;
+    for t := 0 step 5 until 100 do x := x + t;
+    if t == x then go to CONTINUE else x := 0;
 end
 \end{lstlisting}
 
 Examples for blocks are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
-Z: begin 
-	integer i; real t;
-	for i := 0 step 1 until m do
-		for j := 0 step 1 until m do
-			begin
-				z := 0;
-			end
-end block Z
+Z:  begin 
+        integer i; real t;
+        for i := 0 step 1 until m do
+        for j := 0 step 1 until m do
+        begin
+            z := 0;
+        end
+    end block Z
 \end{lstlisting}
 
 On more information on the scope rules of ALGOL 60 and the blocks see \nameref{scopeRule}.
 
 \subsection{Assignment Statement} \label{assigStat}
-Assignment statements allow the programmer to assign values to one or more variables
+Assignment statements allow the programmer to assign values to one or more variables. The assignment operator is :=. In case of subscript variables the subscript expression is evaluated before assignment. So an assignment to a variable in an array gets assigned to only the subscript expression and not the whole array. \\
+All variables on the left side of an assignment must be declared the same type as the values on the right side. So a Boolean value can only be assigned to a Boolean variable. If the variable is of type integer or real, the right side must be an arithmetic expression. A real value can be assigned to an integer value, however, the assignment happens with the following rounding: the largest integer that is not greater than the arithmetic expression E + 0.5.
+
+Examples for assignment statements are as follows:\\ 
+\begin{lstlisting}[language={[60]algol}]
+p := a[5] := n + 1
+f := f + 1
+V := Q > G & N
+\end{lstlisting}
 
 \subsection{Go To Statement}
+As mentioned in the initial text to this section, a go to statement is used to dynamically control the program flow and to interrupt the code at certain locations. The location of the successor of a go to statement is a \nameref{desigExp}. So the next statement to be executed will have the same label as the designational expression.\\
+Go to statements can not lead outside the scope of a block. For more information see \nameref{scopeRule}.\\
+
+Examples for go to statements are as follows:\\ 
+\begin{lstlisting}[language={[60]algol}]
+go to town
+go to Rome[if p < 0 then S else S + 1]
+go to if b < c then q else a[0]
+\end{lstlisting}
 
 \subsection{Conditional Statement}
+Conditional statements are used to execute certain parts of a block or skip certain others based on Boolean expressions. The known conditional statement of ALGOL 60 is the if statement. The conditional statement of an if statement gets executed if the clause of the if statement is true, otherwise the statement gets skipped and if an else statement exists, this statement will get executed. If statements can be chained by applying another if statement within the else statement.\\
+
+Examples for conditional statements are as follows:\\ 
+\begin{lstlisting}[language={[60]algol}]
+if s then n := n + 1
+if p > 0 then V: q := n + m else go to P
+comment The following is one large conditional statement;
+if p == true then A
+A:  begin 
+        if s < 0 then a := g / s else y := 5
+    end
+else if g != 0.0 then a := 5
+else go to S
+\end{lstlisting}
 
 \subsection{For Statement}
+For statements execute the statement S declared right after the for statement 0 or more times. The for statement also includes a controlled variable upon which a sequence of assignments may take place. So the control flow of a for statement is to initially assign a value to the controlled variable, execute the statement within the for statement, test if the breaking condition has already been reached and then either execute the assignment and go to the statement within again or leave the for statement.\\
+For statements could also be achieved by go to statements, however, they are much easier to read for their purpose.\\
+
+Examples for for statements are as follows:\\ 
+\begin{lstlisting}[language={[60]algol}]
+for q := 0 step s until n do B[q] = A[q]
+for i := 1 step 10 until 100 do s := s + i
+\end{lstlisting}
+
+While statements are technically not part of ALGOL 60, however, it is still possible to create while statements with the help of go to statements. An example is the following:\\
+
+\begin{lstlisting}[language={[60]algol}]
+R:  V := V + E
+    if V > 100 then go to EXIT;
+    V := V % 3;
+    go to R;
+EXIT: V := V + 10
+\end{lstlisting}
+
 
 \subsection{Procedure Statement}
+Procedure statements exist to invoke procedures written in ALGOL 60. \nameref{procDecl} will be discussed later. The statement itself is the call of a procedure and has thus the following operations as a consequence in the program:
 
 \newpage
 
