@@ -294,6 +294,16 @@ Examples for reals in ALGOL 60 are as follows:
 -56.46
 \end{lstlisting}
 
+\subsection{Boolean Types}
+Boolean types are the simplest types possible and adhere to the formal logic. The possible values for Boolean types are true or false.
+
+Examples for Boolean types in ALGOL 60 are as follows:
+
+\begin{lstlisting}[language={[60]algol}]
+true
+false
+\end{lstlisting}
+
 \newpage
 
 \section{ALGOL 60 Expressions}
@@ -384,7 +394,7 @@ if b < c then p9 else s[if w <= 0 then 5 else n]
 Statements in ALGOL are the units of operation of every program. Statements will be executed in order as written, however, there are additional control mechanisms as go to statements which allow to let the control flow be directed in a more granular fashion. Labels on statements allow for this dynamic control flow.\\
 Conditional statements may also allow to select certain statements to be executed and others to be skipped.\\
 
-\subsection{Compound statements and blocks}
+\subsection{Compound statements and blocks} \label{compStatsBlocks}
 Basic statements do not require the keywords begin or end and are the basic building blocks for the following compound statements and blocks. Basic statements may either be assignment statements, go to statements, conditional statements or for statements. Basic statements may also include labels.\\
 
 Compound statements and block statements are of the form as follows with S denoting statements which may be again complete compound statements or blocks, L denoting labels and D denoting declarations:\\
@@ -490,19 +500,45 @@ EXIT: V := V + 10
 
 
 \subsection{Procedure Statement}
-Procedure statements exist to invoke procedures written in ALGOL 60. \nameref{procDecl} will be discussed later. The statement itself is the call of a procedure and has thus the following operations as a consequence in the program:
+Procedure statements exist to invoke procedures written in ALGOL 60. \nameref{procDecl} will be discussed later. The parameter amount upon calling a procedure must be the same as defined in the procedure declaration. The call of the procedure can have several effects, depending on the parameters passed when invoked:
 
 \begin{itemize}
-	\item Call by value:
+	\item Call by value:\\
+	The local parameters of the procedure receive the values of the parameters given at the call of the procedure. The local parameters of the procedure are assigned these values explicitly before entering the procedure body. The local parameters are treated as local variables inside the procedure. Switch identifiers or procedure identifiers can not be passed by value as they do not have an inherent value.
+	\item Call by name:\\
+	The local parameters of the procedure are replaced by the actual parameter. Interesting is that the parameters given at the call are not evaluated upon entering the procedure. This has interesting side effects when for example passing procedures or arrays as parameters. If arrays or procedures are given as parameters, they must have the same dimensions as the arrays used within the procedure.
 \end{itemize}
+
+Examples for procedure statements are as follows:\\ 
+\begin{lstlisting}[language={[60]algol}]
+Transpose(W, i + 1)
+Spur(A) Order: (7) Result to: (V)
+\end{lstlisting}
 
 \newpage
 
 \section{ALGOL 60 Declarations}
+Declarations in ALGOL 60 serve the purpose to define properties for identifiers within a block. The statement of \nameref{compStatsBlocks} was discussed previously. More on \nameref{scopeRule} later. Some sort of static variable declaration is possible with the keyword \texttt{own}. Own declares a variable within a block to be the same every time the program enters this block. All other declared values are undefined. It is important that all identifiers must be declared within a program with the exception of labels and formal parameters of procedures. An identifier can not be re-declared within a block head. 
 
 \subsection{Type Declaration} \label{typeDecl}
+To declare certain identifiers to represent simple variables of a given type, one has to declare this type at the block head. As mentioned at the beginning of the section, those declarations may also be own. The variable data types possible for the type declaration are real, integer or Boolean. More on the \nameref{datatypes} was discussed earlier.
+
+Examples for type declarations are as follows:\\ 
+\begin{lstlisting}[language={[60]algol}]
+real s
+own integer n
+Boolean exists
+\end{lstlisting}
 
 \subsection{Array Declaration} \label{arrayDecl}
+The declaration of an array define one or more identifiers to represent a one or multidimensional array. The allowed types . It can furthermore be define of which type the subscripted variables are, which bounds the subscripted variables have and what the dimensions of the array are. The bound of the variables can be defined by giving an upper and a lower bound separated by :, also called bound pair list. The dimension of the array are defined by the number of entries in the bound pair list. The type of the subscripted are all of the same type if one is defined or real otherwise. The subscripted values have no connection to the identity of the variables used in the bound pair lists.
+
+Examples for array declarations are as follows:\\ 
+\begin{lstlisting}[language={[60]algol}]
+array value, value2 [-5:5, 10:20], s[0:100]
+own integer C[if b > 1 then 4 else 0:100]
+Boolean s[false:true]
+\end{lstlisting}
 
 \subsection{Switch Declaration} \label{switchDecl}
 
