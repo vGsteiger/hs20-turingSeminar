@@ -259,7 +259,7 @@ A string is any sequence of basic symbols not containing ". Strings are used as 
 \end{lstlisting}
 
 \subsection{Indentation}
-ALGOL 60 does not require any indentation, however, to make the code more easily readable we will be using an easy sort of indentation where the code within a \texttt{begin} and \texttt{end} will be indented by four spaces. Furthermore, if there is a label, the indentation will be also four spaces in the to the label belonging code.
+ALGOL 60 does not require any indentation, however, to make the code more easily readable we will be using an easy sort of indentation where the code within a \texttt{begin} and \texttt{end} will be indented by four spaces. Furthermore, if there is a label, the indentation will be also four spaces in the to the label belonging code. Additionally, if the execution blocks of for loops are larger than simple blocks, there will also be four spaces indentation on the next line.
 
 \newpage
 
@@ -422,7 +422,7 @@ Examples for compound statements are as follows:\\
 begin
     x := 0;
     for t := 0 step 5 until 100 do x := x + t;
-    if t == x then go to CONTINUE else x := 0;
+        if t == x then go to CONTINUE else x := 0;
 end
 \end{lstlisting}
 
@@ -431,10 +431,10 @@ Examples for blocks are as follows:\\
 Z:  begin 
         integer i; real t;
         for i := 0 step 1 until m do
-        for j := 0 step 1 until m do
-        begin
-            z := 0;
-        end
+            for j := 0 step 1 until m do
+                begin
+                    z := 0;
+                end
     end block Z
 \end{lstlisting}
 
@@ -499,12 +499,12 @@ EXIT: V := V + 10
 \end{lstlisting}
 
 
-\subsection{Procedure Statement}
+\subsection{Procedure Statement} \label{ProcStat}
 Procedure statements exist to invoke procedures written in ALGOL 60. \nameref{procDecl} will be discussed later. The parameter amount upon calling a procedure must be the same as defined in the procedure declaration. The call of the procedure can have several effects, depending on the parameters passed when invoked:
 
 \begin{itemize}
 	\item Call by value:\\
-	The local parameters of the procedure receive the values of the parameters given at the call of the procedure. The local parameters of the procedure are assigned these values explicitly before entering the procedure body. The local parameters are treated as local variables inside the procedure. Switch identifiers or procedure identifiers can not be passed by value as they do not have an inherent value.
+	The local parameters of the procedure receive the values of the parameters given at the call of the procedure. The local parameters of the procedure are assigned these values explicitly before entering the procedure body. The local parameters are treated as local variables inside the procedure. Switch identifiers or procedure identifiers can not be passed by value as they do not have an inherent value. To define a formal parameter to be passed by value the keyword \texttt{value} has to be defined at the parameter declaration of the procedure.
 	\item Call by name:\\
 	The local parameters of the procedure are replaced by the actual parameter. Interesting is that the parameters given at the call are not evaluated upon entering the procedure. This has interesting side effects when for example passing procedures or arrays as parameters. If arrays or procedures are given as parameters, they must have the same dimensions as the arrays used within the procedure.
 \end{itemize}
@@ -541,14 +541,39 @@ Boolean s[false:true]
 \end{lstlisting}
 
 \subsection{Switch Declaration} \label{switchDecl}
+With a switch declaration one assigns values corresponding to a switch identifier. A switch can be composed of one or more designational expressions which are associated from left to right by positive integers starting at 1. To access one of those designational expressions one has to pass the corresponding integer to access the value. The designational expressions get evaluated each time the values are accessed with the values of the variables at access time. Variables defined outside the scope within the switch is can not be accessed by the switch.
+
+Examples for switch declarations are as follows:\\ 
+\begin{lstlisting}[language={[60]algol}]
+switch S := p1, p2, p3
+switch Q := M1, M2, M3, if s > 4 then M4, else M5
+\end{lstlisting}
 
 \subsection{Procedure Declaration} \label{procDecl}
+To define the procedure associated with a procedure identifier, one has to declare this procedure. A procedure consists of a block of code and a heading including formal parameters of the procedure. The formal parameters will be, upon calling the procedure, either be replaced or assigned with the parameters given by the caller. For more information on \nameref{ProcStat} see the previous definitions. The procedure identifier must be named first after the keyword \texttt{procedure}. The types of the formal parameters should be named at the beginning of a procedure. It is customary to also include a commentary at the beginning of a procedure. A comment is placed between the keyword \texttt{comment} and the separator ;.
 
-\subsection{Variable Declaration}
+An example for a procedure declaration is as follows:\\ 
+\begin{lstlisting}[language={[60]algol}]
+procedure transpose(a) Order: (n); value n;
+array a; integer n;
+comment Procedure to transpose a two dimensional matrix;
+begin
+    real w; integer i, k;
+    for i := 1 step 1 until n do
+        for k := i + 1 step 1 until n do
+            begin
+                w := a[i, k];
+                a[i, k] := a[k, i];
+                a[k, i] := w
+            end
+end
+\end{lstlisting}
+
+More examples will be shown in the section \nameref{procedures}.
 
 \newpage
 
-\section{Procedures}
+\section{Procedures} \label{procedures}
 
 \newpage
 
@@ -556,7 +581,7 @@ Boolean s[false:true]
 
 \newpage
 
-\section{Simple Programs}
+\section{Simple Programs} \label{simpleProg}
 
 \newpage
 
