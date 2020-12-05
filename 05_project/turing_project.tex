@@ -169,6 +169,8 @@ We will now save the \nameref{hello.alg}, translate it, compile it, and run it. 
 	\item If everything worked fine you should see \texttt{"Hello, world!"} printed on the command line.
 \end{enumerate}
 
+Note: The marst translator and the c compiler are rather verbose when it comes to warnings. However, all programs specified in this tutorial have been tested and work according to their specification.
+
 \newpage
 
 \section{ALGOL 60 Basic Syntax}
@@ -569,15 +571,159 @@ begin
 end
 \end{lstlisting}
 
+It is important to note that procedures may also be typed where the return type will be specified before the keyword procedure and the value to be returned should have the exact same identifier as the procedure itself.
+
 More examples will be shown in the section \nameref{procedures}.
 
 \newpage
 
 \section{Procedures} \label{procedures}
+As defined previously, procedures are the basic building blocks of ALGOL 60 and can be best compared with functions in modern programming languages. As we have already heard, the parameter passing to procedures can be done in two ways, call by value and call by name. This has ramifications for the behavior of algorithms as one may easily also pass procedures to procedures to be executed and so forth. In the following we will look at some interesting procedures which should highlight some interesting aspects of ALGOL 60. The procedures introduced will get from simple to more complex. \\
+
+If one would like to test out the procedures following one could call them as specified and print out the result with the dummy function \texttt{print} provided by marst.
+
+A very simple but illustrative example of a procedure is the following. It is a procedure without any parameters that has one statement as its body. It could be called by the statement \texttt{simple} from a block within the scope of the program or by the procedure itself:\\
+
+\begin{lstlisting}[language={[60]algol}]
+procedure simple;
+begin
+    Num := Num + 1;
+end
+\end{lstlisting}
+
+The procedure can be called in the following way:
+
+\begin{lstlisting}[language={[60]algol}]
+simple;
+\end{lstlisting}
+
+A bit more complex example would be the following. It is a typed procedure which compares two strings and returns a Boolean value:\\
+
+\begin{lstlisting}[language={[60]algol}]
+Boolean procedure match(int1, int2);
+value int1,int2;
+integer int1,int2;
+begin
+    match := int1 = int2;
+end;
+\end{lstlisting}
+
+The procedure can be called in the following way:
+
+\begin{lstlisting}[language={[60]algol}]
+Boolean b;
+b := match(10,10);
+\end{lstlisting}
+
+Now, instead of typed procedures one could pass a parameter by name to achieve the same result:
+
+\begin{lstlisting}[language={[60]algol}]
+Boolean procedure match(int1, int2, res);
+value int1,int2;
+integer int1,int2;
+Boolean res;
+begin
+    res := int1 = int2
+end;
+\end{lstlisting}
+
+The procedure can then be called in the following way:
+
+\begin{lstlisting}[language={[60]algol}]
+Boolean b;
+match(10,10,b);
+\end{lstlisting}
+
+Now to something a bit more complicated we will use different things we have learned so far. We will introduce a procedure which involves an array, call by name and a for loop:
+
+\begin{lstlisting}[language={[60]algol}]
+procedure spur(a)order:(n)result:(s);
+value n;
+array a; integer n; real s;
+begin
+    integer k;
+    s := 0;
+    for k := 1 step 1 until n do s := s + a[k,k]
+end
+\end{lstlisting}
+
+The procedure can then be called (here with an identity matrix) in the following way:
+
+\begin{lstlisting}[language={[60]algol}]
+array a[0:5,0:5];
+integer n, i; real s;
+n := 5;
+for i := 0 step 1 until n do a[i,i] := 1;
+spur(a)order:(n)result:(s);
+\end{lstlisting}
+
+To put additional knowledge to the test we will now look at a procedure that includes conditional statements, go to statements and the outstring procedure:
+
+\begin{lstlisting}[language={[60]algol}]
+procedure checkEven(num);
+value num;
+integer num;
+begin
+    if num % 2 = 0 then go to even else go to odd;
+    
+    even: outstring(1, "Is even") go to exit;
+    odd: outstring(1, "Is odd") go to exit;
+    exit:
+end
+\end{lstlisting}
+
+Many more examples could be given, however, I am content that you are able to produce any number of procedures from here on with the help of this tutorial.
 
 \newpage
 
 \section{ALGOL 60 Scope Rules} \label{scopeRule}
+ALGOL 60 was one of the first, if not the first, to introduce block scopes into a programming language. Before ALGOL 60 most languages had only the ability to introduce some kind of block rules by go to statements, however, those proved to be insufficient and the block rules were introduced. In AGLOL 60 a block is defined as follows:
+
+\begin{lstlisting}[language={[60]algol}]
+L: L: ... begin D;D;...D;S;S;...S;S end
+\end{lstlisting}
+
+With L denoting labels, D denoting declarations and S denoting statements. The number of each is arbitrary. Now the interesting part is that the identifiers declared within a block are local to this block and will have their own space in memory. So this identifier and its value will have no existence outside of this block and any entity presented by the same identifier declared outside this block will not be accessible within the block. However, variables declares outside the block that are not re-declared within the block are accessible to the block. \\
+
+Labels are the exception to this rule because labels are always local to the block within they occur. Since labels are inherently local to a block, a go to statement can not lead outside a block.\\
+
+To reiterate, declarations within a block are local to this block and have the significance declared within this block and are not accessible from the outside. This is recursively true for blocks within blocks. Upon exit from a block, all variables declared within a block loose their significance.\\
+
+An example to illustrate this is the following:
+
+\begin{lstlisting}[language={[60]algol}]
+begin
+    integer i, k;
+    Boolean b;
+    real v;
+    i := 0;
+    b := true;
+    comment v is real declared but has no value, i is 
+    integer with value 0, b is Boolean with value false;
+    begin
+        integer i;
+        v := 0.0;
+        i := 10;
+        comment i is integer and local to this block with 
+        value 10, v is real and same as in outer block but 
+        now with value 0.0, boolean b is still true and 
+        same as in outer scope;
+        begin
+            int b;
+            i := i + 10;
+            v := 5.0;
+            comment i is the same as in the previous block 
+            and has now value 20, v is the same as in the 
+            outermost block and has value 5.0, b is now of 
+            type int with no value;
+        end
+        comment i currently has value 20, b is boolean 
+        with value true, v is real with value 5.0;
+    end
+    comment i has value 0, b is boolean with value true, 
+    v is real with value 5.0;
+end
+\end{lstlisting}
 
 \newpage
 
