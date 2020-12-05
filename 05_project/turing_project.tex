@@ -605,7 +605,7 @@ value int1,int2;
 integer int1,int2;
 begin
     match := int1 = int2;
-end;
+end
 \end{lstlisting}
 
 The procedure can be called in the following way:
@@ -624,7 +624,7 @@ integer int1,int2;
 Boolean res;
 begin
     res := int1 = int2
-end;
+end
 \end{lstlisting}
 
 The procedure can then be called in the following way:
@@ -728,9 +728,186 @@ end
 \newpage
 
 \section{Recursion}
+Recursion is supported in ALGOL 60 and can be achieved by procedure calls. An example is best illustrated by the well known merge sort algorithm. The following procedures are also good examples on how to implement while loops with go to statements and more:
+
+\begin{lstlisting}[language={[60]algol}]
+procedure merge(arr, l, m, r);
+value l,m,r;
+array arr; integer l,m,r;
+begin
+    integer n1, n2, i, j, k;
+    array L[0:m-l+1], R[0:r-m];
+    
+    n1 := m-l+1;
+    n2 := r-m;
+    
+    for i := 0 step 1 until n1 do L[i] := arr[l + i];
+    for j := 0 step 1 until n2 do L[j] := arr[m + 1 + j];
+    
+    i := 0;
+    j := 0;
+    
+    k := l;
+    
+    WHILE:
+        if i >= n1 || j >= n2 then go to EXIT;
+        
+        if L[i] <= R[j] then 
+        begin 
+            arr[k] := L[i]; 
+            i := i + 1 
+        end
+        else
+        begin
+            arr[k] := R[j];
+            j := j + 1
+        end;
+        k := k + 1;
+        
+        go to WHILE;
+    EXIT:
+    
+    WHILE2:
+        if i >= n1 then go to EXIT2;
+        
+        arr[k] := L[i];
+        i := i + 1;
+        k := k + 1;
+        
+        go to WHILE2;
+    EXIT2:
+    
+    WHILE3:
+        if j >= n2 then go to EXIT3;
+    
+        arr[k] := R[j];
+        j := j + 1;
+        k := k + 1;
+    
+        go to WHILE3;
+    EXIT3:
+    
+end;
+    
+procedure mergeSort(arr, l, r);
+value l, r;
+array arr; integer l, r;
+begin
+    integer m;
+    if l >= r then go to EXIT;
+    
+    begin
+        m := (l+1-1)/2;
+        mergeSort(arr,l,m);
+        mergeSort(arr,m+1,r);
+        merge(arr,l,m,r)
+    end;
+    EXIT:
+
+end
+\end{lstlisting}
 
 \newpage
 
 \section{Simple Programs} \label{simpleProg}
+In this section I have assembled a few simple executable programs written in ALGOL 60.
+
+\subsection{Coin flip}
+In the following we will introduce a simple program that can generate random numbers with a procedure \texttt{random}, evaluate the random number by putting it into the two categories head or tail and do this 1'000 times to see if the random number generator is truly random:
+
+\begin{lstlisting}[language={[60]algol}]
+begin
+    procedure random(lim, res);
+    value lim;
+    integer lim, res;
+    begin
+        own integer a; own Boolean b;
+        
+        if !b then
+        begin
+            a := 100001;
+            b := true
+        end;
+        
+        a := (a * 125) % 2796203;
+        res := ((a % lim) + 1)
+    end;
+    
+    procedure testCoinflip(res, max);
+    value max;
+    integer res, max;
+    begin
+        integer i, tmp;
+        
+        res := 0; 
+        for i := 0 step 1 until max do
+        begin
+            tmp := 0;
+            random(100, tmp);
+            if tmp > 50 then res := res + 1;
+        end;
+    end;
+    
+    integer res, max; real percentage;
+    
+    res := 0; percentage := 0; max := 1000;
+    
+    testCoinflip(res, max);
+    
+    percentage := (res / max) * 100;
+    print(percentage);
+end        
+\end{lstlisting}
+
+\subsection{Greatest number}
+In the following program we will declare an integer array and get from the procedure \texttt{greatestNum} the largest item from the array. The algorithm described in the procedure \texttt{greatestNum} was also mentioned in the paper \textit{Proof of Algorithms by General Snapshots} by Peter Naur. We will reuse the random procedure defined before to fill the array with random numbers.
+
+\begin{lstlisting}[language={[60]algol}]
+begin
+    integer procedure random(lim);
+    value lim;
+    integer lim;
+    begin
+        own integer a, random; own Boolean b;
+    
+        if !b then
+        begin
+            a := 100001;
+            b := true
+        end;
+    
+        a := (a * 125) % 2796203;
+        random := ((a % lim) + 1)
+    end random;
+
+    procedure greatestNum(A, R, N);
+    value N;
+    array A; integer R, N;
+    begin
+        integer r, i;
+        
+        r := 0;
+        for i := 1 step 1 until N do
+            if A[i] > A[r] then r := i;
+        
+        R := A[r]
+    end greatestNum;
+    
+    array A[0:10];
+    integer N, i, R;
+    
+    N := 10
+    
+    for i := 0 step 1 until N do
+        A[i] := random(100);
+        
+    greatestNum(A, R, N);
+    
+    print(R);
+end
+\end{lstlisting}
+
+\section{Conclusion}
+This concludes the ALGOL 60 Tutorial. I hope you could learn a thing or two in these pages and I hope that some interesting ALGOL 60 programs will come out of people reading this tutorial. It has been interesting to closely read the specifications of a programming language, to translate it into workable code and then to write a tutorial on how to write proper ALGOL 60 programs.
 
 \end{document}
