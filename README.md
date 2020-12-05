@@ -1,5 +1,5 @@
 # hs20-turingSeminar
-Repository for the Seminar 58826-01 – Turing Award Winners and Their Contributions in the autumn semester of 2020
+Repository for the contribution of V.Gsteiger to the seminar 58826-01 – Turing Award Winners and Their Contributions in the autumn semester of 2020
 
 The topic of this seminar was Peter Naur and his achievements. The seminar constisted of a report, a presentation and a project.
 
