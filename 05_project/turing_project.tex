@@ -272,7 +272,7 @@ As the original ALGOL 60 document was written without a specific hardware implem
 As mentioned in subsection \nameref{numbers} integers refer to any positive or negative concatenation of numbers without any exponent or decimal fractions. The values possible are between \texttt{-32'768} to \texttt{32'768} if int is stored in 2 bytes or between \texttt{-2,147,483,648} to \texttt{2,147,483,647} if int is stored in 4 bytes. To get the exact possible size of the integer write a short program as follows:
 
 \begin{lstlisting}[language={[60]algol}]
-inline("printf(sizeof(int));")
+inline("printf(\"%lu\", sizeof(int));")
 \end{lstlisting}
 
 The inline procedure is a pseudo procedure implemented by the MARST developers to signify what code will be one to one translated into C code. \\
@@ -331,26 +331,26 @@ Rhesus
 
 \subsection{Arithmetic expressions} \label{arithexp}
 Arithmetic expressions, as the name says, are rules for computing numerical values. Simple arithmetic expressions are the application of the arithmetic operations of the rule upon the actual numerical values of the primaries involved in the expression. The numerical values of primaries are either simply the values given in the case of numbers or in the case of variables the currently assigned values of the variables (see \nameref{assigStat} for more information on assignments). For functional designators it is the value received by executing the corresponding procedure.\\
-The possible arithmetic operators are +, -, *, /, \% and $\hat{}$ **. For more information on the semantics of those operators see \nameref{arithexptypes}.\\
+The possible arithmetic operators are +, -, *, /, \% and  **. For more information on the semantics of those operators see \nameref{arithexptypes}.\\
  The normal arithmetic rules apply. Thus also the precedence from left to right with the exponent operator having the highest precedence, the multiplication or division operators the second highest and the addition or subtraction operator the third highest precedence. Expressions within parentheses are evaluated on their own and further calculated in the subsequent calculations. Examples for simple arithmetic expressions are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
-w * u - Q(S + C) ^** 2
+w * u - Q(S + C) ** 2
 a * sin(omega * t)
 \end{lstlisting}
 
 There is also the possibility of more complex arithmetic expressions which involve Boolean expressions. In this case the value of the arithmetic expression is calculated from the Boolean expressions that are true. Examples for complex arithmetic expressions are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
-if q > 0 then U + V else if a * b > 17 then U / V else 0
-if s then n - 1 else n
+if q > 0 then U := U + V else if a * b > 17 then U := U / V else U := 0
+if s then n := n - 1 else n := n + 1
 \end{lstlisting}
 
 \subsubsection{Arithmetic expression types} \label{arithexptypes}
 The types of arithmetic expressions must be integer or real (see \nameref{datatypes} for more information on types).\\
 The operators +, - and * have the conventional meaning and will return integer if all operands are integer, else real.\\
 The operation <term> / <factor> and <term> \% <factor> both denote division while / is defined for all four combinations of integer and real and will give a result of type real while \% is only defined for two operands of type integer and will return an integer. / is defined as the multiplication of the term with the reciprocal of the factor. \% is defined as the multiplication of the sign of the / division of the two operands with the largest absolute integer that is smaller than the / division of the two operands.\\
-The operation <factor> $\hat{}$ ** <primary> means exponential, where the factor is the base and the primary the exponent.
+The operation <factor> ** <primary> means exponential, where the factor is the base and the primary the exponent.
 
 \subsection{Boolean expressions}
 Boolean expressions are rules for calculating logical values where the principles of evaluations are analogous to the principles of arithmetic evaluations. The possible boolean operators are !, \&, |, -\textgreater{} or ==. 
@@ -393,7 +393,7 @@ if b < c then p9 else s[if w <= 0 then 5 else n]
 \newpage
 
 \section{ALGOL 60 Statements} \label{statement}
-Statements in ALGOL are the units of operation of every program. Statements will be executed in order as written, however, there are additional control mechanisms as go to statements which allow to let the control flow be directed in a more granular fashion. Labels on statements allow for this dynamic control flow.\\
+Statements in ALGOL are the units of operation of every program. Statements will be executed in order as written, however, there are additional control mechanisms as go to statements which allow to let the control flow be directed in a more granular fashion. Statements are separated by the delimiter ;. Labels on statements allow for this dynamic control flow.\\
 Conditional statements may also allow to select certain statements to be executed and others to be skipped.\\
 
 \subsection{Compound statements and blocks} \label{compStatsBlocks}
@@ -403,20 +403,20 @@ Compound statements and block statements are of the form as follows with S denot
 
 Compound statements:
 \begin{lstlisting}[language={[60]algol}]
-L: L: ... begin S; S; ... S; S end
+L: L: ... begin S; S; ... S; S end;
 \end{lstlisting}
 
 Blocks:
 \begin{lstlisting}[language={[60]algol}]
-L: L: ... begin D; D; ... D; S; S; ... S; S end
+L: L: ... begin D; D; ... D; S; S; ... S; S end;
 \end{lstlisting}
 
 Examples for basic statements are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
-tmp := 3
-Rome: S := "All roads lead to rome"
-for i := 1 step 1 until len do x := x + 3
-go to Rome
+tmp := 3;
+Rome: x := x + 1;
+for i := 1 step 1 until len do x := x + 3;
+go to Rome;
 \end{lstlisting}
 
 Examples for compound statements are as follows:\\
@@ -424,20 +424,22 @@ Examples for compound statements are as follows:\\
 begin
     x := 0;
     for t := 0 step 5 until 100 do x := x + t;
-        if t == x then go to CONTINUE else x := 0;
-end
+        if t = x then go to CONTINUE else x := 0;
+end;
 \end{lstlisting}
 
 Examples for blocks are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
 Z:  begin 
-        integer i; real t;
+        integer i, j; real t;
         for i := 0 step 1 until m do
+        begin
             for j := 0 step 1 until m do
                 begin
-                    z := 0;
+                    z := z + i + j
                 end
-    end block Z
+        end
+    end;
 \end{lstlisting}
 
 On more information on the scope rules of ALGOL 60 and the blocks see \nameref{scopeRule}.
@@ -448,9 +450,9 @@ All variables on the left side of an assignment must be declared the same type a
 
 Examples for assignment statements are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
-p := a[5] := n + 1
-f := f + 1
-V := Q > G & N
+p := a[5] := n + 1;
+f := f + 1;
+V := Q > G & N;
 \end{lstlisting}
 
 \subsection{Go To Statement}
@@ -459,25 +461,25 @@ Go to statements can not lead outside the scope of a block. For more information
 
 Examples for go to statements are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
-go to town
-go to Rome[if p < 0 then S else S + 1]
-go to if b < c then q else a[0]
+go to town;
+go to Rome[if p < 0 then S else S + 1];
+go to if b < c then q else a[0];
 \end{lstlisting}
 
 \subsection{Conditional Statement}
-Conditional statements are used to execute certain parts of a block or skip certain others based on Boolean expressions. The known conditional statement of ALGOL 60 is the if statement. The conditional statement of an if statement gets executed if the clause of the if statement is true, otherwise the statement gets skipped and if an else statement exists, this statement will get executed. If statements can be chained by applying another if statement within the else statement.\\
+Conditional statements are used to execute certain parts of a block or skip certain others based on Boolean expressions. The known conditional statement of ALGOL 60 is the if statement. The conditional statement of an if statement gets executed if the clause of the if statement is true, otherwise the statement gets skipped and if an else statement exists, this statement will get executed. If statements can be chained by applying another if statement within the else statement. It is important to note that between an if and else there should not be a delimiter as it is still the same statement. If one wants to execute more than one statement within an if or else branch one should create another compound statement.\\
 
 Examples for conditional statements are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
-if s then n := n + 1
-if p > 0 then V: q := n + m else go to P
+if s then n := n + 1;
+if p > 0 then V: q := n + m else go to P;
 comment The following is one large conditional statement;
-if p == true then A
-A:  begin 
-        if s < 0 then a := g / s else y := 5
-    end
+if p == true then 
+begin 
+    if s < 0 then a := g / s else y := 5; 
+end
 else if g != 0.0 then a := 5
-else go to S
+else go to S;
 \end{lstlisting}
 
 \subsection{For Statement}
@@ -486,18 +488,17 @@ For statements could also be achieved by go to statements, however, they are muc
 
 Examples for for statements are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
-for q := 0 step s until n do B[q] = A[q]
-for i := 1 step 10 until 100 do s := s + i
+for q := 0 step s until n do B[q] = A[q];
+for i := 1 step 10 until 100 do s := s + i;
 \end{lstlisting}
 
 While statements are technically not part of ALGOL 60, however, it is still possible to create while statements with the help of go to statements. An example is the following:\\
 
 \begin{lstlisting}[language={[60]algol}]
-R:  V := V + E
+R:  V := V + E;
     if V > 100 then go to EXIT;
-    V := V % 3;
     go to R;
-EXIT: V := V + 10
+EXIT: V := V + 10;
 \end{lstlisting}
 
 
@@ -513,8 +514,8 @@ Procedure statements exist to invoke procedures written in ALGOL 60. \nameref{pr
 
 Examples for procedure statements are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
-Transpose(W, i + 1)
-Spur(A) Order: (7) Result to: (V)
+Transpose(W, i + 1);
+Spur(A) Order: (7) Result to: (V);
 \end{lstlisting}
 
 \newpage
@@ -527,19 +528,19 @@ To declare certain identifiers to represent simple variables of a given type, on
 
 Examples for type declarations are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
-real s
-own integer n
-Boolean exists
+real s;
+own integer n;
+Boolean exists;
 \end{lstlisting}
 
 \subsection{Array Declaration} \label{arrayDecl}
-The declaration of an array define one or more identifiers to represent a one or multidimensional array. The allowed types . It can furthermore be define of which type the subscripted variables are, which bounds the subscripted variables have and what the dimensions of the array are. The bound of the variables can be defined by giving an upper and a lower bound separated by :, also called bound pair list. The dimension of the array are defined by the number of entries in the bound pair list. The type of the subscripted are all of the same type if one is defined or real otherwise. The subscripted values have no connection to the identity of the variables used in the bound pair lists.
+The declaration of an array define one or more identifiers to represent a one or multidimensional array. The allowed types . It can furthermore be define of which type the subscripted variables are, which bounds the subscripted variables have and what the dimensions of the array are. The bound of the variables can be defined by giving an upper and a lower bound separated by :, also called bound pair list. The dimension of the array are defined by the number of entries in the bound pair list. The type of the subscripted are all of the same type if one is defined or real otherwise. The subscripted values have no connection to the identity of the variables used in the bound pair lists. Arrays are initiated with zeros or false when declared.
 
 Examples for array declarations are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
-array value, value2 [-5:5, 10:20], s[0:100]
-own integer C[if b > 1 then 4 else 0:100]
-Boolean s[false:true]
+array value, value2 [-5:5, 10:20], s[0:100];
+own integer array C[if b > 1 then 0:4 else 0:100];
+Boolean array s[0:10];
 \end{lstlisting}
 
 \subsection{Switch Declaration} \label{switchDecl}
@@ -547,8 +548,8 @@ With a switch declaration one assigns values corresponding to a switch identifie
 
 Examples for switch declarations are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
-switch S := p1, p2, p3
-switch Q := M1, M2, M3, if s > 4 then M4, else M5
+switch S := p1, p2, p3;
+switch Q := M1, M2, M3, if s > 4 then M4, else M5;
 \end{lstlisting}
 
 \subsection{Procedure Declaration} \label{procDecl}
@@ -664,12 +665,23 @@ procedure checkEven(num);
 value num;
 integer num;
 begin
-    if num % 2 = 0 then go to even else go to odd;
+    integer mod;
+    mod := num - ((num%2)*2); comment This represents the mod operator;
+    if mod = 0 then go to even else go to odd;
     
-    even: outstring(1, "Is even") go to exit;
-    odd: outstring(1, "Is odd") go to exit;
+    even: begin outstring(1, "Is even"); go to exit end;
+    odd: begin outstring(1, "Is odd"); go to exit end;
     exit:
-end
+end;
+\end{lstlisting}
+
+The procedure can then be called (here with an identity matrix) in the following way:
+
+\begin{lstlisting}[language={[60]algol}]
+integer n;
+n := -10;
+
+checkEven(n)
 \end{lstlisting}
 
 Many more examples could be given, however, I am content that you are able to produce any number of procedures from here on with the help of this tutorial.

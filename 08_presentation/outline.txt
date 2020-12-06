@@ -23,7 +23,7 @@ Introduction: (3 min)
 
 	Introduction to Peter Naur and Peter Naur's contribution for which he earned the Turing award:
 
-	Information: born 1928. Interested in astronomy, wunderkind, first paper published with 15, Cambridge, weather, Electronic Delay Storage Automatic Calculator, limitations of EDSAC, return to Denmark after time in the US, Regnencentralen, ALGOL 60, editor Algol bulletin, established computer science in denmark, Datalogy, continued to work around formalisation, knowledge transfer, Died on January 3rd 2016
+	Information: born 1928. Interested in astronomy, wunderkind, first paper published with 15, Cambridge, weather, Electronic Delay Storage Automatic Calculator, limitations of EDSAC, return to Denmark after time in the US, Regnencentralen, ALGOL 60 (Algorithmic language 1960), editor Algol bulletin, established computer science in denmark, Datalogy, continued to work around formalisation, knowledge transfer, Died on January 3rd 2016
 
 	Exact time: 1min 30s
 	Time left: 26min 30s
