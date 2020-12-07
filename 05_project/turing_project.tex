@@ -721,7 +721,7 @@ begin
         now with value 0.0, boolean b is still true and 
         same as in outer scope;
         begin
-            int b;
+            integer b;
             i := i + 10;
             v := 5.0;
             comment i is the same as in the previous block 
@@ -730,10 +730,10 @@ begin
             type int with no value;
         end
         comment i currently has value 20, b is boolean 
-        with value true, v is real with value 5.0;
+        with value true, v is real with value 5.0
     end
     comment i has value 0, b is boolean with value true, 
-    v is real with value 5.0;
+    v is real with value 5.0
 end
 \end{lstlisting}
 
@@ -753,8 +753,8 @@ begin
     n1 := m-l+1;
     n2 := r-m;
     
-    for i := 0 step 1 until n1 do L[i] := arr[l + i];
-    for j := 0 step 1 until n2 do L[j] := arr[m + 1 + j];
+    for i := 0 step 1 until n1 - 1 do L[i] := arr[l + i];
+    for j := 0 step 1 until n2 - 1 do R[j] := arr[m + 1 + j];
     
     i := 0;
     j := 0;
@@ -762,7 +762,7 @@ begin
     k := l;
     
     WHILE:
-        if i >= n1 || j >= n2 then go to EXIT;
+        if i >= n1 | j >= n2 then go to EXIT;
         
         if L[i] <= R[j] then 
         begin 
@@ -806,29 +806,38 @@ value l, r;
 array arr; integer l, r;
 begin
     integer m;
+    m := (l+r-1)%2;
     if l >= r then go to EXIT;
     
     begin
-        m := (l+1-1)/2;
         mergeSort(arr,l,m);
         mergeSort(arr,m+1,r);
         merge(arr,l,m,r)
     end;
     EXIT:
 
-end
+end;
 \end{lstlisting}
+
+You can also find a program to run an instance of this merge-sort algorithm in the provided materials.
 
 \newpage
 
 \section{Simple Programs} \label{simpleProg}
-In this section I have assembled a few simple executable programs written in ALGOL 60.
+In this section I have assembled a few simple executable programs written in ALGOL 60. All programs can also be found in the additional materials.
 
 \subsection{Coin flip}
-In the following we will introduce a simple program that can generate random numbers with a procedure \texttt{random}, evaluate the random number by putting it into the two categories head or tail and do this 1'000 times to see if the random number generator is truly random:
+In the following we will introduce a simple program that can generate random numbers with a procedure \texttt{random}, evaluate the random number by putting it into the two categories head or tail and do this 10'000 times to see if the random number generator is truly random:
 
 \begin{lstlisting}[language={[60]algol}]
 begin
+    integer procedure mod(a, n);
+    value a, n;
+    integer a, n;
+    begin
+         mod := a - ((a%n)*n)
+    end;
+ 
     procedure random(lim, res);
     value lim;
     integer lim, res;
@@ -840,9 +849,8 @@ begin
             a := 100001;
             b := true
         end;
-        
-        a := (a * 125) % 2796203;
-        res := ((a % lim) + 1)
+        a := mod((a * 125), 2796203);
+        res := mod(a, lim) + 1
     end;
     
     procedure testCoinflip(res, max);
@@ -856,19 +864,19 @@ begin
         begin
             tmp := 0;
             random(100, tmp);
-            if tmp > 50 then res := res + 1;
-        end;
+            if tmp < 50 then res := res + 1
+        end
     end;
     
     integer res, max; real percentage;
     
-    res := 0; percentage := 0; max := 1000;
+    res := 0; percentage := 0; max := 10000;
     
     testCoinflip(res, max);
     
     percentage := (res / max) * 100;
-    print(percentage);
-end        
+    print(percentage)
+end    
 \end{lstlisting}
 
 \subsection{Greatest number}
@@ -876,21 +884,27 @@ In the following program we will declare an integer array and get from the proce
 
 \begin{lstlisting}[language={[60]algol}]
 begin
+    integer procedure mod(a, n);
+    value a, n;
+    integer a, n;
+    begin
+         mod := a - ((a%n)*n)
+    end;
+ 
     integer procedure random(lim);
     value lim;
     integer lim;
     begin
-        own integer a, random; own Boolean b;
-    
+        own integer a; own Boolean b;
+        
         if !b then
         begin
             a := 100001;
             b := true
         end;
-    
-        a := (a * 125) % 2796203;
-        random := ((a % lim) + 1)
-    end random;
+        a := mod((a * 125), 2796203);
+        random := mod(a, lim) + 1
+    end;
 
     procedure greatestNum(A, R, N);
     value N;
@@ -905,17 +919,82 @@ begin
         R := A[r]
     end greatestNum;
     
-    array A[0:10];
+    array A[0:20];
     integer N, i, R;
     
-    N := 10
+    N := 20;
     
-    for i := 0 step 1 until N do
-        A[i] := random(100);
+    for i := 0 step 1 until N do A[i] := random(100);
         
     greatestNum(A, R, N);
     
-    print(R);
+    print(A);
+    print(R)
+end
+\end{lstlisting}
+
+\subsection{Fisher–Yates shuffle}
+In the following program we will declare an integer array and shuffle the array with the help of the procedure \texttt{shuffle}. The algorithm described in the procedure \texttt{shuffle} is named after Ronald Fisher and Frank Yates, who first described it, and is also known as the Knuth shuffle after Donald Knuth. We will reuse the random procedures defined before to get random numbers.
+
+\begin{lstlisting}[language={[60]algol}]
+begin
+    integer procedure mod(a, n);
+    value a, n;
+    integer a, n;
+    begin
+         mod := a - ((a%n)*n)
+    end;
+ 
+    integer procedure random(lim);
+    value lim;
+    integer lim;
+    begin
+        own integer a; own Boolean b;
+        
+        if !b then
+        begin
+            a := 100001;
+            b := true
+        end;
+        a := mod((a * 125), 2796203);
+        random := mod(a, lim) + 1
+    end;
+
+    procedure swap(arr, i, j);
+    value i, j;
+    array arr; integer i, j;
+    begin
+        integer tmp;
+
+        tmp := arr[i];
+        arr[i] := arr[j];
+        arr[j] := tmp
+    end;
+
+    procedure shuffle(arr, h);
+    comment This is an implementation of the 
+    Fisher-Yates shuffle;
+    value h;
+    array arr; integer h;
+    begin
+        integer j, i;
+        for i := h step -1 until 1 do
+        begin
+            j := random(i);
+            swap(arr, i, j)
+        end
+    end;
+
+    array arr[0:10];
+    integer h, i;
+
+    h := 10;
+    for i := 0 step 1 until h do arr[i] := i;
+
+    print(arr);
+    shuffle(arr, h);
+    print(arr)
+
 end
 \end{lstlisting}
 

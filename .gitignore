@@ -46,7 +46,6 @@ latex.out/
 
 ## Auxiliary and intermediate files from other packages:
 # algorithms
-*.alg
 *.loa
 
 # achemso
