@@ -12,6 +12,7 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage{hyperref}
+%\usepackage{courier}
 
 \restylefloat{table}
 
@@ -42,16 +43,18 @@
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}{Theorem}
 
+\lstset{basicstyle=\ttfamily,columns=flexible,breaklines=true,numbers=left,numberstyle=\small,frame=tb}
+
 \author{Viktor Gsteiger \\ University of Basel \\ Matriculation Number: 18-054-700}
 \title{Turing project: ALGOL 60 Tutorial}
-\date{November 21, 2020 \\\ Seminar: 58826-01 - Turing Award Winners and Their Contributions}
+\date{December 16, 2020 \\\ Seminar: 58826-01 - Turing Award Winners and Their Contributions}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-	The difficulty of learning a new programming language is inherently great. One may have no previous experience all together, one may have some experience but with another language or one may have some knowledge about the language at hand but may have forgotten large parts of the learn things again. The difficulty of learning a programming language that is not used any more and never had great commercial success is even greater, however, in the case of ALGOL 60, I am convinced, that the effort is not without benefits. ALGOL 60 is one of the grandparents of most modern programming languages and thus a direct predecessor of the tools we use every day. It is thus important to study the roots of our tools, to learn from past experiences and correct past mistakes.
+	The difficulty of learning a new programming language is inherently great. One may have no previous experience altogether, one may have some experience but with another language or one may have some knowledge about the language at hand but may have forgotten large parts of the learned things again. The difficulty of learning a programming language that is not used any more and never had great commercial success is even greater, however, in the case of ALGOL 60, I am convinced, that the effort is not without benefits. ALGOL 60 is one of the grandparents of most modern programming languages and thus a direct predecessor of the tools we use every day. It is thus important to study the roots of our tools, to learn from past experiences, and to correct past mistakes.
 \end{abstract}
 
 \newpage
@@ -61,30 +64,30 @@
 \newpage
 
 \section{Introduction}
-This tutorial aims to give the reader an introduction into the ALGOL 60 programming language. The reader should be able to program small to mid size procedures after reading this tutorial and should be able to translate and execute the ALGOL 60 program with the help of the marst translator. This tutorial does not aim to be complete and due to the inherent difficulty of learning a programming language it does not aim to lead to success.
+This tutorial aims to give the reader an introduction to the ALGOL 60 programming language. The reader should be able to program small to mid-size procedures and small size working programs after reading this tutorial and should be able to translate and execute the ALGOL 60 program with the help of the MARST translator. This tutorial does not aim to be complete and due to the inherent difficulty of learning a programming language, it does not aim to lead to success.
 
 \section{Background}
 ALGOL 60 was the direct successor of the International Algebraic Language (IAL or later called ALGOL 58) and was a joint effort of European as well as American computer scientists in the years 1958 to 1960. With the help of the ALGOL Bulletin, a publication edited by Peter Naur, and several conferences the ALGOL 60 report could be published in 1960. ALGOL 60 did not have great commercial success on its own, however, the concepts introduced by the language can be witnessed in programming languages until nowadays.
 
-The GNU marst translator translates programs written in ALGOL 60 into the ANSI C 89 programming language. It is part of the GNU project and currently maintained by Andrew Makhorin and the last release dates back to 2013.
+The GNU MARST translator translates programs written in ALGOL 60 into the ANSI C 89 programming language. It is part of the GNU project and is currently maintained by Andrew Makhorin and the last release dates back to 2013.
 
 \section{ALGOL 60 Environment Setup}
-Before we can start programming in ALGOL 6, we will need to install some prerequisites to edit, translate and execute ALGOL 60 programs.
+Before we can start programming in ALGOL 6, we will need to install some prerequisites to edit, translate, and execute ALGOL 60 programs.
 
 \subsection{Text Editor}
-To edit any kind of text document, one will need a text editor. Examples include Windows Notepad, vim, EMACS, Atom or similar text editors. 
+To edit any kind of text document, one will need a text editor. Examples include Windows Notepad, vim, EMACS, Atom, or similar text editors. 
 
 The files created with the text editor are source files with ALGOL 60 programs usually having the extension ".alg".
 
 \subsection{The C Compiler}
-The C Compiler translates the human readable source code into executable machine language. In the case of writing ALGOL 60 programs the C Compiler is not directly accessed by the user but rather compiles the translated ALGOL 60 program into machine code. 
+The C Compiler translates the human-readable source code into executable machine language. In the case of writing ALGOL 60 programs, the C Compiler is not directly accessed by the user but rather compiles the translated ALGOL 60 program into machine code. 
 
-The C Compiler usually used is the GNU C/C++ compiler. In the following subsection I will discuss on how to install the C compiler on the UNIX based Operating Systems. It is sadly not possible for me to install it on Microsoft Windows and thus I will focus on the UNIX based OS.
+The C Compiler usually used is the GNU C/C++ compiler. In the following subsection, I will discuss how to install the C compiler on the UNIX based Operating Systems. It is sadly not possible for me to install it on Microsoft Windows and thus I will focus on the UNIX-based operating systems.
 
 \subsection{C Compiler Installation}
 
 \subsubsection{Installation on UNIX}
-The GNU C/C++ compiler is mostly already installed on UNIX systems. To check whether the compiler is already install type the following into the command line:
+The GNU C/C++ compiler is mostly already installed on UNIX systems. To check whether the compiler is already installed type the following into the command line:
 
 \begin{lstlisting}[language=bash]
 $ gcc -v
@@ -105,18 +108,18 @@ If the GNU compiler is not installed on your UNIX system you will need to instal
 \subsubsection{Installation on Mac OS}
 The easiest way to install the GNU compiler on a Mac OS X is to install the Xcode development environment provided by Apple. See the documentation on the \href{https://developer.apple.com/xcode/}{download page} for reference.
 
-This tutorial has been written based on Mac OS and the examples have been translated and compiled on Catalina.
+This tutorial has been written based on Mac OS and the examples have been translated, compiled, and executed on Mac OS Catalina.
 
 \subsection{ALGOL 60 Translator Installation}
-The marst ALGOL 60 translator can be downloaded from any \href{https://www.gnu.org/prep/ftp.html}{gnu mirror} under \texttt{/gnu/marst/}. We will be using version 2.7 or marst released in 2013. Download the tar directory and uncompress it.
+The MARST ALGOL 60 translator can be downloaded from any \href{https://www.gnu.org/prep/ftp.html}{gnu mirror} under \texttt{/gnu/marst/}. We will be using version 2.7 or MARST released in 2013. Download the tar directory and uncompress it.
 
-To install marst on your OS type the following into the command line at the location of the \texttt{marst-2.7} directory:
+To install MARST on your OS type the following into the command line at the location of the \texttt{marst-2.7} directory:
 
 \begin{lstlisting}[language=bash]
 $ ./configure; make; make install
 \end{lstlisting}
 
-This should configure, build, and install the marst package. For more information see the \texttt{README} or the \texttt{INSTALL} file.
+This should configure, build, and install the MARST package. For more information see the \texttt{README} or the \texttt{INSTALL} file.
 
 \section{ALGOL 60 Program Structure}
 Before we introduce the building blocks involved in developing an ALGOL 60 program we will introduce an example ALGOL 60 program and its structure so that we may use it again for reference in the following sections.
@@ -151,7 +154,7 @@ The parts of the above program are the following:
 	\item The second line declares the procedure which we called the main procedure. The identifier of the procedure may be changed.
 	\item The next line is a comment which will be ignored by the translator and is used to comment on the code at hand to make it easier for fellow programmers to understand the intention of the program.
 	\item The \texttt{begin} keyword signifies that a block of the procedure starts here.
-	\item Following comes an output keyword \texttt{outstring} which displays the string given to the first  output channel.
+	\item Following comes an output keyword \texttt{outstring} which displays the string given to the first output channel.
 	\item The seventh line calls the main procedure.
 \end{enumerate}
 
@@ -169,7 +172,7 @@ We will now save the \nameref{hello.alg}, translate it, compile it, and run it. 
 	\item If everything worked fine you should see \texttt{"Hello, world!"} printed on the command line.
 \end{enumerate}
 
-Note: The marst translator and the c compiler are rather verbose when it comes to warnings. However, all programs specified in this tutorial have been tested and work according to their specification.
+Note: The MARST translator and the c compiler are rather verbose when it comes to warnings. However, all programs specified in this tutorial have been tested and work according to their specification.
 
 \newpage
 
@@ -184,12 +187,12 @@ The notation used in this part of the tutorial is the Backus Naur form also used
 \end{split}
 \end{equation}
 
-Where the sequence of character enclosed in brackets represent meta-linguistic variables which are represented by a sequence of symbols. The ::= and | signify meta-linguistic connectives. | has the meaning or. Any symbol in a formula that is neither a variable nor a connective denotes itself. Variables can be replaced with their own definition. So the example signifies a recursive rule for the formation of values of the variable <ab>. Some values for <ab> are:\\
+Where the sequence of characters enclosed in brackets represents meta-linguistic variables which are represented by a sequence of symbols. The ::= and | signify meta-linguistic connectives. | has the meaning or. Any symbol in a formula that is neither a variable nor a connective denotes itself. Variables can be replaced with their own definition. So the example signifies a recursive rule for the formation of values of the variable <ab>. Some values for <ab> are:\\
 
 example( or )((
 
 \subsection{Symbols}
-The basic symbols of the ALGOL 60 programming language consists of letters, digits, logical values, and delimiters. With the basic symbols of ALGOL 60 every ALGOL 60 program can be created. The basic symbols themselves have no semantic values and are combined together to create every program. The basic symbols are made up as follows: \\
+The basic symbols of the ALGOL 60 programming language consist of letters, digits, logical values, and delimiters. With the basic symbols of ALGOL 60, every ALGOL 60 program can be created. The basic symbols themselves have no semantic values and are combined together to create every program. The basic symbols are made up as follows: \\
 
 \subsubsection{Letters}
 \begin{equation} \label{eq2}
@@ -213,7 +216,7 @@ Which are used for forming numbers, identifiers and strings.
 <\text{logical values}> ::=&\textbf{true}|\textbf{false} \\
 \end{split}
 \end{equation}
-Which have a set meaning as boolean logical values.
+Which have a set meaning as Boolean logical values.
 
 \subsubsection{Delimiters}
 \begin{equation} \label{eq5}
@@ -230,12 +233,14 @@ Which have a set meaning as boolean logical values.
 <\text{specificator}> ::=&\textbf{string}|\textbf{label}|\textbf{value}\\
 \end{split}
 \end{equation}
-All delimiters have a fixed meaning for which is mostly obvious, or else the meaning will be explained at the appropriate section.\\
+All delimiters have a fixed meaning for which is most obvious, or else the meaning will be explained at the appropriate section.\\
 Typographical features such as blank spaces can be inserted between symbols, however, multi-character symbols should contain no blank space.\\
-The separator \textbf{comment} has special importance and has the purpose of writing symbols into the code that will not be translated into machine executable code. The commenting symbols are all symbols between the separator \textbf{comment} and the separator ;.
+The separator \textbf{comment} has special importance and has the purpose of writing symbols into the code that will not be translated into machine-executable code. The commenting symbols are all symbols between the separator \textbf{comment} and the separator ;.
 
 \subsection{Identifiers}
-In ALGOL 60 an identifier has no inherent meaning, but serve the identification of variables, arrays, labels, switches and procedures. An identifier starts with a letter and is followed by zero or more letters or digits. Every combination is allowed except the previously defined delimiters. Some examples for identifiers are as follows:\\
+In ALGOL 60 an identifier has no inherent meaning but serves the identification of variables, arrays, labels, switches, and procedures. An identifier starts with a letter and is followed by zero or more letters or digits. Every combination is allowed except the previously defined delimiters.\\ 
+
+Some examples for identifiers are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
 Soup
@@ -244,7 +249,9 @@ MARILYN
 \end{lstlisting}
 
 \subsection{Numbers} \label{numbers}
-Numbers are used for arithmetic operations. There are two types of numbers in the ALGOL 60 programming language. Both have the same functionalities, however different ranges of size. The types of numbers are \textbf{integer} and \textbf{real}. Integers are any positive or negative combination of digits. Reals are any integer including a decimal fraction (denoted by the separator .) and/or an exponent part (denoted by the separator \#). More on this in the section \nameref{datatypes}. Some examples for numbers are as follows:\\
+Numbers are used for arithmetic operations. There are two types of numbers in the ALGOL 60 programming language. Both have the same functionalities, however different ranges of size. The types of numbers are \textbf{integer} and \textbf{real}. Integers are any positive or negative combination of digits. Reals are any integer including a decimal fraction (denoted by the separator .) and/or an exponent part (denoted by the separator \#). More on this in section \nameref{datatypes}.\\ 
+
+Some examples for numbers are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
 0
@@ -253,7 +260,9 @@ Numbers are used for arithmetic operations. There are two types of numbers in th
 \end{lstlisting}
 
 \subsection{Strings}
-A string is any sequence of basic symbols not containing ". Strings are used as actual parameters of procedure, for example also the procedure \texttt{outstring} which has been included into the translation program for output functionalities. Due to the translation to a C program the strings may be coded as usual in C fashion. Escape sequences like \textbackslash n are allowed. To use double quote in a string use a backslash \textbackslash". Some examples for strings are as follows:\\
+A string is any sequence of basic symbols not containing ". Strings are used as actual parameters of the procedure, for example also the procedure \texttt{outstring} which has been included in the translation program for output functionalities. Due to the translation to a C program, the strings may be coded as usual in C fashion. Escape sequences like \textbackslash n are allowed. To use a double quote in a string use a backslash \textbackslash".\\ 
+
+Some examples for strings are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
 "This is a string"
@@ -269,15 +278,17 @@ ALGOL 60 does not require any indentation, however, to make the code more easily
 As the original ALGOL 60 document was written without a specific hardware implementation in mind the ALGOL 60 data types used in this tutorial will reflect the C language data types in sizes. Data types define how much space will be occupied in storage.
 
 \subsection{Integer Types}
-As mentioned in subsection \nameref{numbers} integers refer to any positive or negative concatenation of numbers without any exponent or decimal fractions. The values possible are between \texttt{-32'768} to \texttt{32'768} if int is stored in 2 bytes or between \texttt{-2,147,483,648} to \texttt{2,147,483,647} if int is stored in 4 bytes. To get the exact possible size of the integer write a short program as follows:
+As mentioned in subsection \nameref{numbers} integers refer to any positive or negative concatenation of numbers without any exponent or decimal fractions. The values possible are between \texttt{-32'768} to \texttt{32'768} if int is stored in 2 bytes or between \texttt{-2,147,483,648} to \texttt{2,147,483,647} if int is stored in 4 bytes.\\
+
+To get the exact possible size of the integer write a short program as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
 inline("printf(\"%lu\", sizeof(int));")
 \end{lstlisting}
 
-The inline procedure is a pseudo procedure implemented by the MARST developers to signify what code will be one to one translated into C code. \\
+The inline procedure is a pseudo procedure implemented by the MARST developers to signify what code will be translated into C code. \\
 
-Examples for integers in ALGOL 60 are as follows:
+Examples for integers in ALGOL 60 are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
 123
@@ -286,9 +297,9 @@ Examples for integers in ALGOL 60 are as follows:
 \end{lstlisting}
 
 \subsection{Real Types}
-Again, as mentioned in subsection \nameref{numbers} reals refer to any positive concatenation of digits which may include exponents and/or decimal fractions. The values possible are between \texttt{1.2E-38} to \texttt{3.4E+38} with a precision to 6 decimal places if float is stored in 4 bytes
+Again, as mentioned in subsection \nameref{numbers} reals refer to any positive concatenation of digits which may include exponents and/or decimal fractions. The values possible are between \texttt{1.2E-38} to \texttt{3.4E+38} with a precision to 6 decimal places if float is stored in 4 bytes.\\
 
-Examples for reals in ALGOL 60 are as follows:
+Examples for reals in ALGOL 60 are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
 .87
@@ -297,9 +308,9 @@ Examples for reals in ALGOL 60 are as follows:
 \end{lstlisting}
 
 \subsection{Boolean Types}
-Boolean types are the simplest types possible and adhere to the formal logic. The possible values for Boolean types are true or false.
+Boolean types are the simplest types possible and adhere to the formal logic. The possible values for Boolean types are true or false.\\
 
-Examples for Boolean types in ALGOL 60 are as follows:
+Examples for Boolean types in ALGOL 60 are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
 true
@@ -309,10 +320,12 @@ false
 \newpage
 
 \section{ALGOL 60 Expressions}
-The main constituents of any ALGOL 60 programs describing algorithmic processes are arithmetic, Boolean, and designational, expressions. These expressions contain logical values, numbers, variables, function designators, and operators.
+The main constituents of any ALGOL 60 programs describing algorithmic processes are arithmetic, Boolean, and designation expressions. These expressions contain logical values, numbers, variables, function designators, and operators.
 
 \subsection{Variables}
-A variable represents a single values. This value can be used in expressions and can be used to form other values and may be changed by means of assignment statements. Array expressions with their identifiers are also considered variables. The identifiers of arrays are enclosed in subscript brackets []. The type of a variable is defined in the declaration of the variable itself (see \nameref{typeDecl} for more information on types) or for the array identifier (see \nameref{arrayDecl} for more information on arrays). Examples for variables are as follows:
+A variable represents a single value. This value can be used in expressions and can be used to form other values and may be changed by means of assignment statements. Array expressions with their identifiers are also considered variables. The identifiers of arrays are enclosed in subscript brackets []. The type of a variable is defined in the declaration of the variable itself (see \nameref{typeDecl} for more information on types) or for the array identifier (see \nameref{arrayDecl} for more information on arrays).\\
+
+Examples for variables are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
 beta
@@ -321,7 +334,9 @@ a17
 \end{lstlisting}
 
 \subsection{Function designators}
-A function designator represents a single value that can be attained by the application of a given set of rules defined by a procedure declaration (see \nameref{procDecl} for more information on procedures) to a defined set of parameters which can either be single values or variables. It is important to note that if the function is called without any parameter that the brackets should not be added. Examples for function desigantors are as follows:\\
+A function designator represents a single value that can be attained by the application of a given set of rules defined by a procedure declaration (see \nameref{procDecl} for more information on procedures) to a defined set of parameters which can either be single values or variables. It is important to note that if the function is called without any parameter that the brackets should not be added.\\ 
+
+Examples for function designators are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
 Compile("Test")Stack:(P)
@@ -330,16 +345,20 @@ Rhesus
 \end{lstlisting}
 
 \subsection{Arithmetic expressions} \label{arithexp}
-Arithmetic expressions, as the name says, are rules for computing numerical values. Simple arithmetic expressions are the application of the arithmetic operations of the rule upon the actual numerical values of the primaries involved in the expression. The numerical values of primaries are either simply the values given in the case of numbers or in the case of variables the currently assigned values of the variables (see \nameref{assigStat} for more information on assignments). For functional designators it is the value received by executing the corresponding procedure.\\
+Arithmetic expressions, as the name says, are rules for computing numerical values. Simple arithmetic expressions are the application of the arithmetic operations of the rule upon the actual numerical values of the primaries involved in the expression. The numerical values of primaries are either simply the values given in the case of numbers or in the case of variables the currently assigned values of the variables (see \nameref{assigStat} for more information on assignments). For functional designators, it is the value received by executing the corresponding procedure.\\
 The possible arithmetic operators are +, -, *, /, \% and  **. For more information on the semantics of those operators see \nameref{arithexptypes}.\\
- The normal arithmetic rules apply. Thus also the precedence from left to right with the exponent operator having the highest precedence, the multiplication or division operators the second highest and the addition or subtraction operator the third highest precedence. Expressions within parentheses are evaluated on their own and further calculated in the subsequent calculations. Examples for simple arithmetic expressions are as follows:\\
+The normal arithmetic rules apply. Thus also the precedence from left to right with the exponent operator having the highest precedence, the multiplication or division operators the second-highest, and the addition or subtraction operator the third-highest precedence. Expressions within parentheses are evaluated on their own and further calculated in the subsequent calculations.\\
+
+Examples for simple arithmetic expressions are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
 w * u - Q(S + C) ** 2
 a * sin(omega * t)
 \end{lstlisting}
 
-There is also the possibility of more complex arithmetic expressions which involve Boolean expressions. In this case the value of the arithmetic expression is calculated from the Boolean expressions that are true. Examples for complex arithmetic expressions are as follows:\\
+There is also the possibility of more complex arithmetic expressions that involve Boolean expressions. In this case, the value of the arithmetic expression is calculated from the Boolean expressions that are true.\\
+
+Examples for complex arithmetic expressions are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
 if q > 0 then U := U + V else if a * b > 17 then U := U / V else U := 0
@@ -347,8 +366,8 @@ if s then n := n - 1 else n := n + 1
 \end{lstlisting}
 
 \subsubsection{Arithmetic expression types} \label{arithexptypes}
-The types of arithmetic expressions must be integer or real (see \nameref{datatypes} for more information on types).\\
-The operators +, - and * have the conventional meaning and will return integer if all operands are integer, else real.\\
+The types of arithmetic expressions must be an integer or real (see \nameref{datatypes} for more information on types).\\
+The operators +, -, and * have the conventional meaning and will return integer if all operands are integer, else real.\\
 The operation <term> / <factor> and <term> \% <factor> both denote division while / is defined for all four combinations of integer and real and will give a result of type real while \% is only defined for two operands of type integer and will return an integer. / is defined as the multiplication of the term with the reciprocal of the factor. \% is defined as the multiplication of the sign of the / division of the two operands with the largest absolute integer that is smaller than the / division of the two operands.\\
 The operation <factor> ** <primary> means exponential, where the factor is the base and the primary the exponent.
 
@@ -369,9 +388,9 @@ Boolean expressions are rules for calculating logical values where the principle
 \end{table}
 
 The relational operators <, <=, =, >, >=, and != are applied on two arithmetic expressions. \\
-
-The precedence of the operators are first the \label{arithexptypes} precedence, then the relational operators, next the !, following the \&, and then the |, with -\textgreater{} following and == coming last.\\
+The precedence of the operators are first the \label{arithexptypes} precedence, then the relational operators, next to the !, following the \&, and then the |, with -\textgreater{} following and == coming last.\\
 The semantics of the operators are defined as follows:\\
+
 Examples for boolean expressions are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
@@ -381,8 +400,9 @@ if k < 5 then s > w else h == c
 \end{lstlisting}
 
 \subsection{Designational expression} \label{desigExp}
-Designational expressions are rules to determine the labels of an \nameref{statement}. Here the evaluation happens analogous to the \nameref{arithexp}. Boolean expressions can be used to introduce some conditional logic into the designation of the labels. A switch designator refers to the corresponding switch declaration and by the value given to the switch declaration the switch selects the designational expression listed in the switch declaration. More on \nameref{switchDecl} later.\\
-Examples for designational expressions are as follows:\\
+Designation expressions are rules to determine the labels of an \nameref{statement}. Here the evaluation happens analogously to the \nameref{arithexp}. Boolean expressions can be used to introduce some conditional logic into the designation of the labels. A switch designator refers to the corresponding switch declaration and by the value given to the switch declaration the switch selects the designation expression listed in the switch declaration. More on \nameref{switchDecl} later.\\
+
+Examples for designation expressions are as follows:\\
 
 \begin{lstlisting}[language={[60]algol}]
 p9
@@ -394,19 +414,19 @@ if b < c then p9 else s[if w <= 0 then 5 else n]
 
 \section{ALGOL 60 Statements} \label{statement}
 Statements in ALGOL are the units of operation of every program. Statements will be executed in order as written, however, there are additional control mechanisms as go to statements which allow to let the control flow be directed in a more granular fashion. Statements are separated by the delimiter ;. Labels on statements allow for this dynamic control flow.\\
-Conditional statements may also allow to select certain statements to be executed and others to be skipped.\\
+Conditional statements may also allow selecting certain statements to be executed and others to be skipped.\\
 
 \subsection{Compound statements and blocks} \label{compStatsBlocks}
-Basic statements do not require the keywords begin or end and are the basic building blocks for the following compound statements and blocks. Basic statements may either be assignment statements, go to statements, conditional statements or for statements. Basic statements may also include labels.\\
+Basic statements do not require the keywords to begin or end and are the basic building blocks for the following compound statements and blocks. Basic statements may either be assignment statements, go to statements, conditional statements, or for statements. Basic statements may also include labels.\\
 
-Compound statements and block statements are of the form as follows with S denoting statements which may be again complete compound statements or blocks, L denoting labels and D denoting declarations:\\
+Compound statements and block statements are of the form as follows with S denoting statements which may be again complete compound statements or blocks, L denoting labels, and D denoting declarations:\\
 
-Compound statements:
+Compound statements:\\
 \begin{lstlisting}[language={[60]algol}]
 L: L: ... begin S; S; ... S; S end;
 \end{lstlisting}
 
-Blocks:
+Blocks:\\
 \begin{lstlisting}[language={[60]algol}]
 L: L: ... begin D; D; ... D; S; S; ... S; S end;
 \end{lstlisting}
@@ -445,8 +465,8 @@ Z:  begin
 On more information on the scope rules of ALGOL 60 and the blocks see \nameref{scopeRule}.
 
 \subsection{Assignment Statement} \label{assigStat}
-Assignment statements allow the programmer to assign values to one or more variables. The assignment operator is :=. In case of subscript variables the subscript expression is evaluated before assignment. So an assignment to a variable in an array gets assigned to only the subscript expression and not the whole array. \\
-All variables on the left side of an assignment must be declared the same type as the values on the right side. So a Boolean value can only be assigned to a Boolean variable. If the variable is of type integer or real, the right side must be an arithmetic expression. A real value can be assigned to an integer value, however, the assignment happens with the following rounding: the largest integer that is not greater than the arithmetic expression E + 0.5.
+Assignment statements allow the programmer to assign values to one or more variables. The assignment operator is :=. In the case of subscript variables, the subscript expression is evaluated before assignment. So an assignment to a variable in an array gets assigned to only the subscript expression and not the whole array. \\
+All variables on the left side of an assignment must be declared the same type as the values on the right side. So a Boolean value can only be assigned to a Boolean variable. If the variable is of type integer or real, the right side must be an arithmetic expression. A real value can be assigned to an integer value, however, the assignment happens with the following rounding: the largest integer that is not greater than the arithmetic expression E + 0.5.\\
 
 Examples for assignment statements are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
@@ -456,7 +476,7 @@ V := Q > G & N;
 \end{lstlisting}
 
 \subsection{Go To Statement}
-As mentioned in the initial text to this section, a go to statement is used to dynamically control the program flow and to interrupt the code at certain locations. The location of the successor of a go to statement is a \nameref{desigExp}. So the next statement to be executed will have the same label as the designational expression.\\
+As mentioned in the initial text to this section, a go to statement is used to dynamically control the program flow and to interrupt the code at certain locations. The location of the successor of a go to statement is a \nameref{desigExp}. So the next statement to be executed will have the same label as the designation expression.\\
 Go to statements can not lead outside the scope of a block. For more information see \nameref{scopeRule}.\\
 
 Examples for go to statements are as follows:\\ 
@@ -467,7 +487,7 @@ go to if b < c then q else a[0];
 \end{lstlisting}
 
 \subsection{Conditional Statement}
-Conditional statements are used to execute certain parts of a block or skip certain others based on Boolean expressions. The known conditional statement of ALGOL 60 is the if statement. The conditional statement of an if statement gets executed if the clause of the if statement is true, otherwise the statement gets skipped and if an else statement exists, this statement will get executed. If statements can be chained by applying another if statement within the else statement. It is important to note that between an if and else there should not be a delimiter as it is still the same statement. If one wants to execute more than one statement within an if or else branch one should create another compound statement.\\
+Conditional statements are used to execute certain parts of a block or skip certain others based on Boolean expressions. The known conditional statement of ALGOL 60 is the if statement. The conditional statement of an if statement gets executed if the clause of the if the statement is true, otherwise the statement gets skipped and if an else statement exists, this statement will get executed. If statements can be chained by applying another if statement within the else statement. It is important to note that between an if and else there should not be a delimiter as it is still the same statement. If one wants to execute more than one statement within an if or else branch one should create another compound statement.\\
 
 Examples for conditional statements are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
@@ -483,7 +503,7 @@ else go to S;
 \end{lstlisting}
 
 \subsection{For Statement}
-For statements execute the statement S declared right after the for statement 0 or more times. The for statement also includes a controlled variable upon which a sequence of assignments may take place. So the control flow of a for statement is to initially assign a value to the controlled variable, execute the statement within the for statement, test if the breaking condition has already been reached and then either execute the assignment and go to the statement within again or leave the for statement.\\
+For statements execute the statement S declared right after the for statement 0 or more times. The for statement also includes a controlled variable upon which a sequence of assignments may take place. So the control flow of a for statement is to initially assign a value to the controlled variable, execute the statement within the for statement, test if the breaking condition has already been reached, and then either execute the assignment and go to the statement within again or leave the for statement.\\
 For statements could also be achieved by go to statements, however, they are much easier to read for their purpose.\\
 
 Examples for for statements are as follows:\\ 
@@ -492,7 +512,9 @@ for q := 0 step s until n do B[q] = A[q];
 for i := 1 step 10 until 100 do s := s + i;
 \end{lstlisting}
 
-While statements are technically not part of ALGOL 60, however, it is still possible to create while statements with the help of go to statements. An example is the following:\\
+While statements are technically not part of ALGOL 60, however, it is still possible to create while statements with the help of go to statements. For more information, I suggest looking at the definition of go to and while languages and their power.\\ 
+
+An example is the following:\\
 
 \begin{lstlisting}[language={[60]algol}]
 R:  V := V + E;
@@ -521,10 +543,10 @@ Spur(A) Order: (7) Result to: (V);
 \newpage
 
 \section{ALGOL 60 Declarations}
-Declarations in ALGOL 60 serve the purpose to define properties for identifiers within a block. The statement of \nameref{compStatsBlocks} was discussed previously. More on \nameref{scopeRule} later. Some sort of static variable declaration is possible with the keyword \texttt{own}. Own declares a variable within a block to be the same every time the program enters this block. All other declared values are undefined. It is important that all identifiers must be declared within a program with the exception of labels and formal parameters of procedures. An identifier can not be re-declared within a block head. 
+Declarations in ALGOL 60 serve the purpose to define properties for identifiers within a block. The statement of \nameref{compStatsBlocks} was discussed previously. More on \nameref{scopeRule} later. Some sort of static variable declaration is possible with the keyword \texttt{own}. Own declare a variable within a block to be the same every time the program enters this block. All other declared values are undefined. It is important that all identifiers must be declared within a program with the exception of labels and formal parameters of procedures. An identifier can not be re-declared within a blockhead. 
 
 \subsection{Type Declaration} \label{typeDecl}
-To declare certain identifiers to represent simple variables of a given type, one has to declare this type at the block head. As mentioned at the beginning of the section, those declarations may also be own. The variable data types possible for the type declaration are real, integer or Boolean. More on the \nameref{datatypes} was discussed earlier.
+To declare certain identifiers to represent simple variables of a given type, one has to declare this type at the blockhead. As mentioned at the beginning of the section, those declarations may also be own. The variable data types possible for the type declaration are real, integer, or Boolean. More on the \nameref{datatypes} was discussed earlier.\\
 
 Examples for type declarations are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
@@ -534,7 +556,7 @@ Boolean exists;
 \end{lstlisting}
 
 \subsection{Array Declaration} \label{arrayDecl}
-The declaration of an array define one or more identifiers to represent a one or multidimensional array. The allowed types . It can furthermore be define of which type the subscripted variables are, which bounds the subscripted variables have and what the dimensions of the array are. The bound of the variables can be defined by giving an upper and a lower bound separated by :, also called bound pair list. The dimension of the array are defined by the number of entries in the bound pair list. The type of the subscripted are all of the same type if one is defined or real otherwise. The subscripted values have no connection to the identity of the variables used in the bound pair lists. Arrays are initiated with zeros or false when declared.
+The declaration of an array defines one or more identifiers to represent a one or multidimensional array. The allowed types of arrays are integer or real. It can furthermore be defined which type the subscripted variables are, which bounds the subscripted variables have and what the dimensions of the array are. The bound of the variables can be defined by giving an upper and a lower bound separated by :, also called bound pair list. The dimension of the array is defined by the number of entries in the bound pair list. The type of subscripted is all of the same types if one is defined or real otherwise. The subscripted values have no connection to the identity of the variables used in the bound pair lists. Arrays are initiated with zeros or false when declared.\\
 
 Examples for array declarations are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
@@ -544,7 +566,7 @@ Boolean array s[0:10];
 \end{lstlisting}
 
 \subsection{Switch Declaration} \label{switchDecl}
-With a switch declaration one assigns values corresponding to a switch identifier. A switch can be composed of one or more designational expressions which are associated from left to right by positive integers starting at 1. To access one of those designational expressions one has to pass the corresponding integer to access the value. The designational expressions get evaluated each time the values are accessed with the values of the variables at access time. Variables defined outside the scope within the switch is can not be accessed by the switch.
+With a switch declaration, one assigns values corresponding to a switch identifier. A switch can be composed of one or more designation expressions which are associated from left to right by positive integers starting at 1. To access one of those designation expressions one has to pass the corresponding integer to access the value. The designation expressions get evaluated each time the values are accessed with the values of the variables at access time. Variables defined outside the scope within the switch is can not be accessed by the switch.\\
 
 Examples for switch declarations are as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
@@ -553,7 +575,7 @@ switch Q := M1, M2, M3, if s > 4 then M4, else M5;
 \end{lstlisting}
 
 \subsection{Procedure Declaration} \label{procDecl}
-To define the procedure associated with a procedure identifier, one has to declare this procedure. A procedure consists of a block of code and a heading including formal parameters of the procedure. The formal parameters will be, upon calling the procedure, either be replaced or assigned with the parameters given by the caller. For more information on \nameref{ProcStat} see the previous definitions. The procedure identifier must be named first after the keyword \texttt{procedure}. The types of the formal parameters should be named at the beginning of a procedure. It is customary to also include a commentary at the beginning of a procedure. A comment is placed between the keyword \texttt{comment} and the separator ;.
+To define the procedure associated with a procedure identifier, one has to declare this procedure. A procedure consists of a block of code and a heading including formal parameters of the procedure. The formal parameters will be, upon calling the procedure, either be replaced or assigned with the parameters given by the caller. For more information on \nameref{ProcStat} see the previous definitions. The procedure identifier must be named first after the keyword \texttt{procedure}. The types of the formal parameters should be named at the beginning of a procedure. It is customary to also include a commentary at the beginning of a procedure. A comment is placed between the keyword \texttt{comment} and the separator ;.\\
 
 An example for a procedure declaration is as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
@@ -572,18 +594,18 @@ begin
 end
 \end{lstlisting}
 
-It is important to note that procedures may also be typed where the return type will be specified before the keyword procedure and the value to be returned should have the exact same identifier as the procedure itself.
+It is important to note that procedures may also be typed where the return type will be specified before the keyword procedure and the value to be returned should have the same identifier as the procedure itself.\\
 
 More examples will be shown in the section \nameref{procedures}.
 
 \newpage
 
 \section{Procedures} \label{procedures}
-As defined previously, procedures are the basic building blocks of ALGOL 60 and can be best compared with functions in modern programming languages. As we have already heard, the parameter passing to procedures can be done in two ways, call by value and call by name. This has ramifications for the behavior of algorithms as one may easily also pass procedures to procedures to be executed and so forth. In the following we will look at some interesting procedures which should highlight some interesting aspects of ALGOL 60. The procedures introduced will get from simple to more complex. \\
+As defined previously, procedures are the basic building blocks of ALGOL 60 and can be best compared with functions in modern programming languages. As we have already heard, the parameter passing to procedures can be done in two ways, call by value and call by name. This has ramifications for the behavior of algorithms as one may easily also pass procedures to procedures to be executed and so forth. In the following, we will look at some interesting procedures which should highlight some interesting aspects of ALGOL 60. The procedures introduced will get from simple to more complex. \\
 
-If one would like to test out the procedures following one could call them as specified and print out the result with the dummy function \texttt{print} provided by marst.
+If one would like to test out the following procedures one could call them as specified and print out the result with the dummy function \texttt{print} provided by MARST.\\
 
-A very simple but illustrative example of a procedure is the following. It is a procedure without any parameters that has one statement as its body. It could be called by the statement \texttt{simple} from a block within the scope of the program or by the procedure itself:\\
+A very simple but illustrative example of a procedure is the following. It is a procedure without any parameters that have one statement as its body. It could be called by the statement \texttt{simple} from a block within the scope of the program or by the procedure itself:\\
 
 \begin{lstlisting}[language={[60]algol}]
 procedure simple;
@@ -598,7 +620,7 @@ The procedure can be called in the following way:
 simple;
 \end{lstlisting}
 
-A bit more complex example would be the following. It is a typed procedure which compares two strings and returns a Boolean value:\\
+A bit more complex example would be the following. It is a typed procedure that compares two strings and returns a Boolean value:\\
 
 \begin{lstlisting}[language={[60]algol}]
 Boolean procedure match(int1, int2);
@@ -609,14 +631,14 @@ begin
 end
 \end{lstlisting}
 
-The procedure can be called in the following way:
+The procedure can be called in the following way:\\
 
 \begin{lstlisting}[language={[60]algol}]
 Boolean b;
 b := match(10,10);
 \end{lstlisting}
 
-Now, instead of typed procedures one could pass a parameter by name to achieve the same result:
+Now, instead of typed procedures, one could pass a parameter by name to achieve the same result:\\
 
 \begin{lstlisting}[language={[60]algol}]
 Boolean procedure match(int1, int2, res);
@@ -628,14 +650,14 @@ begin
 end
 \end{lstlisting}
 
-The procedure can then be called in the following way:
+The procedure can then be called in the following way:\\
 
 \begin{lstlisting}[language={[60]algol}]
 Boolean b;
 match(10,10,b);
 \end{lstlisting}
 
-Now to something a bit more complicated we will use different things we have learned so far. We will introduce a procedure which involves an array, call by name and a for loop:
+Now to something a bit more complicated we will use different things we have learned so far. We will introduce a procedure that involves an array, call by name, and a for loop:
 
 \begin{lstlisting}[language={[60]algol}]
 procedure spur(a)order:(n)result:(s);
@@ -658,7 +680,7 @@ for i := 0 step 1 until n do a[i,i] := 1;
 spur(a)order:(n)result:(s);
 \end{lstlisting}
 
-To put additional knowledge to the test we will now look at a procedure that includes conditional statements, go to statements and the outstring procedure:
+To put additional knowledge to the test we will now look at a procedure that includes conditional statements, go to statements, and the outstring procedure:
 
 \begin{lstlisting}[language={[60]algol}]
 procedure checkEven(num);
@@ -675,7 +697,7 @@ begin
 end;
 \end{lstlisting}
 
-The procedure can then be called (here with an identity matrix) in the following way:
+The procedure can then be called in the following way:
 
 \begin{lstlisting}[language={[60]algol}]
 integer n;
@@ -684,22 +706,22 @@ n := -10;
 checkEven(n)
 \end{lstlisting}
 
-Many more examples could be given, however, I am content that you are able to produce any number of procedures from here on with the help of this tutorial.
+Many more examples could be given, however, I am content that you can produce any number of procedures from here on with the help of this tutorial.
 
 \newpage
 
 \section{ALGOL 60 Scope Rules} \label{scopeRule}
-ALGOL 60 was one of the first, if not the first, to introduce block scopes into a programming language. Before ALGOL 60 most languages had only the ability to introduce some kind of block rules by go to statements, however, those proved to be insufficient and the block rules were introduced. In AGLOL 60 a block is defined as follows:
+ALGOL 60 was one of the first, if not the first, to introduce block scopes into a programming language. Before ALGOL 60 most languages had only the ability to introduce some kind of block rules by go to statements, however, those proved to be insufficient, and the block rules were introduced. In ALGOL 60 a block is defined as follows:
 
 \begin{lstlisting}[language={[60]algol}]
 L: L: ... begin D;D;...D;S;S;...S;S end
 \end{lstlisting}
 
-With L denoting labels, D denoting declarations and S denoting statements. The number of each is arbitrary. Now the interesting part is that the identifiers declared within a block are local to this block and will have their own space in memory. So this identifier and its value will have no existence outside of this block and any entity presented by the same identifier declared outside this block will not be accessible within the block. However, variables declares outside the block that are not re-declared within the block are accessible to the block. \\
+With L denoting labels, D denoting declarations, and S denoting statements. The number of each is arbitrary. Now the interesting part is that the identifiers declared within a block are local to this block and will have their own space in memory. So this identifier and its value will have no existence outside of this block and any entity presented by the same identifier declared outside this block will not be accessible within the block. However, variables declared outside the block that are not re-declared within the block are accessible to the block. \\
 
-Labels are the exception to this rule because labels are always local to the block within they occur. Since labels are inherently local to a block, a go to statement can not lead outside a block.\\
+Labels are the exception to this rule because labels are always local to the block within which they occur. Since labels are inherently local to a block, a go to statement can not lead outside a block.\\
 
-To reiterate, declarations within a block are local to this block and have the significance declared within this block and are not accessible from the outside. This is recursively true for blocks within blocks. Upon exit from a block, all variables declared within a block loose their significance.\\
+To reiterate, declarations within a block are local to this block and have the significance declared within this block, and are not accessible from the outside. This is recursively true for blocks within blocks. Upon exit from a block, all variables declared within a block lose their significance.\\
 
 An example to illustrate this is the following:
 
@@ -740,7 +762,7 @@ end
 \newpage
 
 \section{Recursion}
-Recursion is supported in ALGOL 60 and can be achieved by procedure calls. An example is best illustrated by the well known merge sort algorithm. The following procedures are also good examples on how to implement while loops with go to statements and more:
+Recursion is supported in ALGOL 60 and can be achieved by procedure calls. An example is best illustrated by the well-known merge sort algorithm. The following procedures are also good examples of how to implement while loops with go to statements and more:
 
 \begin{lstlisting}[language={[60]algol}]
 procedure merge(arr, l, m, r);
@@ -824,10 +846,10 @@ You can also find a program to run an instance of this merge-sort algorithm in t
 \newpage
 
 \section{Simple Programs} \label{simpleProg}
-In this section I have assembled a few simple executable programs written in ALGOL 60. All programs can also be found in the additional materials.
+In this section, I have assembled a few simple executable programs written in ALGOL 60. All programs can also be found in the additional materials.
 
 \subsection{Coin flip}
-In the following we will introduce a simple program that can generate random numbers with a procedure \texttt{random}, evaluate the random number by putting it into the two categories head or tail and do this 10'000 times to see if the random number generator is truly random:
+In the following we will introduce a simple program that can generate random numbers with a procedure \texttt{random}, evaluates the random number by putting it into the two categories head or tail and do this 10'000 times to see if the random number generator is truly random:
 
 \begin{lstlisting}[language={[60]algol}]
 begin
@@ -880,7 +902,7 @@ end
 \end{lstlisting}
 
 \subsection{Greatest number}
-In the following program we will declare an integer array and get from the procedure \texttt{greatestNum} the largest item from the array. The algorithm described in the procedure \texttt{greatestNum} was also mentioned in the paper \textit{Proof of Algorithms by General Snapshots} by Peter Naur. We will reuse the random procedure defined before to fill the array with random numbers.
+In the following program, we will declare an integer array and get from the procedure \texttt{greatestNum} the largest item from the array. The algorithm described in the procedure \texttt{greatestNum} was also mentioned in the paper \textit{Proof of Algorithms by General Snapshots} by Peter Naur. We will reuse the random procedure defined before to fill the array with random numbers.
 
 \begin{lstlisting}[language={[60]algol}]
 begin
@@ -934,7 +956,7 @@ end
 \end{lstlisting}
 
 \subsection{Fisher–Yates shuffle}
-In the following program we will declare an integer array and shuffle the array with the help of the procedure \texttt{shuffle}. The algorithm described in the procedure \texttt{shuffle} is named after Ronald Fisher and Frank Yates, who first described it, and is also known as the Knuth shuffle after Donald Knuth. We will reuse the random procedures defined before to get random numbers.
+In the following program, we will declare an integer array and shuffle the array with the help of the procedure \texttt{shuffle}. The algorithm described in the procedure \texttt{shuffle} is named after Ronald Fisher and Frank Yates, who first described it, and is also known as the Knuth shuffle after Donald Knuth. We will reuse the random procedures defined before to get random numbers.
 
 \begin{lstlisting}[language={[60]algol}]
 begin
@@ -999,6 +1021,6 @@ end
 \end{lstlisting}
 
 \section{Conclusion}
-This concludes the ALGOL 60 Tutorial. I hope you could learn a thing or two in these pages and I hope that some interesting ALGOL 60 programs will come out of people reading this tutorial. It has been interesting to closely read the specifications of a programming language, to translate it into workable code and then to write a tutorial on how to write proper ALGOL 60 programs.
+This concludes the ALGOL 60 Tutorial. I hope you could learn a thing or two in these pages and I hope that some interesting ALGOL 60 programs will come out of people reading this tutorial. It has been interesting to closely read the specifications of a programming language, to translate it into workable code, and then to write a tutorial on how to write proper ALGOL 60 programs.
 
 \end{document}
