@@ -1,7 +1,9 @@
 begin
+    comment This program fills an array with random numbers and then gets the largest assigned number with the procedure greatestNum.;
     integer procedure mod(a, n);
     value a, n;
     integer a, n;
+    comment This is a procedure to calculate the modulo of a dividend (a) and an devisor (n). It is a call by value procedure with an integer as return type.;
     begin
          mod := a - ((a%n)*n)
     end;
@@ -9,6 +11,7 @@ begin
     integer procedure random(lim);
     value lim;
     integer lim;
+    comment This is a procedure with a static variable with which the next random number gets generated and the number can be as large as a given limit. It is a call by value procedure with an integer as return type.;
     begin
         own integer a; own Boolean b;
         
@@ -24,6 +27,7 @@ begin
     procedure greatestNum(A, R, N);
     value N;
     array A; integer R, N;
+    comment This procedure goes through all entries in an array and returns the largest number found within the array. This is a call by name procedure operating upon array A and returning the result in R.;
     begin
         integer r, i;
         

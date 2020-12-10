@@ -1,5 +1,7 @@
 begin
+    comment This program assigns continuous numbers to an array and then shuffles the array according to the Fisher-Yates shuffle.;
     integer procedure mod(a, n);
+    comment This is a procedure to calculate the modulo of a dividend (a) and an devisor (n). It is a call by value procedure with an integer as return type.;
     value a, n;
     integer a, n;
     begin
@@ -9,6 +11,7 @@ begin
     integer procedure random(lim);
     value lim;
     integer lim;
+    comment This is a procedure with a static variable with which the next random number gets generated and the number can be as large as a given limit. It is a call by value procedure with an integer as return type.;
     begin
         own integer a; own Boolean b;
         
@@ -24,6 +27,7 @@ begin
     procedure swap(arr, i, j);
     value i, j;
     array arr; integer i, j;
+    comment This is a procedure to swap two elements of an array at the given positions. This is a call by name procedure that acts upon the given arr.;
     begin
         integer tmp;
 
@@ -33,7 +37,7 @@ begin
     end;
 
     procedure shuffle(arr, h);
-    comment This is an implementation of the Fisher–Yates shuffle;
+    comment This is an implementation of the Fisher–Yates shuffle. For more information see https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle;
     value h;
     array arr; integer h;
     begin
