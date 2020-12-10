@@ -64,7 +64,7 @@
 \newpage
 
 \section{Introduction}
-This tutorial aims to give the reader an introduction to the ALGOL 60 programming language. The reader should be able to program small to mid-size procedures and small size working programs after reading this tutorial and should be able to translate and execute the ALGOL 60 program with the help of the MARST translator. This tutorial does not aim to be complete and due to the inherent difficulty of learning a programming language, it does not aim to lead to success.
+This tutorial aims to give the reader an introduction to the ALGOL 60 programming language. The reader should be able to program small to mid-size procedures and small size working programs after reading this tutorial and should be able to translate and execute the ALGOL 60 program with the help of the MARST translator. This tutorial does not aim to be complete and due to the inherent difficulty of learning a programming language, it does not aim to lead to success. This tutorial is based upon the description of ALGOL 60 in the original ALGOL 60 report written by \citet{backus1960report}.
 
 \section{Background}
 ALGOL 60 was the direct successor of the International Algebraic Language (IAL or later called ALGOL 58) and was a joint effort of European as well as American computer scientists in the years 1958 to 1960. With the help of the ALGOL Bulletin, a publication edited by Peter Naur, and several conferences the ALGOL 60 report could be published in 1960. ALGOL 60 did not have great commercial success on its own, however, the concepts introduced by the language can be witnessed in programming languages until nowadays.
@@ -120,7 +120,7 @@ $ ./configure; make; make install
 \end{lstlisting}
 
 This should configure, build, and install the MARST package. For more information see the \texttt{README} or the \texttt{INSTALL} file.
-
+\newpage
 \section{ALGOL 60 Program Structure}
 Before we introduce the building blocks involved in developing an ALGOL 60 program we will introduce an example ALGOL 60 program and its structure so that we may use it again for reference in the following sections.
 
@@ -270,7 +270,7 @@ Some examples for strings are as follows:\\
 \end{lstlisting}
 
 \subsection{Indentation}
-ALGOL 60 does not require any indentation, however, to make the code more easily readable we will be using an easy sort of indentation where the code within a \texttt{begin} and \texttt{end} will be indented by four spaces. Furthermore, if there is a label, the indentation will be also four spaces in the to the label belonging code. Additionally, if the execution blocks of for loops are larger than simple blocks, there will also be four spaces indentation on the next line.
+ALGOL 60 does not require any indentation, however, to make the code more easily readable we will be using an easy sort of indentation where the code within a \texttt{begin} and \texttt{end} will be indented by four spaces. Furthermore, if there is a label, the indentation will be also four spaces in the to the label belonging code.
 
 \newpage
 
@@ -577,6 +577,8 @@ switch Q := M1, M2, M3, if s > 4 then M4, else M5;
 \subsection{Procedure Declaration} \label{procDecl}
 To define the procedure associated with a procedure identifier, one has to declare this procedure. A procedure consists of a block of code and a heading including formal parameters of the procedure. The formal parameters will be, upon calling the procedure, either be replaced or assigned with the parameters given by the caller. For more information on \nameref{ProcStat} see the previous definitions. The procedure identifier must be named first after the keyword \texttt{procedure}. The types of the formal parameters should be named at the beginning of a procedure. It is customary to also include a commentary at the beginning of a procedure. A comment is placed between the keyword \texttt{comment} and the separator ;.\\
 
+It is important to note that procedures may also be typed where the return type will be specified before the keyword procedure and the value to be returned should have the same identifier as the procedure itself.\\
+\newpage
 An example for a procedure declaration is as follows:\\ 
 \begin{lstlisting}[language={[60]algol}]
 procedure transpose(a) Order: (n); value n;
@@ -593,8 +595,6 @@ begin
             end
 end
 \end{lstlisting}
-
-It is important to note that procedures may also be typed where the return type will be specified before the keyword procedure and the value to be returned should have the same identifier as the procedure itself.\\
 
 More examples will be shown in the section \nameref{procedures}.
 
@@ -846,7 +846,20 @@ You can also find a program to run an instance of this merge-sort algorithm in t
 \newpage
 
 \section{Simple Programs} \label{simpleProg}
-In this section, I have assembled a few simple executable programs written in ALGOL 60. All programs can also be found in the additional materials.
+In this section, I have assembled a few simple executable programs written in ALGOL 60. All programs can also be found in the sub-directory programs.\\
+
+The programs can be executed as follows:\\
+
+\begin{enumerate}
+	\item Open a command line and navigate to the directory where the programs are located.
+	\item Type \texttt{marst NAME\_OF\_PROGRAM.alg -o NAME\_OF\_PROGRAM.c}.
+	\item If there are no errors the translator creates the C file \texttt{NAME\_OF\_PROGRAM.c}.
+	\item Compile and link the file with the following command \texttt{gcc NAME\_OF\_PROGRAM.c -lalgol -lm -o NAME\_OF\_PROGRAM}.
+	\item Run your executable \texttt{./NAME\_OF\_PROGRAM}.
+	\item If everything worked fine you should see the expected output printed on the command line.
+\end{enumerate}
+
+The programs here in the report are not commented for brevity sake, however the source code programs are fully commented.\\
 
 \subsection{Coin flip}
 In the following we will introduce a simple program that can generate random numbers with a procedure \texttt{random}, evaluates the random number by putting it into the two categories head or tail and do this 10'000 times to see if the random number generator is truly random:
@@ -1022,5 +1035,9 @@ end
 
 \section{Conclusion}
 This concludes the ALGOL 60 Tutorial. I hope you could learn a thing or two in these pages and I hope that some interesting ALGOL 60 programs will come out of people reading this tutorial. It has been interesting to closely read the specifications of a programming language, to translate it into workable code, and then to write a tutorial on how to write proper ALGOL 60 programs.
+
+\newpage
+\bibliographystyle{apalike}
+\bibliography{references}
 
 \end{document}
