@@ -17,6 +17,10 @@ begin
 
         begin
             integer b;
+
+            print(i);
+            print(b);
+            print(r);
     
             b := 10;
             i := 10;
@@ -25,15 +29,16 @@ begin
             print(b);
             print(r)
 
-        end
+        end;
             
         print(i);
         print(b);
         print(r)
 
-    end
+    end;
 
     print(i);
     print(b)
     
 end
+

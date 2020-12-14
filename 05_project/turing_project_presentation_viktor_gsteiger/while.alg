@@ -6,13 +6,14 @@ begin
     max := 10;
 
     WHILE:
-        if i > max then go to EXIT;
+        if i >= max then go to EXIT;
     
         i := i + 1;
         print(i);
     
         go to WHILE;
     EXIT:
-        print(i);
+        print(i)
 
 end
+
