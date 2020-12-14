@@ -1,0 +1,260 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+\usetheme{Ilmenau} % best so far
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+%\setbeamertemplate{frametitle continuation}[from second]
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{csquotes}
+\usepackage[font=tiny,labelfont=bf]{caption}
+\usepackage{url}
+\usepackage{qtree}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{smartdiagram}
+\usepackage{amsmath}
+\usepackage{listings}
+
+\usetikzlibrary{automata, positioning, arrows}
+\usetikzlibrary{shapes.geometric,calc}
+
+\graphicspath{{figures/}}
+
+\bibliographystyle{plain}
+
+% To quote
+\let\oldquote\quote
+\let\endoldquote\endquote
+\renewenvironment{quote}[2][]
+{\if\relax\detokenize{#1}\relax
+	\def\quoteauthor{#2}%
+	\else
+	\def\quoteauthor{#2~---~#1}%
+	\fi
+	\oldquote}
+{\par\nobreak\smallskip\hfill(\quoteauthor)%
+	\endoldquote\addvspace{\bigskipamount}}
+
+% To remove header
+\makeatletter
+\newenvironment{withoutheadline}{
+	\setbeamertemplate{headline}[default]
+	\def\beamer@entrycode{\vspace*{-\headheight}}
+}{}
+\makeatother
+
+\makeatletter
+\newenvironment<>{proofs}[1][\proofname]{%
+	\par
+	\def\insertproofname{#1\@addpunct{.}}%
+	\usebeamertemplate{proof begin}#2}
+{\usebeamertemplate{proof end}}
+\makeatother
+%\usepackage{natbib}
+%\renewcommand\bibfont{\scriptsize}
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Formalization]{ALGOL 60 Tutorial} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Viktor Gsteiger} % Your name
+\institute[unibas] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+University of Basel \\ % Your institution for the title page
+\medskip
+\textit{Seminar Turing Award Winners and Their Contributions} \\
+\textit{v.gsteiger@unibas.ch} % Your email address
+}
+\date{December 17, 2020} % Date, can be changed to a custom date
+
+\begin{document}
+\begin{withoutheadline}
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+\end{withoutheadline}
+
+\begin{withoutheadline}
+\begin{frame}
+\frametitle{Extent of Tutorial}
+\begin{itemize}
+	\item 35 pages
+	\item Bottom up
+	\item From Basic to Advanced
+	\item Self-Reflective
+	\item Example based
+\end{itemize}
+\end{frame}
+\end{withoutheadline}
+
+\begin{withoutheadline}
+\begin{frame}[fragile]
+	\frametitle{Call-by-name}
+	
+	\begin{exampleblock}{Example}
+		\begin{lstlisting}[language={[60]algol}]
+    procedure callByName(arr);
+    array arr;
+    begin
+        integer i;
+        i := 0;
+        print(arr[i]);
+        i := 5;
+        print(arr[i]);
+        arr[i] := 10
+    end;
+		\end{lstlisting}
+	\end{exampleblock}
+\end{frame}
+\end{withoutheadline}
+
+\begin{withoutheadline}
+\begin{frame}[fragile]
+	\frametitle{Call-by-value}
+	
+	\begin{exampleblock}{Example}
+		\begin{lstlisting}[language={[60]algol}]
+    integer procedure callByValue(i);
+    value i;
+    integer i;
+    begin
+        callByValue := i + 5
+    end;
+		\end{lstlisting}
+	\end{exampleblock}
+\end{frame}
+\end{withoutheadline}
+
+\begin{withoutheadline}
+\begin{frame}[fragile]
+	\frametitle{Scope-rules}
+	
+	\begin{exampleblock}{Example}
+		\begin{lstlisting}[language={[60]algol}]
+    integer i;
+    boolean b;
+    b := false;
+    i := 0;
+    begin
+        real r; integer i;
+        i := 100;
+        r := 5.0;
+        begin
+            integer b;
+            b := 10;
+            i := 10
+        end;
+    end;
+		\end{lstlisting}
+	\end{exampleblock}
+\end{frame}
+\end{withoutheadline}
+
+\begin{withoutheadline}
+\begin{frame}[fragile]
+	\frametitle{While-loops}
+	
+	\begin{exampleblock}{Example}
+		\begin{lstlisting}[language={[60]algol}]
+    integer i, max;
+    i := 0;
+    max := 10;
+    WHILE:
+        if i >= max then go to EXIT;
+        i := i + 1;
+        go to WHILE;
+    EXIT:
+		\end{lstlisting}
+	\end{exampleblock}
+\end{frame}
+\end{withoutheadline}
+
+\begin{withoutheadline}
+\begin{frame}[fragile]
+	\frametitle{Merge-sort}
+	
+	\begin{exampleblock}{Example}
+	External code
+	\end{exampleblock}
+\end{frame}
+\end{withoutheadline}
+
+
+\end{document} 
