@@ -4,8 +4,11 @@ begin
     begin
         integer i;
         i := 0;
-        print(arr[i]);
-        i := 5;
+        print("Inside call by name function");
+        print("Array at index 0");
+        print(arr[i]); 
+        i := 5; 
+        print("Array at index 5");
         print(arr[i]);
         arr[i] := 10
     end;
@@ -23,14 +26,20 @@ begin
     arr[0] := 5;
     arr[5] := 0;
 
-    print(arr);
+    print("Array at index 5 before call by name");
+
+    print(arr[5]);
 
     callByName(arr);
 
-    print(arr);
+    print("Array at index 5 after call by name");
+
+    print(arr[5]);
 
 
     i := callByValue(10);
+
+    print("Integer i after call by value with integer return");
 
     print(i)
 end

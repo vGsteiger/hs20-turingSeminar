@@ -13,6 +13,7 @@ begin
     
         go to WHILE;
     EXIT:
+        print("Left the while loop");
         print(i)
 
 end
